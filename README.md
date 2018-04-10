@@ -44,39 +44,39 @@ Copyright 2017 SDCO Partners
 
 ### Starting With A Blank Repo [ INIT ]
 1. Create a blank repository
-  * [ ]  Create new blank repo. Do NOT initiate with a README file.
-  * [ ]  `git clone` new repo to local environment 
+  * [x]  Create new blank repo. Do NOT initiate with a README file.
+  * [x]  `git clone` new repo to local environment 
 
 2. Move into new repo folder, create a remote for INIT repo and pull it down
-  * [ ]  Run `git remote add init` + INIT repo url
-  * [ ]  Run `git pull init master`
+  * [x]  Run `git remote add init` + INIT repo url
+  * [x]  Run `git pull init master`
 
 3. Pull down Wordpress Submodule
-  * [ ]  Run `git submodule update --init`
+  * [x]  Run `git submodule update --init`
 
 
 ### Initializing New Repo
 Follow these steps to configure your install to your specific project.
 
 1. WP-CONFIG.PHP
-  * [ ]  set `$local_path` on line 91
+  * [x]  set `$local_path` on line 91
 
 2. LOCAL-CONFIG-EXAMPLE.PHP
-  * [ ]  remove '-example' from end of filepath
-  * [ ]  set DB_NAME, DB_USER and DB_PASSWORD
+  * [x]  remove '-example' from end of filepath
+  * [x]  set DB_NAME, DB_USER and DB_PASSWORD
 
 3. Set up dummy DB
-  * [ ]  create db and user in phpMyAdmin
-  * [ ]  import dummy wordpress db
+  * [x]  create db and user in phpMyAdmin
+  * [x]  import dummy wordpress db
 
 4. PACKAGE.JSON
-  * [ ]  set necessary items ('name', 'description', &c.) 
+  * [x]  set necessary items ('name', 'description', &c.) 
 
 5. GULPFILE.JS
-  * [ ]  set `var uri` in line 16
+  * [x]  set `var uri` in line 16
 
 6. Theme Files & Folders
-  * [ ]  rename the theme folder from 'INIT' to your theme name
+  * [x]  rename the theme folder from 'INIT' to your theme name
   * [ ]  set 'Theme Name' and 'Theme URI' in STYLE.CSS
   
 7. Install Dependencies

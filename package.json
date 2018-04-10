@@ -1,19 +1,19 @@
 {
-  "name": "[ INIT ]",
+  "name": "TheGreene",
   "version": "1.0.0",
-  "description": " Frenchy is a site for testers",
+  "description": "The Greene Dynamic Site",
   "main": "index.js",
   "scripts": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "[ INIT ] "
+    "url": "https://github.com/sdco-partners/green_dyna-18"
   },
   "author": "[ INIT ] | SDCO Partners",
   "license": "ISC",
   "bugs": {
-    "url": "[ INIT ]/bugs"
+    "url": "https://github.com/sdco-partners/green_dyna-18/issues"
   },
   "homepage": "index.js",
   "devDependencies": {
