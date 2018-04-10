@@ -77,24 +77,24 @@ Follow these steps to configure your install to your specific project.
 
 6. Theme Files & Folders
   * [x]  rename the theme folder from 'INIT' to your theme name
-  * [ ]  set 'Theme Name' and 'Theme URI' in STYLE.CSS
+  * [x]  set 'Theme Name' and 'Theme URI' in STYLE.CSS
   
 7. Install Dependencies
-  * [ ]  Run `npm install`
+  * [x]  Run `npm install`
 
 8. Navigate to your local site path (wht you specified in Step 1)
-  * [ ]  Set up Wordpress
-  + [ ]  Login, go to the 'Appearance' tab and activate your theme
+  * [x]  Set up Wordpress
+  + [x]  Login, go to the 'Appearance' tab and activate your theme
 
 9. Push your first commit
-  * [ ]  Run `git status` to see a status
-  * [ ]  Run `git add .`
-  * [ ]  Run `git commit -m"[ YOUR_COMMIT_MESSAGE ]"` 
-  * [ ]  Run `git push origin master` to push your commit to Github
+  * [x]  Run `git status` to see a status
+  * [x]  Run `git add .`
+  * [x]  Run `git commit -m"[ YOUR_COMMIT_MESSAGE ]"` 
+  * [x]  Run `git push origin master` to push your commit to Github
 
 10. Starting your project
-  * [ ]  Run `gulp`
-  * [ ]  Refresh your page, start writing code ...
+  * [x]  Run `gulp`
+  * [x]  Refresh your page, start writing code ...
  
 
 ### Editing Current Project

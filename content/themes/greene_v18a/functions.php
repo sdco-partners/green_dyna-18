@@ -17,6 +17,7 @@
   function my_enqueue_style() {
     $_DIR = get_template_directory_uri();
 
+    wp_enqueue_style('fonts', 'https://cloud.typography.com/778678/7432172/css/fonts.css');
     wp_enqueue_style('styles-min', $_DIR.'/prod/styles.css');
     wp_enqueue_script('scripts-min', $_DIR.'/prod/scripts.js', array(), '1.0.0', true);
   }
