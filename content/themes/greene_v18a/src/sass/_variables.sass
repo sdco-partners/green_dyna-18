@@ -1,15 +1,171 @@
 /* Colors */
-
-$black: 
+$black: #000
+$olive: #32553b
+$lime: #62a044
+$navy: #0c3547
+$cream: #f4f1ef 
 $white: #fff
 
-/* Font Sizes & Fonts */
+/* Typefaces */
+%GothamBook
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif
+    font-style: normal
+    font-weight: 400
 
-$sx3: 0.5em
-$sx2: 0.7em
-$sx1: 0.8em
-$body: 18px
-$bx1: 1.2em 
-$bx2: 1.4em
-$bx3: 1.6em  
+%GothamMedium
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif
+    font-style: normal
+    font-weight: 500
+
+%GothamBold
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif
+    font-style: normal
+    font-weight: 700
+
+%SentinelBook
+    font-family: "Sentinel A", "Sentinel B", serif 
+    font-style: normal
+    font-weight: 400
+
+%SentinelSemiBoldItalic
+    font-family: "Sentinel A", "Sentinel B", serif
+    font-style: italic
+    font-weight: 600
+
+%SentinelBlack
+    font-family: "Sentinel A", "Sentinel B", serif
+    font-style: normal
+    font-weight: 800
+
+
+/* Font Styles */
+%MainHead                  
+    @extend %SentinelSemiBoldItalic
+    font-size: 2.4rem
+    line-height: 2.87rem
+
+%AltHead
+    @extend %GothamBold
+    font-size: 1.87rem
+    line-height: 2.81rem
+
+%MainSubHead
+    @extend %GothamMedium
+    font-size: 1.12rem
+    line-height: 1.87rem
+    letter-spacing: 0.1rem
+
+%MainBody
+    @extend %SentinelBook
+    font-size: 1rem
+    line-height: 1.87rem
+
+%BodyBold
+    @extend %SentinelSemiBoldItalic
+    font-size: 1.12rem
+
+%NavBttn
+    @extend %GothamMedium
+    font-size: 0.62rem
+    line-height: 0.75rem
+    letter-spacing: 0.1rem   
+
+%FooterText
+    @extend %GothamMedium
+    font-size: 0.44rem
+    line-height: 0.56rem
+    letter-spacing: 0.1rem       
+
+%FooterSubText
+    @extend %GothamBook
+    font-size: 0.62rem
+    line-height: 1.12rem
+    letter-spacing: 0.1rem       
+
+%MenuLink
+    @extend %GothamBold
+    font-size: 3.12rem
+    line-height: 1.87rem   
+
+%MenuSubLink
+    @extend %GothamMedium
+    font-size: 3.12rem
+    line-height: 1.87rem   
+    letter-spacing: 0.1rem  
+
+%MenuText
+    @extend %GothamMedium
+    font-size: 3.12rem
+    line-height: 1.12rem   
+    letter-spacing: 0.1rem  
+
+%SubNavText
+    @extend %SentinelSemiBoldItalic
+    font-size: 1.87rem
+    line-height: 2.81rem   
+
+%SubNavTab
+    @extend %GothamBook
+    font-size: 0.75rem
+    line-height: 0.87rem   
+    letter-spacing: 0.1rem  
+
+%SubNavLink
+    @extend %GothamBook
+    font-size: 0.62rem
+    line-height: 0.75rem   
+    letter-spacing: 0.1rem  
+
+%FormText
+    @extend %GothamMedium
+    font-size: 0.62rem
+    line-height: 0.75rem   
+    letter-spacing: 0.1rem  
+
+%FormFillText
+    @extend %SentinelBook
+    font-size: 1rem
+    line-height: 1.87rem   
+
+%FilterText
+    @extend %GothamMedium
+    font-size: 0.62rem
+    line-height: 0.75rem   
+    letter-spacing: 0.1rem  
+
+%FilterText
+    @extend %GothamBold
+    font-size: 0.75rem
+    line-height: 0.87rem   
+    letter-spacing: 0.1rem  
+
+%FPTitle
+    @extend %GothamBold
+    font-size: 1.25rem
+    line-height: 2.06rem   
+    letter-spacing: 0.1rem  
+
+%FPData
+    @extend %GothamBold
+    font-size: 0.93rem
+    line-height: 1.25rem   
+    letter-spacing: 0.1rem  
+
+%MapTitle
+    @extend %SentinelBook
+    font-size: 1rem
+    line-height: 1.25rem   
+    letter-spacing: 0.1rem  
+
+%MapData
+    @extend %GothamMedium
+    font-size: 0.5rem
+    letter-spacing: 0.93rem  
+
+
+
+
+
+
+
 
