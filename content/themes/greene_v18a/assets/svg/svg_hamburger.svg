@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.61 10.75">
+	<defs>
+		<style>.hamburger-cls-1{fill:none;stroke:#294932;stroke-miterlimit:10;stroke-width:2px;}</style>
+	</defs>
+	<title>svg_hamburger</title>
+	<line class="hamburger-cls-1" y1="9.75" x2="31.61" y2="9.75"/>
+	<line class="hamburger-cls-1" y1="1" x2="31.61" y2="1"/>
+</svg>
