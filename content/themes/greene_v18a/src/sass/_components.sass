@@ -1,14 +1,24 @@
 /*  _components.sass */
 /* Components being used globally */
 
-=box( $color: $olive, $hover: $lime ) 
-	border: 1px solid $color
-	padding: 10px
-	&:hover
-		border-color: $hover
-		a
-			color: $hover
-	a
-		color: $color
+//  Box Links
+div.box
+	+box
 
+// Social repeater
+div.social.items
+	+flex( $c: center )
 
+	div.item
+		margin-right: 20px
+		svg
+			width: 13px
+			height: 13px
+	div.item:nth-child( 2 )
+		svg
+			width: 15px
+			height: 12px
+	div.item:nth-child( 4 )
+		svg
+			width: 16px
+			height: 11px

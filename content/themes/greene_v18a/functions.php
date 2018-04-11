@@ -79,4 +79,21 @@
   add_action('_admin_menu', 'remove_editor_menu', 1);
 
 
+  /**
+  *
+  * Prints Phone Number to Special Formatting
+  *
+  */
+  function print_phone($number, $splitter) {
+      $string = "";
+      $is_one = ( $number[0] === '1' );
+      $string .= $is_one ? mb_substr($number, 0, 4) : mb_substr($number, 0, 3);
+      $string .= $splitter;
+      $string .= $is_one ? mb_substr($number, 3, 3) : mb_substr($number, 2, 3);
+      $string .= $splitter;
+      $string .= $is_one ? mb_substr($number, 7) : mb_substr($number, 6);
+      return $string;
+  }
+
+
 ?>

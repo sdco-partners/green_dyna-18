@@ -1,0 +1,81 @@
+/*  _foot.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+footer#foot
+    width: 100%
+    padding-top: 48px
+    padding-left: 56px
+    padding-right: 56px
+
+    div.bar
+        +flex
+        width: 100%
+
+    div.main.bar
+        div.flank
+            +flex( $c: center)
+
+    div.left.flank
+        div.logo
+            margin-right: 22px
+
+            svg
+                width: 74px
+                height: 74px
+
+        div.address
+            span.line.one,
+            span.line.four
+                display: block
+
+    div.right.flank
+        div.sitemap.links
+            width: 230px
+            margin-right: 20px
+            margin-left: 10px
+            +col( $b: 20px )
+
+        div.box
+            padding: 5px
+
+        div.social.links
+            div.availability
+                margin-bottom: 14px
+
+            div.social.items
+                width: 121px
+                margin: 0 auto
+                div.item
+                    margin-right: 0
+
+
+
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+footer#foot
+    @extend %FooterText
+    color: $olive
+    background-color: $cream
+
+    a
+        &:hover
+            color: $lime
+
+    
+    div.main.bar
+        div.right.flank
+            border-left: 1px solid $olive
+
+        div.sitemap.links
+            -webkit-column-rule: 1px solid $olive
+            -moz-column-rule: 1px solid $olive 
+            column-rule: 1px solid $olive
+
+

@@ -16,15 +16,41 @@ $break-small: 500px
 =tiny
   @media(max-width: #{$break-small})
     @content
-    
+
+=break($a, $b: max-width)  
+  @media($b: #{$a})
+    @content
+
 
 /* Flexbox */
-
 =flex($a: flex, $b: space-between, $c: flex-start, $d: wrap)
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-flexbox
+  display: -webkit-flex
   display: $a
+  -webkit-justify-content: $b
+  -moz-justify-content: $b
+  -ms-justify-content: $b
   justify-content: $b
+  -ms-flex-pack: $b
+  -webkit-align-items: $c;
+  -moz-align-items: $c;
+  -ms-align-items: $c;
   align-items: $c
+  -webkit-flex-wrap: $d
+  -moz-flex-wrap: $d
+  -ms-flex-wrap: $d
   flex-wrap: $d
+
+/* Columns */
+=col($a: 2, $b: 20px)
+  column-count: $a
+  -moz-column-count: $a
+  -webkit-column-count: $a
+  column-gap: $b
+  -moz-column-gap: $b
+  -webkit-column-gap: $b
 
 /* Background Image Settings */
 =img($a: no-repeat, $b: center, $c: cover)
@@ -33,7 +59,6 @@ $break-small: 500px
   background-size: $c
 
 /* Browser Detection  */
-
 =browser($browsers: Mozilla)
   @each $browser in $browsers
     html[data-browser*="#{$browser}"] &
@@ -50,3 +75,14 @@ $break-small: 500px
     @content
   &:-ms-input-placeholder
     @content
+
+/* Component Mixins */
+=box( $color: $olive, $hover: $lime ) 
+  border: 1px solid $color
+  padding: 10px
+  &:hover
+    border-color: $hover
+    a
+      color: $hover
+  a
+    color: $color

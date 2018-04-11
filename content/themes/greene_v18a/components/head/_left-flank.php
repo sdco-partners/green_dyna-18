@@ -7,9 +7,5 @@
     <div class="hamburger">
         <?php echo file_get_contents( $_DIR . "/assets/svg/svg_hamburger.svg" ); ?>
     </div>
-    <div class="availability">
-        <div class="box link">
-            <a href="">Check Availability</a>
-        </div>
-    </div>
+    <?php include( locate_template( "components/_check-availability.php" ) ); ?>
 </div>

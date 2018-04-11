@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.49 73.48">
+	<defs>
+		<style>.footer-logo-cls-1{fill:#32553b;}</style>
+	</defs>
+	<title>svg_footer-logo</title>
+	<path class="footer-logo-cls-1" d="M43.63,31.36v13.5H59.37V55a25,25,0,0,1-14.72,4.26,20.64,20.64,0,0,1-19.4-12.34H8.06c4,15.75,17.65,26.55,36.08,26.55A46.12,46.12,0,0,0,74.49,62.22V31.36Z"/>
+	<path class="footer-logo-cls-1" d="M43.53,14.41c8.22,0,13.09,2.64,18.57,7.21L72,9.74C64.54,3.45,56.83,0,44,0,24.61,0,9.91,13.49,7.23,31H23.81C26.09,21.53,34,14.41,43.53,14.41Z"/>
+	<path class="footer-logo-cls-1" d="M2.84,36.22H0V34.33H7.73v1.89H4.89v7.44H2.84Z"/>
+	<path class="footer-logo-cls-1" d="M11.63,34.33h2.05V38h3.79V34.33h2.05v9.33H17.47V39.91H13.69v3.75H11.63Z"/>
+	<path class="footer-logo-cls-1" d="M24.09,34.33h7v1.83h-5V38h4.4v1.82h-4.4v2H31.2v1.83H24.09Z"/>
+</svg>
