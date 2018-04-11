@@ -6,15 +6,14 @@
 
 footer#foot
     width: 100%
-    padding-top: 48px
-    padding-left: 56px
-    padding-right: 56px
+    padding: 48px 56px 13px
 
     div.bar
         +flex
         width: 100%
 
     div.main.bar
+        margin-bottom: 33px
         div.flank
             +flex( $c: center)
 
@@ -51,8 +50,25 @@ footer#foot
                 div.item
                     margin-right: 0
 
+    div.sub.bar
+        margin-top: 13px
+        padding-top: 13px
+        div.flank
+            +flex
 
+        div.static.items
+            +flex
+            width: 250px
 
+    div.partner.logos
+        +flex
+        margin-left: 25px
+        width: 45px
+
+        div.item
+            svg
+                width: 20px
+                height: 20px
 
 
 /* OBJECTS -> For styling objects */
@@ -63,6 +79,7 @@ footer#foot
     @extend %FooterText
     color: $olive
     background-color: $cream
+    text-transform: uppercase
 
     a
         &:hover
@@ -78,4 +95,7 @@ footer#foot
             -moz-column-rule: 1px solid $olive 
             column-rule: 1px solid $olive
 
+    div.sub.bar
+        @extend %FooterSubText
+        border-top: 1px solid $grey
 
