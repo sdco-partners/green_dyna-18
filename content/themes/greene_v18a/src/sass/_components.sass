@@ -19,7 +19,95 @@ div.social.items
 		svg
 			width: 15px
 			height: 12px
+
 	div.item:nth-child( 4 )
 		svg
 			width: 16px
 			height: 11px
+
+// Partner logos
+div.partner.logos
+    +flex
+    margin-left: 25px
+    width: 45px
+
+    > div.item
+        svg
+            width: 20px
+            height: 20px
+
+// Text
+div.text
+	padding-top: 50px
+
+	h1,
+	h2
+		@extend %MainHead
+		color: $black
+		padding-bottom: 35px
+
+	h3,
+	h4,
+	h5
+		@extend %MainSubHead
+		color: $black
+		padding-bottom: 20px
+
+	p
+		padding-top: 20px
+		border-top: 1px solid $black
+		@extend %MainBody
+		color: $black
+
+// Gallery
+div.gallery-wrapper
+	position: relative
+	overflow: hidden
+
+	div.gallery
+		+flex
+
+	div.prev,
+	div.next
+		position: absolute
+		top: calc( 50% - 12px )
+		width: 25px
+		height: 25px
+		background-color: $white
+		transform: rotate( 45deg )
+	
+	div.prev
+		left: -13px
+
+	div.next
+		right: -12px
+
+// Single Image
+div.single.image
+	+img
+	max-width: 100%
+	min-width: 100%
+	max-height: 100%
+
+// Subnav Bar
+div.subnav.bar
+	margin-top: -80px
+	width: 100%
+	height: 60px
+	color: $cream
+	background-color: $navy
+	z-index: -1
+	
+	div.links
+		+flex( $b: flex-start, $c: center )
+		width: 100%
+		max-width: 1130px
+		height: 60px
+		margin: 0 auto
+
+		a
+			@extend %SubNavTab
+			padding-right: 30px
+			color: $cream
+			&:hover
+				color: $lime

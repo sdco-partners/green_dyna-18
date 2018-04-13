@@ -17,8 +17,8 @@
 	</a>
 	<?php $tele = get_field( "contact_tele", "option" ); ?>
 	<a href="tel:<?php echo $tele; ?>">
-		<div class="line four">
+		<span class="line four">
 			<?php echo print_phone( $tele, "." );?>
-		</div>
+		</span>
 	</a>
 </div>

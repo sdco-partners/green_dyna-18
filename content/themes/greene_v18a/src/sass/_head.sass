@@ -10,19 +10,20 @@ header#head
 	height: 130px
 	padding: 45px 52px
 
-	div.left,
-	div.right,
+	> div.left,
+	> div.right,
 		flex: 0 0 241px
 
-	div.left.flank
+	> div.left.flank
 		+flex( $b: flex-start, $c: center )
 		div.hamburger
 			margin-right: 37px
+			z-index: 175
 			svg 
 				width: 32px
 				height: 9px
 
-	div.right.flank
+	> div.right.flank
 		+flex( $b: flex-end, $c: center )
 		height: 34px
 		

@@ -7,5 +7,6 @@
     <div class="hamburger">
         <?php echo file_get_contents( $_DIR . "/assets/svg/svg_hamburger.svg" ); ?>
     </div>
-    <?php include( locate_template( "components/_check-availability.php" ) ); ?>
+    <?php include( locate_template( "components/_check-availability.php" ) ); 
+    include( locate_template( "components/menu/_menu.php" ) );?>
 </div>

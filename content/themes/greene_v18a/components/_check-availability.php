@@ -4,7 +4,9 @@
   */
 ?>
 <div class="availability">
-	<div class="box link">
-	    <a href="">Check Availability</a>
-	</div>
+	<a href="">
+		<div class="box link">
+		    <span>Check Availability</span>
+		</div>
+	</a>
 </div>

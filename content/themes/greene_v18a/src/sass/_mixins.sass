@@ -43,6 +43,7 @@ $break-small: 500px
   -ms-flex-wrap: $d
   flex-wrap: $d
 
+
 /* Columns */
 =col($a: 2, $b: 20px)
   column-count: $a
@@ -51,6 +52,7 @@ $break-small: 500px
   column-gap: $b
   -moz-column-gap: $b
   -webkit-column-gap: $b
+
 
 /* Background Image Settings */
 =img($a: no-repeat, $b: center, $c: cover)
@@ -76,10 +78,12 @@ $break-small: 500px
   &:-ms-input-placeholder
     @content
 
+
 /* Component Mixins */
 =box( $color: $olive, $hover: $lime ) 
   border: 1px solid $color
-  padding: 10px
+  padding: 8px
+  text-transform: uppercase
   &:hover
     border-color: $hover
     a

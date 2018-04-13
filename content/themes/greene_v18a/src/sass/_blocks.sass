@@ -1,0 +1,44 @@
+/*  _blocks.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.content.blocks
+	width: 100%
+	margin-bottom: 66px
+
+div.block
+	margin-top: 72px
+	margin-bottom: 72px
+
+div.block.ahuva
+	max-height: 700px
+	margin-top: 0
+
+div.block.bahira
+
+	div.wrapper
+		+flex
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
+
+		div.text
+			flex: 0 0 430px
+
+		div.gallery-wrapper
+			flex: 0 0 624px
+			
+
+			div.gallery
+				+flex( $d: nowrap )
+				width: 100%
+
+			div.single.image
+
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */

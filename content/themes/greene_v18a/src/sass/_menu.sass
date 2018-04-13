@@ -1,0 +1,147 @@
+/*  _nav.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+section#menu
+	display: none // <-- toggle
+	position: absolute
+	top: 0
+	left: 0
+	padding: 20px
+	width: 100vw
+	height: 100vh
+	height: 100%
+	z-index: 150
+
+	div.menu-wrapper
+		width: 100%
+		height: 100%
+		padding-left: 88px
+		padding-top: 111px
+		overflow: scroll
+
+	div.main.menu.items
+		width: 282px
+		margin-bottom: 48px
+
+	div.sub.menu.items
+		width: 152px
+		div.link-wrapper
+			margin-bottom: 14px
+
+	div.menu.info
+		position: absolute
+		width: 653px
+		margin-left: 20px
+		padding-left: 88px
+		padding-bottom: 20px
+		bottom: 20px
+		left: 0
+
+	div.top.bar
+		padding-bottom: 10px
+
+	div.address
+		+flex( $c: center )
+		position: relative
+		
+		> a
+			position: relative
+
+		span.line.one:before,
+		span.line.four:before
+			content: " "
+			width: 23px
+			height: 23px
+			position: absolute
+			left: 0px
+			top: -3px
+
+		span.line.one,
+		span.line.four
+			margin-left: 35px
+
+	div.bottom.bar
+		+flex( $c: center )
+		div.left.flank
+			+flex( $c: center )
+			width: 225px
+		span
+			padding-top: 10px
+			padding-bottom: 10px
+
+		span.follow
+			padding-right: 15px
+			margin-right: 15px
+			border-right: 1px solid $cream
+
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+section#menu
+	@extend %MenuText
+	background-color: $cream
+	color: $cream
+
+	div.menu-wrapper
+		background-color: $olive
+
+	a
+		color: $cream
+		&:hover
+			colro: $lime
+
+	div.box
+		+box( $cream, $lime )
+		text-align: center
+
+	div.main.menu.items
+		@extend %MenuLink
+
+	div.menu.info
+		background-color: $olive
+		div.top.bar
+			border-bottom: 1px solid $cream
+
+	div.address
+		span.line.one:before
+			background-image: url( "../assets/svg/svg_map-marker.svg" )		
+
+		span.line.four:before
+			background-image: url( "../assets/svg/svg_phone-icon.svg" )		
+
+	div.bottom.bar
+		path.facebook-cls-1,
+		path.twitter-cls-1,
+		path.instagram-cls-1,
+		path.email-cls-1,
+		path.house-cls-1,
+		rect.house-cls-1,
+		polygon.house-cls-1,
+		path.wheelchair-cls-1
+			fill: $cream
+
+		div.item
+			path.facebook-cls-1,
+			path.twitter-cls-1,
+			path.instagram-cls-1,
+			path.email-cls-1,
+				&:hover
+					fill: $lime
+
+	
+
+
+
+
+
+
+
+
+
+
