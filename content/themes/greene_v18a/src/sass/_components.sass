@@ -15,6 +15,7 @@ div.social.items
 		svg
 			width: 13px
 			height: 13px
+
 	div.item:nth-child( 2 )
 		svg
 			width: 15px
@@ -42,22 +43,27 @@ div.text
 
 	h1,
 	h2
+		padding-bottom: 35px
 		@extend %MainHead
 		color: $black
-		padding-bottom: 35px
 
 	h3,
 	h4,
 	h5
+		padding-bottom: 20px
 		@extend %MainSubHead
 		color: $black
-		padding-bottom: 20px
 
 	p
 		padding-top: 20px
-		border-top: 1px solid $black
 		@extend %MainBody
 		color: $black
+
+	strong
+		@extend %BodyBold
+
+	p:first-of-type
+		border-top: 1px solid $black
 
 // Gallery
 div.gallery-wrapper
@@ -106,11 +112,89 @@ div.subnav.bar
 		margin: 0 auto
 
 		a
-			@extend %SubNavTab
 			padding-right: 30px
+			@extend %SubNavTab
 			color: $cream
 			&:hover
 				color: $lime
 
 // Signup
+div.signup
+	width: 100%
+	padding-top: 50px
+	background-color: $cream
+
+	div.signup.wrapper
+		+flex
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
+
+	div.text.wrapper
+		flex: 0 0 340px
+
+	div.form.wrapper
+		flex: 0 0 650px
+
+	form
+		+flex
+
+	div.full,
+	div.submit
+		flex: 0 0 100%
+		margin-bottom: 25px
+
+	div.half
+		flex: 0 0 45%
+		margin-bottom: 25px
+
+	input
+		height: 35px
+		width: 100%
+		border: none
+		padding-left: 15px
+		@extend %FormFillText
+
+	textarea
+		width: 100%
+		height: 90px
+		border: none
+		@extend %FormFillText
+
+	label
+		display: block
+		height: 20px
+		@extend %FormText
+		color: $grey
+
+	div.submit
+		+flex( $b: flex-end, $c: center)
+
+		input[type=submit]
+			@extend %FormText
+			flex: 0 0 117px
+
+		span.checkbox-1
+			flex: 0 0 340px
+			margin-right: 40px
+
+		span.ajax-loader
+			flex: 0 0 100% 
+
+	span.first.last
+		+flex( $c: center )
+
+		input
+			flex 0 0 14px
+			height: 14px
+			width: 14px
+			padding-left: 0
+			-moz-appearance: none
+			-webkit-appearance: none
+			-o-appearance: none
+			border: 2px solid $black
+
+		span
+			@extend %FormText
+
 
