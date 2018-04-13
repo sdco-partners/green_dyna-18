@@ -30,8 +30,11 @@ if( have_posts() ) :
 				endwhile;
 			endif; ?>
 		</div>
-		
+
 	<?php endwhile;
 endif;
+
+$text = get_field( "form_text", "option" );
+include( locate_template("components/_signup.php") );
 
 get_footer();
