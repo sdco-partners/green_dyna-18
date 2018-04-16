@@ -1,0 +1,80 @@
+/*  _text.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.text
+
+	h1,
+	h2
+		padding-bottom: 20px
+
+		& + h3,
+			h4,
+			h5
+			padding-top: 15px
+
+	h3,
+	h4,
+	h5
+		padding-bottom: 20px
+
+	p
+		padding-top: 20px
+	
+
+	li
+		position: relative
+		padding-top: 20px
+		&:before
+			position: absolute
+			top: 10px
+			width: 43px
+			height: 1px
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+
+div.text
+
+	h1,
+	h2
+		@extend %MainHead
+		color: $black
+
+	h3,
+	h4,
+	h5
+		@extend %MainSubHead
+		color: $black
+
+	p,
+	li
+		@extend %MainBody
+		color: $black
+
+	strong
+		@extend %BodyBold
+
+	p:first-of-type
+		border-top: 1px solid $black
+
+	li
+		&:before
+			content: ""
+			background-color: $black
+
+div.block.eada
+
+	h1,
+	h2
+		@extend %AltHead
+		color: $black
+
+	p
+		@extend %BodyBold
+		color: $black
+

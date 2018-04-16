@@ -9,8 +9,8 @@ div.content.blocks
 	padding-bottom: 66px
 
 div.block
-	margin-top: 72px
-	margin-bottom: 72px
+	margin-top: 100px
+	margin-bottom: 100px
 
 div.block.ahuva
 	max-height: 700px
@@ -30,12 +30,90 @@ div.block.bahira
 		div.gallery-wrapper
 			flex: 0 0 624px
 			
-
 			div.gallery
 				+flex( $d: nowrap )
 				width: 100%
 
-			div.single.image
+div.block.calypso
+	margin-top: 145px
+
+	> div.wrapper
+		+flex( $c: center )
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
+
+		div.text
+			flex: 0 0 430px
+
+		div.image-wrapper
+			flex: 0 0 624px
+
+		div.single.image
+			max-width: 100%
+
+div.block.eada
+
+	div.wrapper
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
+
+		h2,
+		h3,
+		h4,
+		h5,
+			max-width: 750px
+
+		p
+			max-width: 525px
+
+div.block.gamila
+	div.image.wrapper
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
+
+div.block.hadrea
+	div.image.wrapper
+		+flex
+		width: 100%
+		max-width: 1135px
+		margin: 0 auto
+
+	div.repeater
+		position: relative
+		flex: 0 0 560px
+
+	div.repeater:nth-child( 2n )
+		margin-left: auto
+
+
+div.block.ilma
+	> div.wrapper
+		+flex
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
+
+		div.image.wrapper
+			flex: 0 0 50%
+			max-width: 573px
+
+			span.overlay
+				display: block
+				width: 200px
+				left: calc( 50% - 100px )
+
+			span.overlay.one
+				top: calc( 50% - 41px + 210px )
+
+		div.text
+			flex: 0 0 45%
+
+			p
+				position: relative
+
 
 
 
@@ -45,3 +123,18 @@ div.block.bahira
 
 div.content.blocks
 	border-bottom: 6px solid $lime
+
+div.block.calypso
+	div.single.image
+		border: 6px solid $grey
+
+div.block.ilma
+	span.overlay
+		text-align: center
+
+	div.text
+		p:nth-child( n + 1 )
+			&:before
+				content: ""
+				background-color: $black
+

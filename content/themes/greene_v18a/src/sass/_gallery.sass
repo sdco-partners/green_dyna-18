@@ -1,0 +1,68 @@
+/*  _gallery.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.gallery-wrapper
+	position: relative
+	overflow: hidden
+
+	div.gallery
+		+flex
+
+	div.prev,
+	div.next
+		position: absolute
+		top: calc( 50% - 12px )
+		width: 25px
+		height: 25px
+	
+	div.prev
+		left: -13px
+
+	div.next
+		right: -12px
+
+// Single Image
+div.single.image
+	max-width: 100%
+	min-width: 100%
+	max-height: 100%
+
+// Overlay Text
+div.image.wrapper
+	position: relative 
+
+	span.overlay
+		position: absolute
+		left: 20px
+	
+	span.one
+		top: -45px
+
+	span.two
+		bottom: -40px
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.gallery-wrapper
+
+	div.prev,
+	div.next
+		background-color: $white
+		transform: rotate( 45deg )
+
+// Single Image
+div.single.image
+	+img
+
+// Overlay Text
+div.image.wrapper
+	span
+		@extend %OverlayText
+		color: $black
+		// opacity: 0.3

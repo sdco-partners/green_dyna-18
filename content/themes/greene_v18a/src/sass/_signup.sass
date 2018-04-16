@@ -1,0 +1,113 @@
+/*  _signup.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.signup
+	width: 100%
+	padding-top: 50px
+
+	div.signup.wrapper
+		+flex( $c: center )
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
+
+	div.text.wrapper
+		flex: 0 0 340px
+		padding-bottom: 75px
+
+	div.form.wrapper
+		flex: 0 0 650px
+
+	form
+		+flex
+
+	div.full,
+	div.submit
+		flex: 0 0 100%
+		margin-bottom: 25px
+
+	div.half
+		flex: 0 0 45%
+		margin-bottom: 25px
+
+	input
+		height: 35px
+		width: 100%
+		border: none
+		padding-left: 15px
+
+	textarea
+		width: 100%
+		height: 90px
+		border: none
+
+	label
+		display: block
+		height: 20px
+
+	div.submit
+		+flex( $b: flex-end, $c: center)
+
+		input[type=submit]
+			flex: 0 0 117px
+
+		span.checkbox-1
+			flex: 0 0 340px
+			margin-right: 40px
+
+		span.ajax-loader
+			flex: 0 0 100% 
+
+	span.first.last
+		+flex( $c: center )
+
+		input
+			flex 0 0 14px
+			height: 14px
+			width: 14px
+			padding-left: 0
+
+
+body.page-template-tmpl_contact
+	div.signup
+		min-height: 600px
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.signup
+	background-color: $cream
+
+	input
+		border: none
+		@extend %FormFillText
+
+	textarea
+		border: none
+		@extend %FormFillText
+
+	label
+		@extend %FormText
+		color: $grey
+
+	div.submit
+
+		input[type=submit]
+			@extend %FormText
+
+	span.first.last
+
+		input
+			-moz-appearance: none
+			-webkit-appearance: none
+			-o-appearance: none
+			border: 2px solid $black
+
+		span
+			@extend %FormText
+

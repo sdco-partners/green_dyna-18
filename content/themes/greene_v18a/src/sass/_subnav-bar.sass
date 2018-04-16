@@ -1,0 +1,37 @@
+/*  _subnav-bar.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.subnav.bar
+	margin-top: -80px
+	width: 100%
+	height: 60px
+	z-index: -1
+	
+	div.links
+		+flex( $b: flex-start, $c: center )
+		width: 100%
+		max-width: 1130px
+		height: 60px
+		margin: 0 auto
+
+		a
+			padding-right: 30px
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.subnav.bar
+	color: $cream
+	background-color: $navy
+	
+	div.links
+
+		a
+			@extend %SubNavTab
+			color: $cream
+			&:hover
+				color: $lime

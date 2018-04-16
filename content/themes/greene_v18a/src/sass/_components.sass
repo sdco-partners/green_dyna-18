@@ -5,196 +5,28 @@
 div.box
 	+box
 
+// Tele 
+div.tele
+    a
+        font-size: 0.75rem
+
+
 // Social repeater
-div.social.items
-	+flex( $c: center )
-
-	div.item
-		margin-right: 20px
-		
-		svg
-			width: 13px
-			height: 13px
-
-	div.item:nth-child( 2 )
-		svg
-			width: 15px
-			height: 12px
-
-	div.item:nth-child( 4 )
-		svg
-			width: 16px
-			height: 11px
+@import "social-items"
 
 // Partner logos
-div.partner.logos
-    +flex
-    margin-left: 25px
-    width: 45px
-
-    > div.item
-        svg
-            width: 20px
-            height: 20px
+@import "partner-logos"
 
 // Text
-div.text
-	padding-top: 50px
-
-	h1,
-	h2
-		padding-bottom: 35px
-		@extend %MainHead
-		color: $black
-
-	h3,
-	h4,
-	h5
-		padding-bottom: 20px
-		@extend %MainSubHead
-		color: $black
-
-	p
-		padding-top: 20px
-		@extend %MainBody
-		color: $black
-
-	strong
-		@extend %BodyBold
-
-	p:first-of-type
-		border-top: 1px solid $black
+@import "text"
 
 // Gallery
-div.gallery-wrapper
-	position: relative
-	overflow: hidden
-
-	div.gallery
-		+flex
-
-	div.prev,
-	div.next
-		position: absolute
-		top: calc( 50% - 12px )
-		width: 25px
-		height: 25px
-		background-color: $white
-		transform: rotate( 45deg )
-	
-	div.prev
-		left: -13px
-
-	div.next
-		right: -12px
-
-// Single Image
-div.single.image
-	+img
-	max-width: 100%
-	min-width: 100%
-	max-height: 100%
+@import "gallery"
 
 // Subnav Bar
-div.subnav.bar
-	margin-top: -80px
-	width: 100%
-	height: 60px
-	color: $cream
-	background-color: $navy
-	z-index: -1
-	
-	div.links
-		+flex( $b: flex-start, $c: center )
-		width: 100%
-		max-width: 1130px
-		height: 60px
-		margin: 0 auto
-
-		a
-			padding-right: 30px
-			@extend %SubNavTab
-			color: $cream
-			&:hover
-				color: $lime
+@import "subnav-bar"
 
 // Signup
-div.signup
-	width: 100%
-	padding-top: 50px
-	background-color: $cream
-
-	div.signup.wrapper
-		+flex
-		width: 100%
-		max-width: 1130px
-		margin: 0 auto
-
-	div.text.wrapper
-		flex: 0 0 340px
-
-	div.form.wrapper
-		flex: 0 0 650px
-
-	form
-		+flex
-
-	div.full,
-	div.submit
-		flex: 0 0 100%
-		margin-bottom: 25px
-
-	div.half
-		flex: 0 0 45%
-		margin-bottom: 25px
-
-	input
-		height: 35px
-		width: 100%
-		border: none
-		padding-left: 15px
-		@extend %FormFillText
-
-	textarea
-		width: 100%
-		height: 90px
-		border: none
-		@extend %FormFillText
-
-	label
-		display: block
-		height: 20px
-		@extend %FormText
-		color: $grey
-
-	div.submit
-		+flex( $b: flex-end, $c: center)
-
-		input[type=submit]
-			@extend %FormText
-			flex: 0 0 117px
-
-		span.checkbox-1
-			flex: 0 0 340px
-			margin-right: 40px
-
-		span.ajax-loader
-			flex: 0 0 100% 
-
-	span.first.last
-		+flex( $c: center )
-
-		input
-			flex 0 0 14px
-			height: 14px
-			width: 14px
-			padding-left: 0
-			-moz-appearance: none
-			-webkit-appearance: none
-			-o-appearance: none
-			border: 2px solid $black
-
-		span
-			@extend %FormText
+@import "signup"
 
 

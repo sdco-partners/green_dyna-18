@@ -1,0 +1,29 @@
+/*  _social-items.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.social.items
+	+flex( $c: center )
+
+	div.item
+		margin-right: 20px
+		
+		svg
+			width: 13px
+			height: 13px
+
+	div.item:nth-child( 2 )
+		svg
+			width: 15px
+			height: 12px
+
+	div.item:nth-child( 4 )
+		svg
+			width: 16px
+			height: 11px
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */

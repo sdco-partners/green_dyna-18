@@ -25,6 +25,26 @@ if( have_posts() ) :
 			        elseif ( get_row_layout() === "bahira" ) : 
 			            include( locate_template( "components/blocks/_bahira.php") );	
 
+			        /* BLOCK: CALYPSO */
+			        elseif ( get_row_layout() === "calypso" ) : 
+			            include( locate_template( "components/blocks/_calypso.php") );	
+
+			        /* BLOCK: EADA */
+			        elseif ( get_row_layout() === "eada" ) : 
+			            include( locate_template( "components/blocks/_eada.php") );	
+
+			        /* BLOCK: GAMILA */
+			        elseif ( get_row_layout() === "gamila" ) : 
+			            include( locate_template( "components/blocks/_gamila.php") );
+
+			        /* BLOCK: HADREA */
+			        elseif ( get_row_layout() === "hadrea" ) : 
+			            include( locate_template( "components/blocks/_hadrea.php") );
+
+			        /* BLOCK: ILMA */
+			        elseif ( get_row_layout() === "ilma" ) : 
+			            include( locate_template( "components/blocks/_ilma.php") );
+
 			        endif;
 
 				endwhile;
