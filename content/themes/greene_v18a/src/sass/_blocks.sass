@@ -17,7 +17,6 @@ div.block.ahuva
 	margin-top: 0
 
 div.block.bahira
-
 	div.wrapper
 		+flex
 		width: 100%
@@ -33,6 +32,7 @@ div.block.bahira
 			div.gallery
 				+flex( $d: nowrap )
 				width: 100%
+
 
 div.block.calypso
 	margin-top: 145px
@@ -52,6 +52,7 @@ div.block.calypso
 		div.single.image
 			max-width: 100%
 
+
 div.block.eada
 
 	div.wrapper
@@ -68,11 +69,55 @@ div.block.eada
 		p
 			max-width: 525px
 
+
+div.block.fatima
+	> div.wrapper
+		width: 100%
+		max-width: 1135px
+		margin: 0 auto
+
+	div.repeater
+		+flex
+		padding-top: 45px
+		padding-bottom: 45px
+
+	div.image.wrapper
+		flex: 0 0 568px
+
+	div.text.wrapper
+		flex: 0 0 45%
+		height: 379px
+		position: relative
+
+		p
+			padding-top: 0
+
+		div.links
+			position: absolute
+			bottom: 0
+			left: 0
+			&:before
+				position: absolute
+				width: 75px
+				height: 1px
+
+			a
+				display: block
+				margin-top: 15px
+
+
+	div.repeater:nth-child( 2n )
+		div.image.wrapper
+			order: 2
+
+
+
 div.block.gamila
 	div.image.wrapper
 		width: 100%
 		max-width: 1130px
 		margin: 0 auto
+
 
 div.block.hadrea
 	div.image.wrapper
@@ -132,9 +177,20 @@ div.block.ilma
 	span.overlay
 		text-align: center
 
-	div.text
-		p:nth-child( n + 1 )
-			&:before
-				content: ""
-				background-color: $black
+div.block.fatima
+	div.repeater
+		border-bottom: 1px solid $grey
+
+	p
+		border-top: none
+
+	div.links
+		&:before
+			content: ""
+			background-color: $grey
+		a
+			@extend %BodyLink
+			color: $olive
+			&:hover
+				color: $lime
 

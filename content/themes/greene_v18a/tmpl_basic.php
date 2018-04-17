@@ -33,6 +33,10 @@ if( have_posts() ) :
 			        elseif ( get_row_layout() === "eada" ) : 
 			            include( locate_template( "components/blocks/_eada.php") );	
 
+			        /* BLOCK: FATIMA */
+			        elseif ( get_row_layout() === "fatima" ) : 
+			            include( locate_template( "components/blocks/_fatima.php") );
+
 			        /* BLOCK: GAMILA */
 			        elseif ( get_row_layout() === "gamila" ) : 
 			            include( locate_template( "components/blocks/_gamila.php") );
