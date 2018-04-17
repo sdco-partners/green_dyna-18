@@ -53,6 +53,24 @@ div.block.calypso
 			max-width: 100%
 
 
+div.block.dagmar
+	> div.wrapper
+		+flex( $b: flex-start, $c: center )
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
+
+	div.single.image
+		flex: 0 0 33%
+		min-width: inherit
+		max-width: 373px
+		max-height: 249px
+		margin-bottom: 5px
+
+	div.single.image:nth-child( 3n + 2 )
+		margin-left: 5px
+		margin-right: 5px
+
 div.block.eada
 
 	div.wrapper
@@ -96,10 +114,14 @@ div.block.fatima
 			position: absolute
 			bottom: 0
 			left: 0
-			&:before
-				position: absolute
-				width: 75px
-				height: 1px
+
+			a:first-of-type
+				&:before
+					position: absolute
+					top: 0
+					left: 0
+					width: 75px
+					height: 1px
 
 			a
 				display: block
@@ -159,7 +181,11 @@ div.block.ilma
 			p
 				position: relative
 
-
+div.block.sitemap
+	> div.wrapper
+		width: 100%
+		max-width: 1130px
+		margin: 0 auto
 
 
 /* OBJECTS -> For styling objects */
@@ -185,12 +211,16 @@ div.block.fatima
 		border-top: none
 
 	div.links
-		&:before
-			content: ""
-			background-color: $grey
+		a:first-of-type
+			&:before
+				content: ""
+				background-color: $grey
 		a
 			@extend %BodyLink
 			color: $olive
 			&:hover
 				color: $lime
 
+div.block.dagmar
+	div.single.image
+		cursor: pointer

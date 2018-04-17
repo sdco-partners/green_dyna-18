@@ -29,6 +29,10 @@ if( have_posts() ) :
 			        elseif ( get_row_layout() === "calypso" ) : 
 			            include( locate_template( "components/blocks/_calypso.php") );	
 
+			        /* BLOCK: DAGMAR */
+			        elseif ( get_row_layout() === "dagmar" ) : 
+			            include( locate_template( "components/blocks/_dagmar.php") );	
+
 			        /* BLOCK: EADA */
 			        elseif ( get_row_layout() === "eada" ) : 
 			            include( locate_template( "components/blocks/_eada.php") );	

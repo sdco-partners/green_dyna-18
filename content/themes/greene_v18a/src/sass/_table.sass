@@ -1,0 +1,52 @@
+/*  _tale.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.table
+	max-width: 756px
+
+	div.headers,
+	div.list
+		+flex( $b: flex-start )
+
+		h2
+			margin-bottom: 10px
+
+		ul,
+		ol
+			margin-top: 15px
+
+		li
+			max-width: 200px
+
+	div.headers h2:first-of-type,
+	div.list ul:first-of-type	
+		flex: 0 0 348px
+
+	div.headers h2:nth-of-type( n + 2 ),
+	div.list ul:nth-of-type( n + 2 )
+		flex: 0 0 auto
+		+col
+
+	
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.table
+	h2,
+	h3,
+	h4,
+	h5,
+	h6
+		@extend %SiteMapHead
+
+	ul,
+	ol
+		@extend %SiteMapLink
+
+	div.headers
+		border-bottom: 1px solid $black

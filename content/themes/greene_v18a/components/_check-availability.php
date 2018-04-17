@@ -4,9 +4,9 @@
   */
 ?>
 <div class="availability">
-	<a href="">
+	<a href="<?php echo get_page_link( 29 ); ?>">
 		<div class="box link">
-		    <span>Check Availability</span>
+		    <span>Find An Apartment</span>
 		</div>
 	</a>
 </div>
