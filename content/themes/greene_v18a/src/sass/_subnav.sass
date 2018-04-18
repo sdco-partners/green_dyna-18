@@ -20,18 +20,49 @@ div.subnav.bar
 		a
 			padding-right: 30px
 
+div.subnav.tab
+	+flex( $c: center )
+	width: 100%
+	max-width: 300px
+	height: 60px
+	padding-right: 30px
+	&:before
+		content: ""
+		position: absolute
+		top: 0
+		right: 100%
+		height: 60px
+		width: 50vw
+
+	div.tabs
+		position: relative
+		&:after
+			content: ""
+			position: absolute
+			height: 16px
+			width: 16px
+			bottom: -30px
+			left: calc( 50% - 14px )
+			transform: rotate( 45deg )
+
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
-div.subnav.bar
+div.subnav.bar,
+div.subnav.tab
 	color: $cream
 	background-color: $navy
+	&:before
+		background-color: $navy
 	
-	div.links
+	div.links,
+	div.tabs
+		&:after
+			background-color: $white
 
 		a
-			@extend %SubNavTab
+			@extend %SubNavLink
 			color: $cream
 			&:hover
 				color: $lime

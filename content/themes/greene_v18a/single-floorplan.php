@@ -6,7 +6,11 @@
  */ 
 get_header(); ?>
 <div class="floorplan layout">
-	<?php include( locate_template("components/floorplan/_primary-data.php") ); ?>
+	<?php include( locate_template("components/floorplan/_primary-data.php") );
+	include( locate_template("components/floorplan/_schedule-tour.php") ); ?>
 </div>
 
-<? get_footer();
+<? 
+$text = get_field( "form_text", "option" );
+include( locate_template("components/_signup.php") );
+get_footer();

@@ -1,6 +1,6 @@
 <?php
   /*
-  * Section =>  _single-image
+  * Section =>  _SINGLE-IMAGE
   */
 
   if( $image ) : ?>
