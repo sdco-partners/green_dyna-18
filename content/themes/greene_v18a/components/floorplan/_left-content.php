@@ -13,6 +13,6 @@
 		<?php include( locate_template("components/floorplan/_attributes.php") ); ?>
 	</div>
 	<div class="bottom bar">
-		<?php include( locate_template("components/floorplan/_subnav.php") ); ?>
+		<?php include( locate_template("components/_subnav-tab.php") ); ?>
 	</div>
 </div>

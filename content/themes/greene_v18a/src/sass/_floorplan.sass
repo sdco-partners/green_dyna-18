@@ -1,0 +1,65 @@
+/*  _floorplan.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.floorplan.layout
+
+div.primary.data.component
+	+flex( $c: center )
+	width: 100%
+	max-width: 1135px
+	margin: 0 auto
+
+	> div.content.wrapper
+		flex: 0 0 50%
+
+	div.left.content
+		div.top.bar
+			+flex( $c: flex-end )
+			width: 100%
+			max-width: 433px
+			padding-bottom: 15px
+			margin-bottom: 25px
+
+		div.codes
+			+flex( $c: flex-end )
+			h2
+				margin-right: 10px
+
+
+
+@import "attributes"
+
+@import "subnav-tab"
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.primary.data.component
+	@extend %IndvFPBody
+	color: $black
+
+	a
+		color: $olive
+		&:hover
+			color: $lime
+
+	div.left.content
+		div.top.bar
+			border-bottom: 1px solid $black
+
+			h2
+				@extend %IndvFPTitle
+				color: $black
+
+			h3
+				@extend %IndvFPCode
+				color: $grey
+
+
+	rect.fp-reedy-st0
+		stroke: $white

@@ -5,5 +5,5 @@
 ?>
 
 <div class="map">
-	<?php file_get_contents( $map[ "url" ] ); ?>
+	<?php echo file_get_contents( $map[ "url" ] ); ?>
 </div>
