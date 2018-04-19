@@ -4,7 +4,8 @@
 /* includes positioning styles like display, padding, margin, height */
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
-div.signup
+div.signup,
+div.schedule
 	width: 100%
 	padding-top: 50px
 
@@ -83,6 +84,10 @@ body.page-template-tmpl_contact
 div.signup
 	background-color: $cream
 
+
+div.signup,
+div.schedule
+
 	input
 		border: none
 		@extend %FormFillText
@@ -111,3 +116,7 @@ div.signup
 		span
 			@extend %FormText
 
+
+div.schedule
+	input
+		border: 1px solid $grey

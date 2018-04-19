@@ -10,7 +10,6 @@ get_header(); ?>
 	include( locate_template("components/floorplan/_schedule-tour.php") ); ?>
 </div>
 
-<? 
-$text = get_field( "form_text", "option" );
+<? $text = get_field( "form_text", "option" );
 include( locate_template("components/_signup.php") );
 get_footer();
