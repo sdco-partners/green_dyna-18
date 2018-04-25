@@ -12,4 +12,5 @@
   	</div>  	
   </div>
 
-  <?php include( locate_template("components/_date-picker.php") ); ?>
+  <?php $heading = "Desired Move-In Date";
+  include( locate_template("components/datepicker/_date-picker.php") ); ?>

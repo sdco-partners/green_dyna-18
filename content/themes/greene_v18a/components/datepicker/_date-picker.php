@@ -2,7 +2,7 @@
   /*
   * Section =>  _UNITS
   */
-$heading = "Desired Move-In Date";
+
 ?>
 <div class="overlay"></div>
 
