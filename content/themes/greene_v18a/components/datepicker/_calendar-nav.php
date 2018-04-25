@@ -3,7 +3,7 @@
   * Section =>  _CALENAR-NAV
   */
 ?>
-<div class="datepicker calendar navigation">
+<div class="datepicker navigation">
 	<div class="left arrow">
 		<?php echo file_get_contents( $_DIR . "/assets/svg/svg_arrow.svg" ); ?>
 	</div>

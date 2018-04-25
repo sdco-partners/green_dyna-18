@@ -55,3 +55,22 @@ div.datepicker.wrapper
 
 div.calendar
     @extend %GridData
+
+div.datepicker.wrapper
+
+    div.grid.wrapper
+        div.item.su
+            border-left: none
+
+        div.item.sa
+            border-right: none
+            cursor: pointer
+            &:hover
+                color: $white
+                background-color: $lime
+
+        div.item
+            &:hover
+                color: $white
+                background-color: $lime
+
