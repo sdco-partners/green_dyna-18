@@ -53,6 +53,17 @@ $break-small: 500px
   -moz-column-gap: $b
   -webkit-column-gap: $b
 
+/* Grid */
+=grid( $a: repeat(6, 1fr), $b: repeat(6, 52px), $c: stretch, $d: stretch, $e: stretch, $f: stretch )
+  display: -ms-grid
+  display: grid
+  grid-template-columns: $a
+  grid-template-rows: $b
+  align-items: $c
+  justify-items: $d
+  align-content: $e
+  justify-content: $f
+
 
 /* Background Image Settings */
 =img($a: no-repeat, $b: center, $c: cover)

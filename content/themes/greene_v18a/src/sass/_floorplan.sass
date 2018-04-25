@@ -5,12 +5,19 @@
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 div.floorplan.layout
+	margin-top: 100px
+	margin-bottom: 100px
 
 	> div.component
 		+flex( $c: center )
 		width: 100%
 		max-width: 1135px
 		margin: 0 auto
+
+div.schedule.component,
+div.available.units.component
+	> div.wrapper
+		width: 100% 
 
 div.primary.data.component
 
@@ -42,7 +49,7 @@ div.heading
 
 @import "attributes"
 
-@import "schedule-tour"
+@import "units"
 
 
 /* OBJECTS -> For styling objects */
@@ -71,7 +78,8 @@ div.primary.data.component
 				color: $grey
 
 
-	rect.fp-reedy-st0
+	rect.fp-reedy-st0,
+	rect.fp-keowee-st18
 		stroke: $white
 
 

@@ -9,11 +9,29 @@ div.schedule
 	width: 100%
 	padding-top: 50px
 
-	div.signup.wrapper
-		+flex( $c: center )
+	div.signup.wrapper,
+	div.column.wrapper
 		width: 100%
 		max-width: 1130px
 		margin: 0 auto
+		padding-top: 25px
+		// padding-bottom: 25px
+
+	div.signup.wrapper
+		+flex( $c: center )
+
+
+	div.column.wrapper
+		+flex
+		
+		div.col
+			+flex
+
+		div.col.one
+			flex: 0 0 600px
+
+		div.col.two
+			flex: 0 0 490px
 
 	div.text.wrapper
 		flex: 0 0 340px
@@ -34,16 +52,19 @@ div.schedule
 		flex: 0 0 45%
 		margin-bottom: 25px
 
-	input
-		height: 35px
+	input,
+	textarea,
+	select
 		width: 100%
 		border: none
+
+	input,
+	select
+		height: 35px
 		padding-left: 15px
 
 	textarea
-		width: 100%
 		height: 90px
-		border: none
 
 	label
 		display: block
@@ -54,6 +75,7 @@ div.schedule
 
 		input[type=submit]
 			flex: 0 0 117px
+			padding: 0
 
 		span.checkbox-1
 			flex: 0 0 340px
@@ -72,6 +94,11 @@ div.schedule
 			padding-left: 0
 
 
+div.schedule
+	div.submit
+		margin-top: 140px
+		margin-bottom: 0
+
 body.page-template-tmpl_contact
 	div.signup
 		min-height: 600px
@@ -85,16 +112,19 @@ div.signup
 	background-color: $cream
 
 
+
 div.signup,
 div.schedule
 
-	input
+	input,
+	textarea,
+	select
 		border: none
 		@extend %FormFillText
 
-	textarea
-		border: none
-		@extend %FormFillText
+	input:focus,
+	textarea:focus
+		border-left: 5px solid $lime
 
 	label
 		@extend %FormText
@@ -104,6 +134,10 @@ div.schedule
 
 		input[type=submit]
 			@extend %FormText
+			&:hover
+				color: $white
+				background-color: $navy
+
 
 	span.first.last
 
@@ -115,8 +149,28 @@ div.schedule
 
 		span
 			@extend %FormText
-
+	
 
 div.schedule
-	input
+	input,
+	textarea
 		border: 1px solid $grey
+
+	select
+		background-color: $white;
+		outline: 1px solid $grey
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+	div.column.wrapper
+		border-bottom: 1px solid $grey
+
+	div.submit
+
+		input[type=submit]
+			@extend %FormText
+			color: $white
+			background-color: $navy
+			&:hover
+				background-color: $lime

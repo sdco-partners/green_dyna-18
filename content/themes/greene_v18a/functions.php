@@ -12,6 +12,7 @@
  * @version 1.0
  */
 
+  $_DIR = get_template_directory_uri();
 
   /* Add Styles, Fonts, and Javascript */
   function my_enqueue_style() {

@@ -1,0 +1,57 @@
+/*  _date-picker.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.overlay
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    z-index: 200
+
+
+div.datepicker.wrapper
+    position: fixed
+    top: calc( 50% - 286px )
+    left: calc( 50% - 279px )
+    width: 558px
+    height: 573px
+    z-index: 250
+    padding-top: 40px
+    padding-left: 40px
+    padding-right: 40px
+
+div.datepicker.navigation
+    +flex( $c: center )
+
+div.calendar.header
+    flex: 0 0 auto
+    +flex
+
+div.arrow
+    flex: 0 0 22px
+
+    svg
+        width: 11px
+        height: 22px
+
+div.arrow
+    transform: rotate( 180deg )
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.overlay
+    background-color: $navy
+    opacity: 0.5
+
+div.datepicker.wrapper
+    background-color: $cream
+
+div.calendar
+    @extend %GridData

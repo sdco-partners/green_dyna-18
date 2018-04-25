@@ -1,0 +1,44 @@
+/*  _units.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.grid.wrapper
+    +grid
+    margin-top: 5px
+
+    div.item
+        +flex( $b: center, $c: center )
+        height: 100%
+
+div.datepicker.wrapper
+    div.grid.wrapper
+        +grid( $a: repeat(7, 1fr) )
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.grid.wrapper
+    @extend %GridData
+    text-align: center
+
+    div.item
+        border-left: 1px solid $grey
+        border-bottom: 1px solid $grey
+
+    div.item.head
+        border-left: none
+
+
+    div.item.first
+        border-left: none
+
+    div.item.last
+        border-right: none
+        cursor: pointer
+        &:hover
+            color: $white
+            background-color: $lime
+
