@@ -17,29 +17,7 @@ div.floorplan.layout
 div.schedule.component,
 div.available.units.component
 	> div.wrapper
-		width: 100% 
-
-div.primary.data.component
-
-	> div.content.wrapper
-		flex: 0 0 50%
-
-	div.left.content
-		div.top.bar
-			+flex( $c: flex-end )
-			width: 100%
-			max-width: 433px
-			padding-bottom: 15px
-			margin-bottom: 25px
-
-		div.codes
-			+flex( $c: flex-end )
-			h2
-				margin-right: 10px
-
-	div.bottom.bar
-		margin-top: 45px
-		position: relative
+		width: 100%
 
 div.heading
 	width: 100%
@@ -47,40 +25,18 @@ div.heading
 	padding-top: 22px
 	padding-bottom: 22px
 
+@import "primary-data"
+
 @import "attributes"
 
 @import "units"
+
+@import "floorplan-grid"
 
 
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */
 /* INCEPTION RULE: DO NOT nest more than 4  */
-
-div.primary.data.component
-	@extend %IndvFPBody
-	color: $black
-
-	a
-		color: $olive
-		&:hover
-			color: $lime
-
-	div.left.content
-		div.top.bar
-			border-bottom: 1px solid $black
-
-			h2
-				@extend %IndvFPTitle
-				color: $black
-
-			h3
-				@extend %IndvFPCode
-				color: $grey
-
-
-	rect.fp-reedy-st0,
-	rect.fp-keowee-st18
-		stroke: $white
 
 
 div.heading

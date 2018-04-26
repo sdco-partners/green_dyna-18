@@ -1,0 +1,72 @@
+/*  _primary-data.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.primary.data.component
+
+	> div.content.wrapper
+		flex: 0 0 50%
+
+	div.left.content
+		div.top.bar
+			+flex( $c: flex-end )
+			width: 100%
+			max-width: 433px
+			padding-bottom: 15px
+			margin-bottom: 25px
+
+		div.codes
+			+flex( $c: flex-end )
+			h2
+				margin-right: 10px
+
+	div.bottom.bar
+		margin-top: 45px
+		position: relative
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.primary.data.component
+	@extend %IndvFPBody
+	color: $black
+
+	a
+		color: $olive
+		&:hover
+			color: $lime
+
+	div.left.content
+		div.top.bar
+			border-bottom: 1px solid $black
+
+			h2
+				@extend %IndvFPTitle
+				color: $black
+
+			h3
+				@extend %IndvFPCode
+				color: $grey
+
+
+rect.fp-reedy-st0,
+rect.fp-keowee-st18,
+rect.fp-eastatoe-st24,
+rect.fp-jocassee-st25,
+rect.fp-toxaway-st27,
+rect.fp-saluda-st29,
+rect.fp-pacolet-st27,
+rect.fp-tyger-st25,
+rect.fp-brushy-st27,
+rect.fp-broad-st24,
+rect.fp-chattooga-st25,	
+rect.fp-wildcat-st27,
+rect.fp-brasstown-st26,
+rect.fp-whitewater-st26,
+rect.fp-summit-st28,
+rect.fp-bowen-st24
+	stroke: none

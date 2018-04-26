@@ -4,7 +4,7 @@
   */
 ?>
 <div class="datepicker navigation">
-	<div class="left arrow">
+	<div class="left arrow" id="left-cal">
 		<?php echo file_get_contents( $_DIR . "/assets/svg/svg_arrow.svg" ); ?>
 	</div>
 	<div class="calendar header">
@@ -12,7 +12,7 @@
 		<span> &nbsp; </span>
 		<span class="year"><?php echo date( "Y" ); ?></span>
 	</div>
-	<div class="right arrow">
+	<div class="right arrow" id="right-cal">
 		<?php echo file_get_contents( $_DIR . "/assets/svg/svg_arrow.svg" ); ?>
 	</div>
 </div>
