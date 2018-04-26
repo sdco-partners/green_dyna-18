@@ -12,7 +12,9 @@ if( have_posts() ) :
 		the_post(); ?>
 		<div class="block sitemap">
 			<div class="wrapper">
-				<?php include( locate_template("components/_table.php") ); ?>
+				<?php
+				/* BLOCK: TABLE */
+				include( locate_template("components/_table.php") ); ?>
 			</div>
 		</div>
 

@@ -53,33 +53,25 @@ $archive_id = 29; ?>
 	        endif;
 
 		endwhile;
-	endif; ?>
+	endif;
+
+	query_posts($query_string . "&order=ASC");
+	if( have_posts() ) : ?>
+		<div class="floorplans grid">
+		<?php while( have_posts() ) :
+			the_post();
+
+			include( locate_template( "components/floorplan/_floorplan-grid.php") );
+
+		endwhile; ?>
+		</div>
+	<?php endif; ?>
+
 </div>
 
-<?php query_posts($query_string . "&order=ASC");
-if( have_posts() ) : ?>
-	<div class="floorplans grid">
-	<?php while( have_posts() ) :
-		the_post(); 
-		$map = get_field( "map" ); 
-		$name = strtolower( get_the_title() ); 
-		$codes = get_field( "codes" ); 
-		$pdf = get_field( "pdf" ); ?>
-				<div class="single floorplan">
-					<div class="rendering">
-						<?php include( locate_template( "components/floorplan/_map.php") ); ?>
-					</div>
-					<div class="data">
-						<?php include( locate_template( "components/floorplan/_codes.php") ); 
-						include( locate_template( "components/floorplan/_attributes.php") );
-						?> 
-					</div>
-				</div>
-	<?php endwhile; ?>
-	</div>
-<?php endif;
+<?php $text = get_field( "form_text", "option" );
 
-$text = get_field( "form_text", "option" );
+/* BLOCK: SIGNUP */
 include( locate_template("components/_signup.php") );
 
 get_footer();

@@ -63,6 +63,8 @@ if( have_posts() ) :
 endif;
 
 $text = get_field( "form_text", "option" );
+
+/* BLOCK: SIGNUP */
 include( locate_template("components/_signup.php") );
 
 get_footer();
