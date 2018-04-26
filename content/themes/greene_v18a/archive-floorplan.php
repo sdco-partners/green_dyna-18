@@ -53,18 +53,32 @@ $archive_id = 29; ?>
 	        endif;
 
 		endwhile;
-	endif;
+	endif; ?>
 
-	query_posts($query_string . "&order=ASC");
+	<div class="view subnav">
+		<h2>Whichever apartment home you choose,<h2>
+		<h2>The Greene offers fresh-air, urban living in the West End.<h2>
+		<div class="subnav tabs">
+			<span id="view-indv">Individual Plans</span>
+			<span id="span"></span>
+			<span id="view-map">Community Map</span>
+		</div>
+	</div>
+
+	<?php query_posts($query_string . "&order=ASC");
+
 	if( have_posts() ) : ?>
+
 		<div class="floorplans grid">
 		<?php while( have_posts() ) :
 			the_post();
 
-			include( locate_template( "components/floorplan/_floorplan-grid.php") );
+			/* BLOCK: FLOORPLAN */
+			include( locate_template( "components/floorplan/_floorplan-grid.php" ) );
 
 		endwhile; ?>
 		</div>
+
 	<?php endif; ?>
 
 </div>
