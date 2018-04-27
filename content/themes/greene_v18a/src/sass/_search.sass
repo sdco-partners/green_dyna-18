@@ -1,0 +1,168 @@
+/*  _search.sass */
+
+/* PAGE CONTEXT -> For positioning items */
+/* includes positioning styles like display, padding, margin, height */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.search.filter
+    width: 100%
+    max-width: 870px
+    margin: 0 auto
+    height: 100%
+
+    div.choose.bedrooms.wrapper
+        +flex( $c: center)
+        width: 100%
+    
+    div.option.bed
+        +flex( $b: center, $c: center )
+        flex: 1 0 auto
+        height: 56px
+
+    div.option.bed:nth-of-type( 1 )
+        justify-content: flex-start
+        flex: 2 0 auto
+        padding-left: 30px
+
+div.option#toggle-full
+    width: 100%
+    padding-top: 20px
+    padding-bottom: 20px
+
+div.expandable.wrapper
+    +flex
+    width: 100%
+    max-width: 655px
+    margin: 0 auto
+
+    div.col
+        flex: 0 0 45%
+        +flex( $c: center )
+
+        div.option
+            flex: 0 0 100%
+
+        label
+            display: block
+            margin-bottom: 10px
+
+        span
+            display: block
+
+        select
+            border: none
+            width: 100%
+            padding: 10px
+
+        span
+            position: relative
+            width: 100%
+            margin-bottom: 20px
+            &:before
+                position: absolute
+                content: " "
+                top: 6px
+                right: 12px
+                width: 11px
+                height: 11px
+                transform: rotate( -45deg )
+            &:after
+                position: absolute
+                content: " "
+                top: 5px
+                right: 0px
+                width: 35px
+                height: 20px
+
+        span#opt-availability
+            padding: 10px
+
+div.submit.options
+    flex: 0 0 100%
+    +flex( $b: flex-end, $c: center )
+    margin-bottom: 30px
+
+    div.submit#search
+        flex: 1 0 auto
+        +flex( $b: center, $c: center)
+
+        span
+            +flex( $b: center, $c: center)
+            height: 34px
+            width: 117px
+            margin-left: 40px
+
+
+
+
+div.option.rent-range,
+div.option.square-footage-range
+    +flex( $c: center )
+    
+    label
+        flex: 0 0 100%
+
+    span
+        flex: 0 0 45%
+
+
+/* OBJECTS -> For styling objects */
+/* Includes cosmetic styles like color, typography, and borders */
+/* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.search.filter
+    @extend %FilterText
+    border: 1px solid $black
+
+    div.choose.bedrooms.wrapperv
+        border-bottom: 1px solid $black
+
+        div.option.bed
+            border-left: 1px solid $black
+            &:hover
+                color: $white
+                background-color: $lime
+
+        div.option.bed:nth-of-type( 1 )
+            border: none
+
+    label
+        color: $grey
+
+div.expandable.wrapper
+
+    span
+        border: 1px solid $grey
+
+    select
+        @extend %FilterText
+        background-color: $white
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+    span
+        &:before
+            border-left: 1px solid $grey
+            border-bottom: 1px solid $grey
+        &:after
+            border-left: 1px solid $grey
+
+div.option#toggle-full
+    text-align: center
+
+
+div.submit#search,
+div.reset#default,
+div.option#toggle-full
+    @extend %FilterSubmit
+    border: none
+
+div.submit#search
+    span
+        color: $white
+        background-color: $navy
+
+div.reset#default
+    span
+        border: none
