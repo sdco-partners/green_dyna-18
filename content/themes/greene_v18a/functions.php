@@ -201,3 +201,42 @@ function get_month_obj( $date = false ) {
     }
     return $month;
 }
+
+
+/**
+*
+* Single Option Params
+*
+*/
+function single_option_repeater( Array $params, $class ) {
+    $options = Array();
+    foreach( $params as $param ) {
+        $opt = new StdClass();
+        $opt->class = $class;
+        $opt->label = $param;
+        $options[] = $opt;
+    }
+    return $options;
+}
+
+/**
+*
+* Single Option Params
+*
+*/
+function dropdown_builder( 
+    $label, 
+    $min_label, 
+    $max_label, 
+    Array $choices 
+) {
+    $options = new StdClass();
+    $options->label = $label;
+    $options->min_label = $min_label;
+    $options->max_label = $max_label;
+    foreach( $choices as $option ){
+        $options->choices[] = $option;
+    }
+    return $options;
+}
+

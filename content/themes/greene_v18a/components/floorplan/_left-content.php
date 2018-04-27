@@ -5,6 +5,7 @@
 ?>
 
 <div class="left content wrapper">
+	
 	<div class="top bar">
 		<?php include( locate_template("components/floorplan/_codes.php") );
 		include( locate_template("components/_files.php") ); ?>
@@ -15,4 +16,5 @@
 	<div class="bottom bar">
 		<?php include( locate_template("components/_subnav-tab.php") ); ?>
 	</div>
+
 </div>
