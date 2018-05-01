@@ -21,13 +21,12 @@ header#head
 			z-index: 175
 			svg 
 				width: 32px
-				height: 9px
+				height: 32px
 
 	> div.right.flank
 		+flex( $b: flex-end, $c: center )
 		height: 34px
 		
-
 		div.tele
 			margin-left: 20px
 
@@ -61,8 +60,6 @@ section.center.flank
 		z-index: 75
 
 
-
-
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */
 /* INCEPTION RULE: DO NOT nest more than 4  */
@@ -78,13 +75,14 @@ header#head
 		&:hover
 			color: $lime
 
-	svg
-		path
-			&:hover
-				fill: $lime
 
 	div.social.items
 		border-right: 1px solid $olive
+
+div.hamburger#ham
+	&:hover
+		.hamburger-st0
+			stroke: $lime
 
 section.center.flank
 

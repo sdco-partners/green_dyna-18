@@ -5,14 +5,14 @@
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 section#menu
-	display: none // <-- toggle
+	opacity: 0
 	position: absolute
 	top: 0
 	left: 0
 	padding: 20px
 	width: 100vw
 	height: 100vh
-	z-index: 150
+	z-index: -1
 
 	div.menu-wrapper
 		position: absolute
@@ -90,6 +90,14 @@ section#menu
 		div.social.items
 			padding-top: 3px
 
+header#head.pre
+	section#menu
+		z-index: 150
+
+header#head.toggle
+	section#menu
+		opacity: 1
+
 
 
 /* OBJECTS -> For styling objects */
@@ -100,6 +108,7 @@ section#menu
 	@extend %MenuText
 	background-color: $cream
 	color: $cream
+	transition: 0.25s opacity ease
 
 	div.menu-wrapper
 		background-color: $olive
@@ -152,7 +161,10 @@ section#menu
 				&:hover
 					fill: $lime
 
-	
+header#head.toggle
+	line.hamburger-st0
+		stroke: $white
+
 
 
 
