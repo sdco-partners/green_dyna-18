@@ -113,11 +113,175 @@ const navEvent = () => {
     } );
 };
 
+/*
+* slideShow
+*/
+class SlideShow {
+    constructor( {
+        target,
+        timer = 6000,
+        pause = false,
+        currentIndx = 0,
+    } ) {
+        Object.assign( this, {
+            timer,
+            pause,
+            currentIndx,
+        } );
+        this.$galleryWrapper = target;
+        this.assembleDOMElements();
+        this.assembleEventListeners();
+        this.assembleBoundingBoxes();
+        this.calculateInterval();
+    }
+
+    start() {
+        this.countDown();
+    }
+
+    assembleDOMElements() {
+        Array.prototype.forEach.call( this.$galleryWrapper.childNodes, ( $el ) => {
+            if ( $el.tagName === "DIV" ) {
+                if ( $el.classList.contains( "gallery" ) ) {
+                    this.$gallery = $el;
+                } else if ( $el.classList.contains( "prev" ) ) {
+                    this.$bttnPrev = $el;
+                } else if ( $el.classList.contains( "next" ) ) {
+                    this.$bttnNext = $el;
+                }
+            }
+        } );
+        this.slides = this.$gallery.childNodes;
+    }
+
+    assembleEventListeners() {
+        this.$bttnPrev.addEventListener( "click", ( e ) => {
+            e.preventDefault();
+            this.changeSlide( "left" );
+        } );
+
+        this.$bttnNext.addEventListener( "click", ( e ) => {
+            e.preventDefault();
+            this.changeSlide( "right" );
+        } );
+    }
+
+    assembleBoundingBoxes() {
+        this.galleryWidth = this.$gallery.getBoundingClientRect().right;
+        this.nextPos = this.findNextPos().getBoundingClientRect().left;
+    }
+
+    findNextPos() {
+        return Array.prototype.find.call( this.slides, slide =>
+            slide.tagName === "DIV" &&
+            slide.getBoundingClientRect() &&
+            slide.getBoundingClientRect().left > this.$gallery.scrollLeft );
+    }
+
+    findDiv() {
+        return Array.prototype.find.call( this.slides, slide =>
+            slide.tagName === "DIV" );
+    }
+
+    calculateInterval() {
+        const box = this.$gallery.getBoundingClientRect();
+        this.offset = ( box.left - box.width );
+        this.interval = ( this.nextPos - this.offset - this.$gallery.scrollLeft ) / 20;
+    }
+
+    moveForward( time = 0.1 ) {
+        if ( this.$gallery.scrollLeft + this.interval < this.nextPos - this.offset ) {
+            this.$gallery.scrollLeft += this.interval;
+            setTimeout( this.moveForward.bind( this, time + 0.1 ), 18 );
+        }
+    }
+
+    moveBackward() {
+        console.log( "this is never used", this.galleryWidth );
+    }
+
+    changeSlide( direction ) {
+        switch ( direction ) {
+        case "left":
+            this.setPause();
+            this.moveBackward();
+            break;
+        case "right":
+            this.setPause();
+            this.moveForward();
+            break;
+        default:
+            this.changeSlide();
+        }
+    }
+
+    checkLength() {
+        if ( this.$gallery.scrollLeft < 0 ) {
+            this.$gallery.scrollLeft = this.galleryWidth;
+        } else if ( this.$gallery.scrollLeft > this.galleryWidth ) {
+            this.$gallery.scrollLeft = 0;
+        }
+    }
+
+    setPause( pauseTime = 6000 ) {
+        if ( !this.pause ) {
+            this.pause = true;
+            setTimeout( () => {
+                this.pause = false;
+            }, pauseTime );
+        }
+    }
+
+    resetTime( time = 6000 ) {
+        this.timer = time;
+    }
+
+    spendTime() {
+        this.timer -= 1000;
+    }
+
+    countDown() {
+        if ( this.timer === 0 ) {
+            this.next();
+            this.changeSlide();
+            this.resetTime();
+        } else if ( !this.pause ) {
+            this.spendTime();
+        }
+        setTimeout( this.countDown.bind( this ), 1000 );
+    }
+
+    default() {
+        console.log( "doesn't do anything", this.$gallery.getBoundingClientRect() );
+    //     console.log( "doesn't do anything", this.nextPos );
+    //     this.$gallery.addEventListener( "scroll", () => {
+    //         console.log( this.$gallery.scrollLeft );
+    //     } );
+    }
+}
+
+/*
+* Initiate Slider
+*/
+const initSlider = () => {
+    const id = 0;
+    const galleryObj = {};
+    const $galleries = document.getElementsByClassName( "gallery-wrapper" );
+    Array.prototype.forEach.call( $galleries, ( $gallery ) => {
+        galleryObj[ `gal-${ id }` ] = new SlideShow( {
+            target: $gallery,
+        } );
+        // galleryObj[ `gal-${ id }` ].start();
+        galleryObj[ `gal-${ id }` ].default();
+    } );
+};
+
 /**
 * Document Ready
 */
 document.onreadystatechange = () => {
     if ( document.readyState === "complete" ) {
         navEvent();
+        initSlider();
     }
 };

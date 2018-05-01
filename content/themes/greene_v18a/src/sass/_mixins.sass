@@ -88,16 +88,3 @@ $break-small: 500px
     @content
   &:-ms-input-placeholder
     @content
-
-
-/* Component Mixins */
-=box( $color: $olive, $hover: $lime ) 
-  border: 1px solid $color
-  padding: 8px
-  text-transform: uppercase
-  &:hover
-    border-color: $hover
-    a
-      color: $hover
-  a
-    color: $color

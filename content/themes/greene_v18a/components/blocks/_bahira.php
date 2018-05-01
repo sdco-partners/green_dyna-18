@@ -2,8 +2,7 @@
   /*
   * Section =>  _BAHIRA
   */
-$text = get_sub_field( "text" ); 
-?>
+$text = get_sub_field( "text" ); ?>
 
 <div class="block bahira">
 	<div class="wrapper">

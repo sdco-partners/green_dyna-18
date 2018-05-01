@@ -134,9 +134,10 @@ div.schedule
 
 		input[type=submit]
 			@extend %FormText
+			color: $white
+			background-color: $navy
 			&:hover
-				color: $white
-				background-color: $navy
+				background-color: $lime
 
 
 	span.first.last
@@ -149,7 +150,12 @@ div.schedule
 
 		span
 			@extend %FormText
+
+	input[ type="checkbox" ]
+		transition: 0.2s background-color ease
 	
+	input[ type="checkbox" ]:checked
+		background-color: $lime
 
 div.schedule
 	input,
@@ -166,11 +172,3 @@ div.schedule
 	div.column.wrapper
 		border-bottom: 1px solid $grey
 
-	div.submit
-
-		input[type=submit]
-			@extend %FormText
-			color: $white
-			background-color: $navy
-			&:hover
-				background-color: $lime

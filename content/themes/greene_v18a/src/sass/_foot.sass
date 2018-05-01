@@ -30,6 +30,29 @@ footer#foot
             span.line.four
                 display: block
 
+            span.line.two
+                position: relative
+                padding-right: 10px
+                &:after
+                    content: "•"
+                    position: absolute
+                    top: -2px
+                    right: 5px
+                    width: 5px
+                    height: 100%
+
+            span.line.four
+                position: relative
+                padding-top: 10px
+                &:before
+                    content: ""
+                    position: absolute
+                    top: 4px
+                    left: 0
+                    height: 1px
+                    width: 10px
+                    background-color: $olive
+
     div.right.flank
         div.sitemap.links
             width: 230px
