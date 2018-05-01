@@ -5,25 +5,41 @@
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 div.floorplan.layout
-	margin-top: 100px
-	margin-bottom: 100px
+    margin-top: 100px
+    margin-bottom: 100px
+    overflow: hidden
 
-	> div.component
-		+flex( $c: center )
-		width: 100%
-		max-width: 1135px
-		margin: 0 auto
+    > div.component
+        +flex( $c: center )
+        width: 100%
+        max-width: 1135px
+        margin: 0 auto
 
-div.schedule.component,
-div.available.units.component
-	> div.wrapper
-		width: 100%
+    div.schedule.component,
+    div.available.units.component
+        opacity: 0
+        display: none
+        transition: 0.4s all ease-in
+        transform: translate( 0, 20px ) 
+        padding-top: 50px
+
+        > div.wrapper
+            width: 100%
+
+    div.schedule.component.pre,
+    div.available.units.component.pre
+        display: flex
+
+    div.schedule.component.opacity,
+    div.available.units.component.opacity
+        opacity: 1
+        transform: translate( 0, 0 ) 
 
 div.heading
-	width: 100%
-	max-width: 1130px
-	padding-top: 22px
-	padding-bottom: 22px
+    width: 100%
+    max-width: 1130px
+    padding-top: 22px
+    padding-bottom: 22px
 
 @import "primary-data"
 
@@ -43,9 +59,9 @@ div.heading
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 div.heading
-	border-top: 1px solid $grey
-	border-bottom: 1px solid $grey
+    border-top: 1px solid $grey
+    border-bottom: 1px solid $grey
 
-	h2
-		@extend %IndvFPTitle
-		color: $black
+    h2
+        @extend %IndvFPTitle
+        color: $black

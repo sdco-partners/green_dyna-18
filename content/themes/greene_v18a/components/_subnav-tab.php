@@ -5,10 +5,10 @@
 ?>
 
 <div class="subnav tab">
-	<div class="tabs">
-		<a href="">Schedule A Tour</a>
+	<div class="tabs schedule-link">
+		<span class="link schedule">Schedule A Tour</span>
 	</div>
-	<div class="tabs">
-		<a href="">Check Availability</a>
+	<div class="tabs available-link">
+		<span class="link available">Check Availability</span>
 	</div>
 </div>
