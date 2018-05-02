@@ -3,7 +3,7 @@
   * Section =>  _HADREA
   */ ?>
 
-<div class="block gamila">
+<div class="block hadrea">
 	<div class="image wrapper">
 		<?php if ( have_rows( "repeater" ) ) :
 			while( have_rows( "repeater" ) ) :

@@ -14,6 +14,11 @@ div.subnav.bar
 		margin-top: 20px
 		margin-bottom: -80px
 		height: 96px
+	+small
+		+flex( $b: center, $c: center )
+		margin-top: 20px
+		margin-bottom: -80px
+		height: 96px
 	
 	div.links
 		+flex( $b: flex-start, $c: center )
@@ -25,11 +30,19 @@ div.subnav.bar
 			justify-content: center
 			height: 82px
 			max-width: 284px
+		+small
+			justify-content: center
+			height: 82px
+			max-width: 284px
 
 		a
 			+flex( $b: center, $c: center )
 			padding-right: 30px
 			+medium
+				flex: 0 0 100%
+				height: 41px
+				padding-right: 0
+			+small
 				flex: 0 0 100%
 				height: 41px
 				padding-right: 0
@@ -80,6 +93,9 @@ div.subnav.tab
 		&:after
 			background-color: $white
 		+medium
+			a:first-of-type
+				border-bottom: 1px solid $grey
+		+small
 			a:first-of-type
 				border-bottom: 1px solid $grey
 

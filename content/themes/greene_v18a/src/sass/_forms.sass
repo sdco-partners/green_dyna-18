@@ -8,6 +8,8 @@ div.signup,
 div.schedule
 	width: 100%
 	padding-top: 50px
+	+small
+		padding-top: 25px
 
 	div.signup.wrapper,
 	div.column.wrapper
@@ -15,11 +17,15 @@ div.schedule
 		max-width: 1130px
 		margin: 0 auto
 		padding-top: 25px
-		// padding-bottom: 25px
+		+medium
+			max-width: 900px
+		+small
+			max-width: 500px
+		+tiny
+			max-width: 300px
 
 	div.signup.wrapper
 		+flex( $c: center )
-
 
 	div.column.wrapper
 		+flex
@@ -36,9 +42,18 @@ div.schedule
 	div.text.wrapper
 		flex: 0 0 340px
 		padding-bottom: 75px
+		+medium
+			flex: 0 0 350px
+		+small
+			flex: 0 0 100%
+			padding-bottom: 25px
 
 	div.form.wrapper
 		flex: 0 0 650px
+		+medium
+			flex: 0 0 500px
+		+small
+			flex: 0 0 100%
 
 	form
 		+flex

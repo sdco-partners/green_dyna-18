@@ -1,19 +1,23 @@
 /* Media Breakpoints & Mixins */
 
-$large: 1250px
-$medium: 950px
-$small: 500px
+$lg: 1250px
+$med: 1000px
+$sm: 500px
 
 =larger
-  @media(min-width: #{$large})
+  @media(min-width: #{$lg})
     @content
 
 =medium
-  @media(min-width: #{$medium}) and (max-width: #{$large})
+  @media(min-width: #{$med}) and (max-width: #{$lg})
+    @content
+
+=small
+  @media(min-width: #{$sm}) and (max-width: #{$med})
     @content
 
 =tiny
-  @media(max-width: #{$small})
+  @media(max-width: #{$sm})
     @content
 
 =break($a, $b: max-width)  

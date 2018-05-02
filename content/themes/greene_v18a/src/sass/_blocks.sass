@@ -5,197 +5,318 @@
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 div.content.blocks
-	width: 100%
-	padding-bottom: 66px
+    width: 100%
+    padding-bottom: 66px
 
 div.block
-	margin-top: 100px
-	margin-bottom: 100px
+    margin-top: 100px
+    margin-bottom: 100px
+    +small
+        margin-top: 50px
+        margin-bottom: 50px
 
 div.block.ahuva
-	max-height: 700px
-	margin-top: 0
+    max-height: 700px
+    margin-top: 0
+    div.single.image
+        +small
+            max-height: 420px
+        +tiny
+            max-height: 170px
+            margin-left: 20px
+            margin-right: 20px
+            max-width: calc( 100% - 40px )
+            min-width: initial
 
 div.block.bahira
-	div.wrapper
-		+flex
-		width: 100%
-		max-width: 1130px
-		margin: 0 auto
+    div.wrapper
+        +flex
+        width: 100%
+        max-width: 1130px
+        margin: 0 auto
+        +medium
+            max-width: 900px
+        +small
+            max-width: 500px
+        +tiny
+            max-width: 300px
 
-		+medium
-			max-width: 900px
+        div.text
+            flex: 0 0 430px
+            max-height: 350px
+            overflow: hidden
+            +medium
+                flex: 0 0 350px
+                max-height: 450px
+            +small
+                flex: 0 0 100%
+                margin-bottom: 25px
+            +tiny
+                flex: 0 0 100%
 
-		div.text
-			flex: 0 0 430px
-			max-height: 350px
-			overflow: hidden
+        div.gallery-wrapper
+            flex: 0 0 624px
+            +medium
+                flex: 0 0 500px
+            +small
+                flex: 0 0 100%
+            +tiny
+                flex: 0 0 100%
+            
+            div.gallery
+                +flex( $d: nowrap )
+                max-width: 624px
+                +medium
+                    max-width: 500px
+                +small
+                    max-width: 500px
+                +tiny
+                    max-width: 280px
+                    max-height: 180px
 
-			+medium
-				flex: 0 0 350px
-				max-height: 450px
-
-		div.gallery-wrapper
-			flex: 0 0 624px
-
-			+medium
-				flex: 0 0 500px
-			
-			div.gallery
-				+flex( $d: nowrap )
-				max-width: 624px
-
-				+medium
-					max-width: 500px
+            div.single.image
+                +tiny
+                    max-width: 280px
+                    max-height: 180px
 
 
 div.block.calypso
-	margin-top: 145px
+    margin-top: 145px
+    +small
+        margin-top: 100px
 
-	> div.wrapper
-		+flex( $c: center )
-		width: 100%
-		max-width: 1130px
-		margin: 0 auto
+    > div.wrapper
+        +flex( $c: center )
+        width: 100%
+        max-width: 1130px
+        margin: 0 auto
+        +medium
+            max-width: 900px
+        +small
+            max-width: 500px
 
-		div.text
-			flex: 0 0 430px
+        div.text
+            flex: 0 0 430px
+            +medium
+                flex: 0 0 350px
+            +small
+                flex: 0 0 100%
+                margin-bottom: 45px
 
-		div.image-wrapper
-			flex: 0 0 624px
+        div.image-wrapper
+            flex: 0 0 624px
+            +medium
+                flex: 0 0 500px
+            +small
+                flex: 0 0 100%
 
-		div.single.image
-			max-width: 100%
+        div.single.image
+            max-width: 100%
+            +medium
+                max-width: 500px
+            +small
+                max-width: 500px
 
 
 div.block.dagmar
-	> div.wrapper
-		+flex( $b: flex-start, $c: center )
-		width: 100%
-		max-width: 1130px
-		margin: 0 auto
+    > div.wrapper
+        +flex( $b: flex-start, $c: center )
+        width: 100%
+        max-width: 1130px
+        margin: 0 auto
 
-	div.single.image
-		flex: 0 0 33%
-		min-width: inherit
-		max-width: 373px
-		max-height: 249px
-		margin-bottom: 5px
+    div.single.image
+        flex: 0 0 33%
+        min-width: inherit
+        max-width: 373px
+        max-height: 249px
+        margin-bottom: 5px
 
-	div.single.image:nth-child( 3n + 2 )
-		margin-left: 5px
-		margin-right: 5px
+    div.single.image:nth-child( 3n + 2 )
+        margin-left: 5px
+        margin-right: 5px
 
 div.block.eada
 
-	div.wrapper
-		width: 100%
-		max-width: 1130px
-		margin: 0 auto
+    div.wrapper
+        width: 100%
+        max-width: 1130px
+        margin: 0 auto
+        +medium
+            max-width: 900px
+        +small
+            max-width: 500px
 
-		h2,
-		h3,
-		h4,
-		h5,
-			max-width: 750px
+        h2,
+        h3,
+        h4,
+        h5,
+            max-width: 750px
 
-		p
-			max-width: 525px
+        p
+            max-width: 525px
 
 
 div.block.fatima
-	> div.wrapper
-		width: 100%
-		max-width: 1135px
-		margin: 0 auto
+    > div.wrapper
+        width: 100%
+        max-width: 1135px
+        margin: 0 auto
+        +medium
+            max-width: 900px
+        +small
+            max-width: 500px
 
-	div.repeater
-		+flex
-		padding-top: 45px
-		padding-bottom: 45px
+    div.repeater
+        +flex
+        padding-top: 45px
+        padding-bottom: 45px
+        +small
+            padding-top: 25px
+            // padding-bottom: 25px
 
-	div.image.wrapper
-		flex: 0 0 568px
+    div.image.wrapper
+        flex: 0 0 568px
+        +medium
+            flex: 0 0 500px
+        +small
+            flex: 0 0 100%
 
-	div.text.wrapper
-		flex: 0 0 45%
-		height: 379px
-		position: relative
+        div.single.image
+            +medium
+                max-width: 500px
+                min-width: initial
+            +small
+                max-width: 500px
+                min-width: initial
 
-		p
-			padding-top: 0
+    div.text.wrapper
+        flex: 0 0 45%
+        height: 379px
+        position: relative
+        +medium
+            flex: 0 0 350px
+        +small
+            flex: 0 0 100%
+            margin-top: 25px
+            height: 100%
 
-		div.links
-			position: absolute
-			bottom: 0
-			left: 0
+        p
+            padding-top: 0
 
-			a:first-of-type
-				&:before
-					position: absolute
-					top: 0
-					left: 0
-					width: 75px
-					height: 1px
+        div.links
+            position: absolute
+            bottom: 0
+            left: 0
 
-			a
-				display: block
-				margin-top: 15px
+            +small
+                position: relative
+                margin-top: 25px
+                padding-top: 10px
+
+            a:first-of-type
+                &:before
+                    position: absolute
+                    top: 0
+                    left: 0
+                    width: 75px
+                    height: 1px
+
+            a
+                display: block
+                margin-top: 15px
 
 
-	div.repeater:nth-child( 2n )
-		div.image.wrapper
-			order: 2
+    div.repeater:nth-child( 2n )
+        div.image.wrapper
+            order: 2
+            +small
+                order: initial
 
 
+div.block.gamila
+    div.image.wrapper
+        +flex
+        width: 100%
+        max-width: 1135px
+        margin: 0 auto
+        +medium
+            max-width: 900px
+    div.single.image
+        +small
+            max-height: 320px
 
-div.block.gamila,
 div.block.hadrea
-	div.image.wrapper
-		+flex
-		width: 100%
-		max-width: 1135px
-		margin: 0 auto
+    div.image.wrapper
+        +flex
+        width: 100%
+        max-width: 1135px
+        margin: 0 auto
+        +medium
+            max-width: 900px
+        +small
+            max-width: 500px
 
-	div.repeater
-		position: relative
-		flex: 0 0 560px
+    div.repeater
+        position: relative
+        flex: 0 0 100%
+        margin-bottom: 50px
 
-	div.repeater:nth-child( 2n )
-		margin-left: auto
+        div.single.image
+            max-width: 568px
+            min-width: initial
+            +medium
+                max-width: 450px
+            +small
+                max-width: 500px
 
+    div.repeater:nth-child( 2n )
+        div.single.image
+            margin-left: auto
 
 
 div.block.ilma
-	> div.wrapper
-		+flex
-		width: 100%
-		max-width: 1130px
-		margin: 0 auto
+    > div.wrapper
+        +flex
+        width: 100%
+        max-width: 1130px
+        margin: 0 auto
+        +medium
+            max-width: 900px
+        +small
+            max-width: 500px
 
-		div.image.wrapper
-			flex: 0 0 50%
-			max-width: 573px
 
-			span.overlay
-				display: block
-				width: 200px
-				left: calc( 50% - 100px )
+        div.image.wrapper
+            flex: 0 0 50%
+            max-width: 573px
+            +medium
+                max-width: 450px
+            +small
+                max-width: 100%
 
-			span.overlay.one
-				top: calc( 50% - 41px + 210px )
+            span.overlay
+                display: block
+                width: 200px
+                left: calc( 50% - 100px )
 
-		div.text
-			flex: 0 0 45%
+            span.overlay.one
+                top: calc( 50% - 41px + 210px )
 
-			p
-				position: relative
+        div.text
+            flex: 0 0 45%
+            +small
+                flex: 0 0 100%
+                margin-top: 45px
+
+            p
+                position: relative
 
 div.block.sitemap
-	> div.wrapper
-		width: 100%
-		max-width: 1130px
-		margin: 0 auto
+    > div.wrapper
+        width: 100%
+        max-width: 1130px
+        margin: 0 auto
 
 
 /* OBJECTS -> For styling objects */
@@ -203,34 +324,34 @@ div.block.sitemap
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 div.content.blocks
-	border-bottom: 6px solid $lime
+    border-bottom: 6px solid $lime
 
 div.block.calypso
-	div.single.image
-		border: 6px solid $grey
+    div.single.image
+        border: 6px solid $grey
 
 div.block.ilma
-	span.overlay
-		text-align: center
+    span.overlay
+        text-align: center
 
 div.block.fatima
-	div.repeater
-		border-bottom: 1px solid $grey
+    div.repeater
+        border-bottom: 1px solid $grey
 
-	p
-		border-top: none
+    p
+        border-top: none
 
-	div.links
-		a:first-of-type
-			&:before
-				content: ""
-				background-color: $grey
-		a
-			@extend %BodyLink
-			color: $olive
-			&:hover
-				color: $lime
+    div.links
+        a:first-of-type
+            &:before
+                content: ""
+                background-color: $grey
+        a
+            @extend %BodyLink
+            color: $olive
+            &:hover
+                color: $lime
 
 div.block.dagmar
-	div.single.image
-		cursor: pointer
+    div.single.image
+        cursor: pointer

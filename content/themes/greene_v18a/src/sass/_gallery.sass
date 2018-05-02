@@ -37,6 +37,9 @@ div.image.wrapper
 	span.overlay
 		position: absolute
 		left: 20px
+		+small
+			width: 100%
+			left: 0
 	
 	span.one
 		top: -45px
@@ -44,6 +47,20 @@ div.image.wrapper
 	span.two
 		bottom: -40px
 
+	div.repeater:nth-of-type( even )
+		span.one
+			bottom: calc( 100% - 40px )
+			left: calc( 50% + 20px )
+			+small
+				left: inherit
+				bottom: inherit
+
+		span.two
+			top: calc( 100% - 45px )
+			left: calc( 50% + 20px )
+			+small
+				left: inherit
+				bottom: inherit
 
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */
@@ -53,7 +70,6 @@ div.gallery-wrapper
 
 	div.prev,
 	div.next
-		// background-color: $white
 		transform: rotate( 45deg )
 		cursor: pointer
 		transition: 0.1s transform ease
@@ -83,3 +99,5 @@ div.image.wrapper
 	span
 		@extend %OverlayText
 		color: $black
+		+small
+			text-align: center
