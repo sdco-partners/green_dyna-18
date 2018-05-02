@@ -130,8 +130,8 @@ class SlideShow {
         } );
         this.$galleryWrapper = target;
         this.assembleDOMElements();
-        this.assembleEventListeners();
-        this.assembleBoundingBoxes();
+        this.setEventListeners();
+        this.assemblePos();
         this.calculateInterval();
     }
 
@@ -140,21 +140,25 @@ class SlideShow {
     }
 
     assembleDOMElements() {
-        Array.prototype.forEach.call( this.$galleryWrapper.childNodes, ( $el ) => {
+        const children = this.$galleryWrapper.childNodes;
+        Array.prototype.forEach.call( children, ( $el ) => {
+            const classes = $el.classList;
             if ( $el.tagName === "DIV" ) {
-                if ( $el.classList.contains( "gallery" ) ) {
+                if ( classes.contains( "gallery" ) ) {
                     this.$gallery = $el;
-                } else if ( $el.classList.contains( "prev" ) ) {
+                    this.slides = this.assembleSlides();
+                    this.length = this.slides.length;
+                    this.indx = 0;
+                } else if ( classes.contains( "prev" ) ) {
                     this.$bttnPrev = $el;
-                } else if ( $el.classList.contains( "next" ) ) {
+                } else if ( classes.contains( "next" ) ) {
                     this.$bttnNext = $el;
                 }
             }
         } );
-        this.slides = this.$gallery.childNodes;
     }
 
-    assembleEventListeners() {
+    setEventListeners() {
         this.$bttnPrev.addEventListener( "click", ( e ) => {
             e.preventDefault();
             this.changeSlide( "left" );
@@ -166,21 +170,23 @@ class SlideShow {
         } );
     }
 
-    assembleBoundingBoxes() {
-        this.galleryWidth = this.$gallery.getBoundingClientRect().right;
-        this.nextPos = this.findNextPos().getBoundingClientRect().left;
+    assemblePos() {
+        const nextIndx = this.findNextSlideIndx();
+        const nextSlide = this.slides[ nextIndx ];
+        console.log( "next slide", nextSlide );
+        this.nextPos = nextSlide.getBoundingClientRect().left;
     }
 
-    findNextPos() {
-        return Array.prototype.find.call( this.slides, slide =>
-            slide.tagName === "DIV" &&
-            slide.getBoundingClientRect() &&
-            slide.getBoundingClientRect().left > this.$gallery.scrollLeft );
+    assembleSlides() {
+        const children = this.$gallery.childNodes;
+        return Array.prototype.filter.call( children, $child =>
+            $child.tagName === "DIV" );
     }
 
-    findDiv() {
-        return Array.prototype.find.call( this.slides, slide =>
-            slide.tagName === "DIV" );
+    findNextSlideIndx() {
+        return ( this.indx + 1 <= this.length - 1 ) ?
+            this.indx + 1 :
+            0;
     }
 
     calculateInterval() {
@@ -190,9 +196,14 @@ class SlideShow {
     }
 
     moveForward( time = 0.1 ) {
+        console.log( "forward triggered", this.nextPos );
         if ( this.$gallery.scrollLeft + this.interval < this.nextPos - this.offset ) {
             this.$gallery.scrollLeft += this.interval;
+            this.indx += 1;
             setTimeout( this.moveForward.bind( this, time + 0.1 ), 18 );
+        } else {
+            this.$gallery.scrollLeft = this.nextPos - this.offset;
+            this.nextPos = this.assemblePos();
         }
     }
 
@@ -252,11 +263,9 @@ class SlideShow {
     }
 
     default() {
-        console.log( "doesn't do anything", this.$gallery.getBoundingClientRect() );
-    //     console.log( "doesn't do anything", this.nextPos );
-    //     this.$gallery.addEventListener( "scroll", () => {
-    //         console.log( this.$gallery.scrollLeft );
-    //     } );
+        this.$gallery.addEventListener( "scroll", () => {
+            console.log( "XX-->", this.$gallery.scrollLeft );
+        } );
     }
 }
 

@@ -23,15 +23,30 @@ div.block.bahira
 		max-width: 1130px
 		margin: 0 auto
 
+		+medium
+			max-width: 900px
+
 		div.text
 			flex: 0 0 430px
+			max-height: 350px
+			overflow: hidden
+
+			+medium
+				flex: 0 0 350px
+				max-height: 450px
 
 		div.gallery-wrapper
 			flex: 0 0 624px
+
+			+medium
+				flex: 0 0 500px
 			
 			div.gallery
 				+flex( $d: nowrap )
 				max-width: 624px
+
+				+medium
+					max-width: 500px
 
 
 div.block.calypso

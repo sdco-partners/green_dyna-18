@@ -1,20 +1,19 @@
 /* Media Breakpoints & Mixins */
 
-$break-xlarge: 1300px
-$break-large: 1024px
-$break-medium: 900px
-$break-small: 500px
+$large: 1250px
+$medium: 950px
+$small: 500px
 
-=desktop
-  @media(min-width: #{$break-xlarge})
+=larger
+  @media(min-width: #{$large})
     @content
 
-=tablet
-  @media(min-width: #{$break-medium})
+=medium
+  @media(min-width: #{$medium}) and (max-width: #{$large})
     @content
 
 =tiny
-  @media(max-width: #{$break-small})
+  @media(max-width: #{$small})
     @content
 
 =break($a, $b: max-width)  
