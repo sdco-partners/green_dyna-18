@@ -7,6 +7,12 @@
 footer#foot
     width: 100%
     padding: 48px 56px 13px
+    +small
+        padding: 40px 0 60px
+        max-width: 500px
+        margin: 0 auto
+    +tiny
+        max-width: 300px
 
     div.bar
         +flex
@@ -14,21 +20,46 @@ footer#foot
 
     div.main.bar
         margin-bottom: 33px
+        +small
+            margin-bottom: 0
         div.flank
             +flex( $c: center)
 
     div.left.flank
+        +small
+            flex: 0 0 100%
+            justify-content: center
+
         div.logo
             margin-right: 22px
+            +small 
+                display: none
 
             svg
                 width: 74px
                 height: 74px
 
         div.address
+            +small
+                width: 100%
+                padding-bottom: 15px
             span.line.one,
             span.line.four
                 display: block
+                +small
+                    display: initial
+
+            span.line.one
+                +small
+                    position: relative
+                    padding-right: 10px
+                    &:after
+                        content: "•"
+                        position: absolute
+                        top: -2px
+                        right: 5px
+                        width: 5px
+                        height: 100%
 
             span.line.two
                 position: relative
@@ -44,6 +75,11 @@ footer#foot
             span.line.four
                 position: relative
                 padding-top: 10px
+                +small
+                    display: block
+
+                    &:before
+                        display: none
                 &:before
                     content: ""
                     position: absolute
@@ -53,15 +89,27 @@ footer#foot
                     width: 10px
                     background-color: $olive
 
+
     div.right.flank
+        +small
+            flex: 0 0 100%
+            padding-top: 14px
+
         div.sitemap.links
             width: 230px
             margin-right: 20px
             margin-left: 10px
             +col( $b: 20px )
+            +small
+                +col( $a: 1, $b: 0 )
+                width: initial
+                flex: 0 1 auto
+                width: initial
+                margin: 0
 
-        div.box
-            padding: 5px
+            a
+                +small
+                    display: block
 
         div.social.links
             div.availability
@@ -76,12 +124,38 @@ footer#foot
     div.sub.bar
         margin-top: 13px
         padding-top: 13px
+        +small 
+            +flex
+
         div.flank
             +flex
+
+        div.left.flank
+            +small
+                flex: 0 0 60%
+
+        div.right.flank
+            +small
+                flex: 0 0 40%
+                display: block
+                justify-content: flex-end
+                align-items: center
+                padding-top: 0
+            a
+                +small
+                    display: block
+                    margin-top: 5px
+
 
         div.static.items
             +flex
             width: 250px
+            +small
+                width: 100px
+            div.item
+                +small
+                    flex: 0 0 100%
+                    margin-bottom: 5px
 
 
 /* OBJECTS -> For styling objects */
@@ -93,6 +167,8 @@ footer#foot
     color: $olive
     background-color: $cream
     text-transform: uppercase
+    +small
+        background-color: $white
 
     a
         &:hover
@@ -102,13 +178,25 @@ footer#foot
     div.main.bar
         div.right.flank
             border-left: 1px solid $olive
+            +small
+                border: none
 
         div.sitemap.links
             -webkit-column-rule: 1px solid $olive
             -moz-column-rule: 1px solid $olive 
             column-rule: 1px solid $olive
 
+        div.left.flank
+            div.address
+                +small
+                    text-align: center
+                    border-bottom: 1px solid $grey
+
+
     div.sub.bar
         @extend %FooterSubText
         border-top: 1px solid $grey
+
+        div.right.flank
+            text-align: right
 
