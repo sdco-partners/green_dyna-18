@@ -36,6 +36,7 @@ div.block.bahira
         +small
             max-width: 500px
         +tiny
+            justify-content: center
             max-width: 300px
 
         div.text
@@ -48,8 +49,6 @@ div.block.bahira
             +small
                 flex: 0 0 100%
                 margin-bottom: 25px
-            +tiny
-                flex: 0 0 100%
 
         div.gallery-wrapper
             flex: 0 0 624px
@@ -57,8 +56,7 @@ div.block.bahira
                 flex: 0 0 500px
             +small
                 flex: 0 0 100%
-            +tiny
-                flex: 0 0 100%
+                max-width: 250px
             
             div.gallery
                 +flex( $d: nowrap )
@@ -68,12 +66,12 @@ div.block.bahira
                 +small
                     max-width: 500px
                 +tiny
-                    max-width: 300px
+                    max-width: 250px
                     max-height: 250px
 
             div.single.image
                 +tiny
-                    max-width: 300px
+                    max-width: 250px
                     max-height: 250px
 
 
@@ -275,6 +273,9 @@ div.block.hadrea
                 max-width: 450px
             +small
                 max-width: 500px
+            +tiny
+                max-width: 300px
+                max-height: 200px
 
     div.repeater:nth-child( 2n )
         div.single.image
@@ -291,6 +292,8 @@ div.block.ilma
             max-width: 900px
         +small
             max-width: 500px
+        +tiny
+            max-width: 300px
 
 
         div.image.wrapper
@@ -308,6 +311,12 @@ div.block.ilma
 
             span.overlay.one
                 top: calc( 50% - 41px + 210px )
+                +tiny
+                    top: calc( 50% - 41px + 150px )
+
+            div.single.image
+                +tiny
+                    max-height: 600px
 
         div.text
             flex: 0 0 45%

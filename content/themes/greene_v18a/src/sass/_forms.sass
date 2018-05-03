@@ -93,6 +93,8 @@ div.schedule
 
 	div.submit
 		+flex( $b: flex-end, $c: center)
+		+tiny
+			justify-content: center
 
 		input[type=submit]
 			flex: 0 0 117px
@@ -101,18 +103,30 @@ div.schedule
 		span.checkbox-1
 			flex: 0 0 340px
 			margin-right: 40px
+			+tiny
+				flex: 0 0 100%
+				margin: 0
 
 		span.ajax-loader
 			flex: 0 0 100% 
 
 	span.first.last
 		+flex( $c: center )
+		+tiny
+			justify-content: flex-start
+			margin-bottom: 40px
 
 		input
 			flex 0 0 14px
 			height: 14px
 			width: 14px
 			padding-left: 0
+			+tiny
+				margin-right: 10px
+
+		span
+			+tiny
+				flex: 1 0 50%
 
 
 div.schedule
