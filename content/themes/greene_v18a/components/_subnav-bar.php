@@ -7,6 +7,6 @@
 ?>
 <div class="subnav bar">
 	<div class="links">
-		<?php include( locate_template("components/_links.php") );?>	
+		<?php include( locate_template("components/_box-links.php") );?>	
 	</div>
 </div>
