@@ -96,18 +96,21 @@ const hamburger = {
 * Nav Event
 */
 const navEvent = () => {
+    const $body = document.getElementsByTagName( "BODY" )[ 0 ];
     addEvents.toID( {
         trigger: "ham",
         target: "head",
         callback: ( $trigger, $target ) => {
             if ( !$target.classList.contains( "toggle" ) ) {
-                $target.classList.toggle( "pre" );
-                $target.classList.toggle( "toggle" );
+                $target.classList.add( "pre" );
+                $body.classList.add( "lock" );
+                $target.classList.add( "toggle" );
                 hamburger.open();
             } else {
                 hamburger.close();
-                $target.classList.toggle( "toggle" );
-                delay( () => $target.classList.toggle( "pre" ) );
+                $target.classList.remove( "toggle" );
+                $body.classList.remove( "lock" );
+                delay( () => $target.classList.remove( "pre" ) );
             }
         },
     } );
