@@ -134,8 +134,7 @@ class SlideShow {
         this.$galleryWrapper = target;
         this.assembleDOMElements();
         this.setEventListeners();
-        this.assemblePos();
-        this.calculateInterval();
+        this.disableBttns();
     }
 
     start() {
@@ -149,9 +148,13 @@ class SlideShow {
             if ( $el.tagName === "DIV" ) {
                 if ( classes.contains( "gallery" ) ) {
                     this.$gallery = $el;
+                    this.max = this.$gallery.scrollWidth;
                     this.slides = this.assembleSlides();
                     this.length = this.slides.length;
                     this.indx = 0;
+                    this.addClasses( {
+                        className: "next",
+                    } );
                 } else if ( classes.contains( "prev" ) ) {
                     this.$bttnPrev = $el;
                 } else if ( classes.contains( "next" ) ) {
@@ -161,79 +164,116 @@ class SlideShow {
         } );
     }
 
+    assembleSlides() {
+        return Array.prototype.filter.call( this.$gallery.childNodes, $child =>
+            $child.tagName === "DIV" );
+    }
+
+    addClasses( {
+        className,
+        $target = this.slides,
+        exclude = 0,
+    } ) {
+        Array.prototype.forEach.call( $target, ( $el, indx ) => {
+            if ( indx !== exclude ) {
+                $el.classList.add( className );
+            }
+        } );
+    }
+
+    resetClasses() {
+        Array.prototype.forEach.call( this.slides, ( $el, indx, array ) => {
+            if ( indx === array.length - 1 ) {
+                $el.classList.add( "next" );
+            } else {
+                this.resetSlide( $el );
+            }
+        } );
+    }
+
+    reorderSlides() {
+        Array.prototype.forEach.call( this.slides, ( $slide, indx ) => {
+            if ( indx === this.indx ) {
+                $slide.classList.remove( "prev" );
+                $slide.classList.remove( "next" );
+            } else if ( indx < this.indx ) {
+                $slide.classList.add( "prev" );
+                $slide.classList.remove( "next" );
+            } else if ( indx > this.indx ) {
+                $slide.classList.add( "next" );
+                $slide.classList.remove( "prev" );
+            }
+        } );
+    }
+
+    resetSlide( $el = this.slides[ this.indx ] ) {
+        $el.classList.remove( "next" );
+        $el.classList.remove( "prev" );
+    }
+
     setEventListeners() {
         this.$bttnPrev.addEventListener( "click", ( e ) => {
             e.preventDefault();
-            this.changeSlide( "left" );
+            if ( this.indx !== 0 ) {
+                this.changeSlide( "left" );
+                this.setPause();
+            }
         } );
 
         this.$bttnNext.addEventListener( "click", ( e ) => {
             e.preventDefault();
-            this.changeSlide( "right" );
+            if ( this.indx !== this.length - 1 ) {
+                this.changeSlide( "right" );
+                this.setPause();
+            }
         } );
     }
 
-    assemblePos() {
-        const nextIndx = this.findNextSlideIndx();
-        const nextSlide = this.slides[ nextIndx ];
-        console.log( "next slide", nextSlide );
-        this.nextPos = nextSlide.getBoundingClientRect().left;
+    moveForward( indx = this.indx ) {
+        this.slides[ indx ].classList.add( "prev" );
+        this.increment();
+        this.resetSlide();
+        this.disableBttns();
     }
 
-    assembleSlides() {
-        const children = this.$gallery.childNodes;
-        return Array.prototype.filter.call( children, $child =>
-            $child.tagName === "DIV" );
+    moveBackward( indx = this.indx ) {
+        this.slides[ indx ].classList.add( "next" );
+        this.decrement();
+        this.resetSlide();
+        this.disableBttns();
     }
 
-    findNextSlideIndx() {
-        return ( this.indx + 1 <= this.length - 1 ) ?
-            this.indx + 1 :
-            0;
+    increment() {
+        this.indx += 1;
     }
 
-    calculateInterval() {
-        const box = this.$gallery.getBoundingClientRect();
-        this.offset = ( box.left - box.width );
-        this.interval = ( this.nextPos - this.offset - this.$gallery.scrollLeft ) / 20;
+    decrement() {
+        this.indx -= 1;
     }
 
-    moveForward( time = 0.1 ) {
-        console.log( "forward triggered", this.nextPos );
-        if ( this.$gallery.scrollLeft + this.interval < this.nextPos - this.offset ) {
-            this.$gallery.scrollLeft += this.interval;
-            this.indx += 1;
-            setTimeout( this.moveForward.bind( this, time + 0.1 ), 18 );
+    disableBttns() {
+        if ( this.indx === 0 ) {
+            this.$bttnPrev.classList.add( "disable" );
         } else {
-            this.$gallery.scrollLeft = this.nextPos - this.offset;
-            this.nextPos = this.assemblePos();
+            this.$bttnPrev.classList.remove( "disable" );
         }
-    }
-
-    moveBackward() {
-        console.log( "this is never used", this.galleryWidth );
+        if ( this.indx === this.length - 1 ) {
+            this.$bttnNext.classList.add( "disable" );
+        } else {
+            this.$bttnNext.classList.remove( "disable" );
+        }
     }
 
     changeSlide( direction ) {
         switch ( direction ) {
         case "left":
-            this.setPause();
             this.moveBackward();
             break;
         case "right":
-            this.setPause();
             this.moveForward();
             break;
         default:
             this.changeSlide();
-        }
-    }
-
-    checkLength() {
-        if ( this.$gallery.scrollLeft < 0 ) {
-            this.$gallery.scrollLeft = this.galleryWidth;
-        } else if ( this.$gallery.scrollLeft > this.galleryWidth ) {
-            this.$gallery.scrollLeft = 0;
         }
     }
 
@@ -255,37 +295,54 @@ class SlideShow {
     }
 
     countDown() {
+        console.log( "timer", this.timer );
         if ( this.timer === 0 ) {
-            this.next();
-            this.changeSlide();
+            if ( this.indx < this.length - 1 ) {
+                this.changeSlide( "right" );
+            } else {
+                this.resetClasses();
+                this.indx = 0;
+                this.disableBttns();
+                delay( () => {
+                    this.addClasses( {
+                        className: "next",
+                    } );
+                }, 1000 );
+            }
             this.resetTime();
         } else if ( !this.pause ) {
             this.spendTime();
         }
         setTimeout( this.countDown.bind( this ), 1000 );
-    }
-
-    default() {
-        this.$gallery.addEventListener( "scroll", () => {
-            console.log( "XX-->", this.$gallery.scrollLeft );
-        } );
+        // delay( () => this.countDown(), 1000 )
     }
 }
 
 /*
-* Initiate Slider
+* Gallery
 */
-const initSlider = () => {
-    const id = 0;
-    const galleryObj = {};
-    const $galleries = document.getElementsByClassName( "gallery-wrapper" );
-    Array.prototype.forEach.call( $galleries, ( $gallery ) => {
-        galleryObj[ `gal-${ id }` ] = new SlideShow( {
-            target: $gallery,
+const Gallery = {
+    galleryObj: {},
+
+    build() {
+        const $galleries = document.getElementsByClassName( "gallery-wrapper" );
+        const $body = document.getElementsByTagName( "BODY" )[ 0 ];
+        Array.prototype.forEach.call( $galleries, ( $gallery, indx ) => {
+            this.galleryObj[ `gal-${ indx }` ] = new SlideShow( {
+                target: $gallery,
+            } );
         } );
-        // galleryObj[ `gal-${ id }` ].start();
-        galleryObj[ `gal-${ id }` ].default();
-    } );
+        if ( $body.classList.contains( "home" ) ) {
+            this.galleryObj[ "gal-0" ].start();
+        }
+    },
+
+    setIndx( gal, indx ) {
+        console.log( "setindex", this.galleryObj[ gal ].indx, indx );
+        this.galleryObj[ gal ].indx = indx - 1;
+        this.galleryObj[ gal ].moveForward( indx );
+        this.galleryObj[ gal ].reorderSlides();
+    },
 };
 
 /*
@@ -343,13 +400,91 @@ const toggleTabs = () => {
     } );
 };
 
+/*
+* Extract Indx
+*/
+const extractIndx = $el =>
+    parseInt( $el.id.split( "-" )[ 1 ], 10 );
+
+/*
+* Slides Fadeout
+*/
+const slidesFadeout = ( $slides ) => {
+    Array.prototype.forEach.call( $slides, ( $single ) => {
+        if ( $single.tagName === "DIV" ) {
+            $single.classList.add( "fadeout" );
+            delay( () => $single.classList.remove( "fadeout" ), 1000 );
+        }
+    } );
+};
+
+/*
+* GallerySlidesLogic
+*/
+const gallerySlidesLogic = ( $slides, $box ) => {
+    Array.prototype.forEach.call( $slides, ( $slide ) => {
+        if ( $slide.tagName === "DIV" ) {
+            $slide.addEventListener( "click", ( e ) => {
+                e.preventDefault();
+                Gallery.setIndx( "gal-0", extractIndx( $slide ) );
+                if ( !$box.classList.contains( "on" ) ) {
+                    $box.classList.add( "fadout" );
+                    delay( () => {
+                        $box.classList.remove( "fadout" );
+                        $box.classList.add( "on" );
+                    }, 250 );
+                    slidesFadeout( $slides );
+                }
+            } );
+        }
+    } );
+};
+
+/*
+* CloseBttnLogic
+*/
+const closeBttnLogic = ( $child, $slides, $gallery, $box ) => {
+    $child.addEventListener( "click", ( e ) => {
+        e.preventDefault();
+        if ( $box.classList.contains( "on" ) ) {
+            slidesFadeout( $slides );
+            delay( () => $box.classList.remove( "on" ), 250 );
+        }
+    } );
+};
+
+/*
+* Init Lightbox
+*/
+const initLightbox = () => {
+    const $lightbox = document.getElementsByClassName( "lightbox" );
+    let $gallery = null;
+    let $slides = null;
+    Array.prototype.forEach.call( $lightbox, ( $box ) => {
+        const $children = $box.childNodes;
+        Array.prototype.forEach.call( $children, ( $child ) => {
+            if ( $child.tagName === "DIV" ) {
+                const classes = $child.classList;
+                if ( classes.contains( "gallery" ) ) {
+                    $gallery = $child;
+                    $slides = $child.childNodes;
+                    gallerySlidesLogic( $slides, $box );
+                } else if ( classes.contains( "close" ) ) {
+                    closeBttnLogic( $child, $slides, $gallery, $box );
+                }
+            }
+        } );
+    } );
+};
+
 /**
 * Document Ready
 */
 document.onreadystatechange = () => {
     if ( document.readyState === "complete" ) {
+        Gallery.build();
         navEvent();
-        initSlider();
         toggleTabs();
+        initLightbox();
     }
 };

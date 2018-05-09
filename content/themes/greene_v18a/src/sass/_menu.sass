@@ -5,98 +5,146 @@
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 section#menu
-	opacity: 0
-	position: fixed
-	top: 0
-	left: 0
-	padding: 20px
-	width: 100vw
-	height: 100vh
-	z-index: -1
+    opacity: 0
+    position: fixed
+    top: 0
+    left: 0
+    padding: 20px
+    width: 100vw
+    height: 100vh
+    z-index: -1
+    +tiny
+        padding: 0
 
-	div.menu-wrapper
-		position: absolute
-		overflow: hidden
-		width: calc( 100% - 40px )
-		height: calc( 100% - 40px )
-		padding-left: 88px
-		padding-top: 111px
-		overflow: scroll
+    div.menu-wrapper
+        position: absolute
+        overflow: hidden
+        width: calc( 100% - 40px )
+        height: calc( 100% - 40px )
+        padding-left: 88px
+        padding-top: 111px
+        overflow: scroll
+        +small
+            +flex( $b: center, $c: center )
+            padding-left: 0
+            padding-top: 75px
+            padding-bottom: 75px
+        +tiny
+            padding-top: 0
+            padding-bottom: 0
+            width: 100%
+            height: 100%
 
-	div.main.menu.items
-		width: 282px
-		margin-bottom: 48px
+    div.main.menu.items
+        width: 282px
+        margin-bottom: 48px
+        +small
+            flex: 0 0 100%
+            margin-bottom: 0
 
-	div.sub.menu.items
-		width: 182px
-		div.link-wrapper
-			margin-bottom: 14px
+    div.sub.menu.items
+        width: 182px
+        +small
+            width: 200px
+            margin-left: auto
+            margin-right: auto
 
-	div.menu.logo
-		position: absolute
-		top: 120px
-		right: -20px
+        div.link-wrapper
+            margin-bottom: 14px
 
-		svg
-			width: 337px
-			height: 337px
+    div.menu.logo
+        position: absolute
+        top: 120px
+        right: -20px
+        z-index: 0
+        +small
+            display: none
 
-	div.menu.info
-		position: absolute
-		width: 753px
-		margin-left: 20px
-		padding-left: 88px
-		padding-bottom: 20px
-		bottom: 20px
-		left: 0
+        svg
+            width: 337px
+            height: 337px
 
-	div.top.bar
-		padding-bottom: 10px
+    div.menu.info
+        position: absolute
+        width: 753px
+        margin-left: 20px
+        padding-left: 88px
+        padding-bottom: 20px
+        bottom: 20px
+        left: 0
+        +small
+            flex: 0 0 100%
+            position: relative
+            bottom: initial
+            margin: 0 auto
+            padding-left: 0
+            padding-bottom: 0
+        +tiny
+            max-width: 300px
 
-	div.address
-		+flex( $c: center )
-		position: relative
-		
-		> a
-			position: relative
+    div.top.bar
+        padding-bottom: 10px
+        +small
+            display: none
 
-		span.line.one:before,
-		span.line.four:before
-			content: " "
-			width: 23px
-			height: 23px
-			position: absolute
-			left: 0px
-			top: -3px
+    div.address
+        +flex( $c: center )
+        position: relative
+        
+        > a
+            position: relative
 
-		span.line.one,
-		span.line.four
-			margin-left: 35px
+        span.line.one:before,
+        span.line.four:before
+            content: " "
+            width: 23px
+            height: 23px
+            position: absolute
+            left: 0px
+            top: -3px
 
-	div.bottom.bar
-		+flex( $c: center )
-		div.left.flank
-			+flex( $c: center )
-			width: 235px
-		span
-			padding-top: 10px
-			padding-bottom: 10px
+        span.line.one,
+        span.line.four
+            margin-left: 35px
 
-		span.follow
-			padding-right: 15px
-			margin-right: 15px
-			border-right: 1px solid $cream
+    div.bottom.bar
+        +flex( $c: center )
+        +small
+            justify-content: center
 
-		div.social.items
-			padding-top: 3px
+        div.left.flank
+            +flex( $c: center )
+            width: 235px
+            +small
+                width: 100%
+                max-width: 500px
+
+        span
+            padding-top: 10px
+            padding-bottom: 10px
+
+        span.follow
+            padding-right: 15px
+            margin-right: 15px
+            +small
+                flex: 0 0 100%
+
+        div.social.items
+            padding-top: 3px
+            +small
+                margin-left: auto
+                margin-right: auto
+
+        div.right.flank
+            display: none
 
 header#head.pre
-	section#menu
-		z-index: 150
+    section#menu
+        z-index: 150
 
 header#head.toggle
-	section#menu
-		opacity: 1
+    section#menu
+        opacity: 1
 
 
 
@@ -105,56 +153,65 @@ header#head.toggle
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 section#menu
-	@extend %MenuText
-	background-color: $cream
-	color: $cream
-	transition: 0.25s opacity ease
+    @extend %MenuText
+    background-color: $cream
+    color: $cream
+    transition: 0.25s opacity ease
 
-	div.menu-wrapper
-		background-color: $olive
+    div.menu-wrapper
+        background-color: $olive
 
-	a
-		color: $cream
-		&:hover
-			colro: $lime
+    a
+        color: $cream
+        &:hover
+            colro: $lime
 
-	div.box
-		text-align: center
+    div.box
+        text-align: center
 
-	div.main.menu.items
-		@extend %MenuLink
+    div.main.menu.items
+        @extend %MenuLink
+        +small
+            text-align: center
 
-	div.menu.logo
-		path.logo-cls-1,
-		circle.logo-cls-1
-			fill: $lime
+    div.menu.logo
+        path.logo-cls-1,
+        circle.logo-cls-1
+            fill: $lime
 
-	div.menu.info
-		background-color: $olive
-		div.top.bar
-			border-bottom: 1px solid $cream
+    div.menu.info
+        background-color: $olive
+        div.top.bar
+            border-bottom: 1px solid $cream
 
-	div.address
-		span.line.one:before
-			background-image: url( "../assets/svg/svg_map-marker.svg" )		
+        span.follow
+            border-right: 1px solid $cream
+            +small
+                border-right: none
+                border-top: 1px solid $cream
+                text-align: center
 
-		span.line.four:before
-			background-image: url( "../assets/svg/svg_phone-icon.svg" )		
+    div.address
+        span.line.one:before
+            background-image: url( "../assets/svg/svg_map-marker.svg" )     
 
-	div.bottom.bar
-		path.facebook-cls-1,
-		path.twitter-cls-1,
-		path.instagram-cls-1,
-		path.email-cls-1,
-		path.house-cls-1,
-		rect.house-cls-1,
-		polygon.house-cls-1,
-		path.wheelchair-cls-1
-			fill: $cream
+        span.line.four:before
+            background-image: url( "../assets/svg/svg_phone-icon.svg" )     
+
+    div.bottom.bar
+        path.facebook-cls-1,
+        path.twitter-cls-1,
+        path.instagram-cls-1,
+        path.email-cls-1,
+        path.house-cls-1,
+        rect.house-cls-1,
+        polygon.house-cls-1,
+        path.wheelchair-cls-1
+            fill: $cream
 
 header#head.toggle
-	line.hamburger-st0
-		stroke: $white
+    line.hamburger-st0
+        stroke: $white
 
 
 

@@ -4,113 +4,325 @@
 /* includes positioning styles like display, padding, margin, height */
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
-div.gallery-wrapper
-	position: relative
 
-	div.gallery
-		+flex
-		overflow: scroll
+div.block.bahira
+    div.gallery-wrapper
+        position: relative
 
-	div.prev,
-	div.next
-		position: absolute
-		top: calc( 50% - 12px )
-		width: 25px
-		height: 25px
-	
-	div.prev
-		left: -20px
+        div.gallery
+            position: relative
+            overflow: hidden
 
-	div.next
-		right: -20px
+        > div.prev,
+        > div.next
+            position: absolute
+            top: calc( 50% - 12px )
+            width: 25px
+            height: 25px
+        
+        > div.prev
+            left: -20px
+
+        > div.next
+            right: -20px
+
+        div.single.image
+            position: absolute
+            transform: translate( 0, 0 )
+            transition: 1s transform ease-in, 0.4s opacity ease-in
+            top: 0
+            left: 0
+            opacity: 1
+            z-index: 35
+
+        div.single.image:first-of-type
+            z-index: 40
+
+        div.single.image.next
+            transform: translate( 100%, 0 )
+
+        div.single.image.prev
+            transform: translate( -100%, 0 )
+
+div.block.dagmar
+    min-height: 500px
+    div.gallery-wrapper
+        position: relative
+        width: 100%
+        height: 100%
+
+        > div.prev,
+        > div.next,
+        > div.next.disabled,
+        > div.next.disabled,
+        > div.close
+            position: absolute
+            width: 25px
+            height: 25px
+            z-index: -1
+
+        > div.prev,
+        > div.next            
+            top: calc( 50% - 12px )
+
+        > div.next
+            right: 80px
+
+        > div.prev
+            left: 80px
+
+        > div.close
+            top: 80px
+            left: calc( 50% - 12px )
+            &:before
+                content: ""
+                position: absolute
+                top: 0px
+                right: 16px
+                width: 25px
+                height: 25px
+            &:after
+                content: ""
+                position: absolute
+                top: 0px
+                left: 16px
+                width: 25px
+                height: 25px
+
+        > div.close:hover::after
+            left: 15px
+
+
+    div.gallery
+        +flex( $b: flex-start, $c: center )
+        width: 100%
+        max-width: 1130px
+        margin: 0 auto
+
+    div.single.image
+        flex: 0 0 33%
+        position: initial
+        min-width: inherit
+        max-width: 373px
+        max-height: 249px
+        margin-bottom: 5px
+        transition: 0.3s opacity ease
+
+    div.single.image.next,
+    div.single.image.prev
+        transform: translate( 0, 0 )
+
+    div.single.image:nth-child( 3n + 2 )
+        margin-left: 5px
+        margin-right: 5px
+
+div.block.dagmar
+    div.gallery-wrapper.lightbox.on
+        position: fixed
+        top: 0
+        left: 0
+        height: 100vh
+        width: 100vw
+        z-index: 400
+
+        > div.prev,
+        > div.next,
+        > div.close
+            z-index: 500
+
+        div.gallery
+            position: absolute
+            justify-content: center
+            flex-wrap: nowrap
+            top: 0
+            left: 0
+            max-width: 100vw
+            height: 100vh
+            z-index: 400
+
+            div.single.image
+                display: block
+                position: absolute
+                margin: 0
+                max-width: 80vw
+                max-height: 80vh
+                margin-bottom: 0
+                transition: 1.5s transform cubic-bezier(0.19, 1, 0.22, 1), 0.3s opacity ease
+
+            div.single.image.next
+                transform: translate( 150vw, 0 )
+
+            div.single.image.prev
+                transform: translate( -150vw, 0 )
 
 // Single Image
 div.single.image
-	max-width: 100%
-	min-width: 100%
-	max-height: 100%
+    max-width: 100%
+    min-width: 100%
+    max-height: 100%
 
 // Overlay Text
 div.image.wrapper
-	position: relative 
+    position: relative 
 
-	span.overlay
-		position: absolute
-		left: 20px
-		+small
-			width: 100%
-			left: 0
-	
-	span.one
-		top: -45px
-		+tiny
-			top: -35px
+    span.overlay
+        position: absolute
+        left: 20px
+        +small
+            width: 100%
+            left: 0
+    
+    span.one
+        top: -45px
+        +tiny
+            top: -35px
 
-	span.two
-		bottom: -40px
-		+tiny
-			bottom: -35px
+    span.two
+        bottom: -40px
+        +tiny
+            bottom: -35px
 
-	div.repeater:nth-of-type( even )
-		span.one
-			bottom: calc( 100% - 40px )
-			left: calc( 50% + 20px )
-			+small
-				left: inherit
-				bottom: inherit
+    div.repeater:nth-of-type( even )
+        span.one
+            bottom: calc( 100% - 40px )
+            left: calc( 50% + 20px )
+            +small
+                left: inherit
+                bottom: inherit
 
-		span.two
-			top: calc( 100% - 45px )
-			left: calc( 50% + 20px )
-			+small
-				left: inherit
-				bottom: inherit
+        span.two
+            top: calc( 100% - 45px )
+            left: calc( 50% + 20px )
+            +small
+                left: inherit
+                bottom: inherit
 
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */
 /* INCEPTION RULE: DO NOT nest more than 4  */
+div.block.bahira
+    div.gallery-wrapper
 
-div.gallery-wrapper
+        > div.prev,
+        > div.next
+            transform: rotate( 45deg )
+            cursor: pointer
+            transition: 0.1s transform ease, 0.4s opacity ease
 
-	div.prev,
-	div.next
-		transform: rotate( 45deg )
-		cursor: pointer
-		transition: 0.1s transform ease
+        > div.prev.disable,
+        > div.next.disable
+            opacity: 0.2
 
-	div.prev
-		border-left: 1px solid $olive
-		border-bottom: 1px solid $olive
-		&:hover
-			border-left: 3px solid $lime
-			border-bottom: 3px solid $lime
-			transform: translate( 1px, 0 ) rotate( 45deg )
+        > div.prev
+            border-left: 1px solid $olive
+            border-bottom: 1px solid $olive
+            &:hover
+                border-left: 3px solid $lime
+                border-bottom: 3px solid $lime
+                transform: translate( 1px, 0 ) rotate( 45deg )
 
-	div.next
-		border-right: 1px solid $olive
-		border-top: 1px solid $olive
-		&:hover
-			border-right: 3px solid $lime
-			border-top: 3px solid $lime
-			transform: translate( -1px, 0 ) rotate( 45deg )
+        > div.next
+            border-right: 1px solid $olive
+            border-top: 1px solid $olive
+            &:hover
+                border-right: 3px solid $lime
+                border-top: 3px solid $lime
+                transform: translate( -1px, 0 ) rotate( 45deg )
+
+div.block.dagmar
+
+    div.gallery-wrapper.lightbox
+        > div.prev,
+        > div.next,
+        > div.next.disabled,
+        > div.next.disabled,
+        > div.close
+            opacity: 0
+
+    div.gallery-wrapper.lightbox.on
+        // transition: 0.5s background-color ease-in
+        > div.prev,
+        > div.next,
+        > div.close::after,
+        > div.close::before
+            transform: rotate( 45deg )
+            cursor: pointer
+            transition: 0.1s transform ease, 0.4s opacity ease
+
+        > div.prev,
+        > div.next,
+        > div.close
+            opacity: 1
+
+        > div.prev.disable,
+        > div.next.disable
+            opacity: 0.2
+
+        > div.prev,
+        > div.close::after
+            border-left: 2px solid $grey
+            border-bottom: 2px solid $grey
+
+        > div.prev
+            &:hover
+                border-left: 3px solid $lime
+                border-bottom: 3px solid $lime
+
+        > div.next,
+        > div.close::before
+            border-right: 2px solid $grey
+            border-top: 2px solid $grey
+
+        > div.next
+            &:hover
+                border-right: 3px solid $lime
+                border-top: 3px solid $lime
+
+        > div.close:hover::after
+            border-left: 3px solid $lime
+            border-bottom: 3px solid $lime
+
+        > div.close:hover::before
+            border-right: 3px solid $lime
+            border-top: 3px solid $lime
+
+    div.single.image
+        opacity: 1
+
+    div.single.image.fadeout
+        opacity: 0
 
 // Single Image
 div.single.image
-	+img
+    +img
 
 // Overlay Text
 div.image.wrapper
-	span
-		@extend %OverlayText
-		color: $black
-		+small
-			text-align: center
-		+tiny
-			font-size: 2rem
+    span
+        @extend %OverlayText
+        color: $black
+        +small
+            text-align: center
+        +tiny
+            font-size: 2rem
 
-	span.one
-		text-shadow: 0 1px 1px rgba( 211, 224, 234, 0.65)
+    span.one
+        text-shadow: 0 1px 1px rgba( 211, 224, 234, 0.65 )
 
-	span.two
-		text-shadow: 0 -1px 1px rgba( 255, 255, 255, 0.65)
+    span.two
+        text-shadow: 0 -1px 1px rgba( 255, 255, 255, 0.65 )
+
+div.block.dagmar
+    div.single.image
+        cursor: pointer
+
+div.gallery-wrapper.lightbox.on
+    div.gallery
+        background-color: rgba( 255, 255, 255, 0.95)
+        opacity: 1
+        transition: 0.5s opacity ease-in
+
+div.gallery-wrapper.lightbox.fadeout
+    div.gallery
+        opacity: 0
 
