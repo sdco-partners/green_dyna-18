@@ -5,95 +5,95 @@
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 header#head
-	+flex
-	width: 100%
-	height: 130px
-	padding: 45px 52px
-	+small
-		justify-content: flex-end
-	+tiny
-		padding: 25px
-		align-items: center
+    +flex
+    width: 100%
+    height: 130px
+    padding: 45px 52px
+    +small
+        justify-content: flex-end
+    +tiny
+        padding: 25px
+        align-items: center
 
-	> div.left,
-	> div.right,
-		flex: 0 0 251px
-		+tiny
-			flex: 0 0 100%
+    > div.left,
+    > div.right,
+        flex: 0 0 251px
+        +tiny
+            flex: 0 0 100%
 
-	> div.left.flank
-		+flex( $b: flex-start, $c: center )
-		+small
-			justify-content: flex-end
-		div.hamburger
-			margin-right: 37px
-			z-index: 175
-			+small
-				order: 2
-				margin-right: 0
-				margin-left: 37px
-			+tiny
-				margin-left: 15px
-			svg 
-				width: 32px
-				height: 32px
+    > div.left.flank
+        +flex( $b: flex-start, $c: center )
+        +small
+            justify-content: flex-end
+        div.hamburger
+            margin-right: 37px
+            z-index: 175
+            +small
+                order: 2
+                margin-right: 0
+                margin-left: 37px
+            +tiny
+                margin-left: 15px
+            svg 
+                width: 32px
+                height: 32px
 
-		div.availability
-			+break( $a: 340px )
-				display: none 
+        div.availability
+            +break( $a: 340px )
+                display: none 
 
-	> div.right.flank
-		+flex( $b: flex-end, $c: center )
-		height: 34px
-		+small
-			display: none
-		
-		div.tele
-			margin-left: 20px
+    > div.right.flank
+        +flex( $b: flex-end, $c: center )
+        height: 34px
+        +small
+            display: none
+        
+        div.tele
+            margin-left: 20px
 
 section.center.flank
-	+flex( $b: center, $c: center )
-	position: absolute
-	top: 25px
-	left: calc( 50% - 83px )
-	width: 166px
-	height: 166px
-	+small
-		top: 18px
-		left: 52px
-		width: 100px
-		height: 100px
-	+tiny
-		left: 10px
+    +flex( $b: center, $c: center )
+    position: absolute
+    top: 25px
+    left: calc( 50% - 83px )
+    width: 166px
+    height: 166px
+    +small
+        top: 18px
+        left: 52px
+        width: 100px
+        height: 100px
+    +tiny
+        left: 10px
 
-	div.main.logo
-		z-index: 100
-		svg
-			width: 120px
-			height: 120px
-			+small
-				width: 75px
-				height: 75px
+    div.main.logo
+        z-index: 100
+        svg
+            width: 120px
+            height: 120px
+            +small
+                width: 75px
+                height: 75px
 
-	div.circle
-		position: absolute
-		top: 0
-		left: 0
-		width: 166px
-		height: 166px
-		z-index: 50
-		+small
-			display: none
+    div.circle
+        position: absolute
+        top: 0
+        left: 0
+        width: 166px
+        height: 166px
+        z-index: 50
+        +small
+            display: none
 
-	div.rectangle
-		position: absolute
-		top: 0
-		left: 0
-		width: 166px
-		height: 99px
-		z-index: 75
-		+small
-			display: none
+    div.rectangle
+        position: absolute
+        top: 0
+        left: 0
+        width: 166px
+        height: 99px
+        z-index: 75
+        +small
+            display: none
 
 
 /* OBJECTS -> For styling objects */
@@ -101,35 +101,55 @@ section.center.flank
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
 header#head
-	@extend %NavText
-	color: $olive
-	background-color: $cream
-	border-bottom: 6px solid $lime
-	+small
-		border-bottom: none
-		border-top: 6px solid $lime
+    @extend %NavText
+    color: $olive
+    background-color: $cream
+    border-bottom: 6px solid $lime
+    +small
+        border-bottom: none
+        border-top: 6px solid $lime
 
-	a
-		color: $olive
-		&:hover
-			color: $lime
+    a
+        color: $olive
+        &:hover
+            color: $lime
 
 
-	div.social.items
-		border-right: 1px solid $olive
+    div.social.items
+        border-right: 1px solid $olive
+
+    div.left.flank,
+    div.right.flank div.social div.item,
+    div.right.flank div.tele
+        opacity: 0
+
+    div.flank.fade,
+    div.right.flank div.social div.item.fade,
+    div.right.flank div.tele.fade
+        opacity: 1
+        transform: translate( 0, 0 )
+
+    div.left.flank,
+    div.right.flank div.tele
+        transition: 0.5s opacity cubic-bezier(0.39, 0.575, 0.565, 1)
+        transition-delay: 0.3s
+
+    div.right.flank div.social div.item
+        transform: translate( 0, -10px )
+        transition: 1s opacity cubic-bezier(0.39, 0.575, 0.565, 1), 0.7s transform cubic-bezier(0.39, 0.575, 0.565, 1)
 
 div.hamburger#ham
-	cursor: pointer
-	&:hover
-		.hamburger-st0
-			stroke: $lime
+    cursor: pointer
+    &:hover
+        .hamburger-st0
+            stroke: $lime
 
 section.center.flank
 
-	div.circle
-		background-color: $cream
-		border-radius: 80px
-		border: 6px solid $lime
+    div.circle
+        background-color: $cream
+        border-radius: 80px
+        border: 6px solid $lime
 
-	div.rectangle
-		background-color: $cream
+    div.rectangle
+        background-color: $cream

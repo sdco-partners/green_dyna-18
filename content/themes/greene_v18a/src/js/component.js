@@ -295,7 +295,6 @@ class SlideShow {
     }
 
     countDown() {
-        console.log( "timer", this.timer );
         if ( this.timer === 0 ) {
             if ( this.indx < this.length - 1 ) {
                 this.changeSlide( "right" );
@@ -314,7 +313,6 @@ class SlideShow {
             this.spendTime();
         }
         setTimeout( this.countDown.bind( this ), 1000 );
-        // delay( () => this.countDown(), 1000 )
     }
 }
 
@@ -338,7 +336,6 @@ const Gallery = {
     },
 
     setIndx( gal, indx ) {
-        console.log( "setindex", this.galleryObj[ gal ].indx, indx );
         this.galleryObj[ gal ].indx = indx - 1;
         this.galleryObj[ gal ].moveForward( indx );
         this.galleryObj[ gal ].reorderSlides();
@@ -476,15 +473,71 @@ const initLightbox = () => {
         } );
     } );
 };
+/*
+* Add Fade
+*/
+const addFade = ( $el ) => {
+    $el.classList.add( "fade" );
+};
 
-/**
+/*
+* findChildClass
+*/
+const findChildClass = ( $el, className, callback ) => {
+    Array.prototype.forEach.call( $el.childNodes, ( $item, indx ) => {
+        if ( $item.tagName === "DIV" ) {
+            if ( $item.classList.contains( className ) ) {
+                callback( $item, indx );
+            }
+        }
+    } );
+    return null;
+};
+
+/*
+* Document Fade
+*/
+const documentFade = () => {
+    const $body = document.getElementsByTagName( "BODY" )[ 0 ];
+    addFade( $body );
+};
+
+/*
+* Document Fade
+*/
+const headerFade = () => {
+    const $head = document.getElementById( "head" );
+    Array.prototype.forEach.call( $head.childNodes, ( $flank ) => {
+        if ( $flank.tagName === "DIV" ) {
+            if ( $flank.classList.contains( "left" ) ) {
+                addFade( $flank );
+            } else if ( $flank.classList.contains( "right" ) ) {
+                findChildClass( $flank, "tele", ( $item ) => {
+                    addFade( $item );
+                } );
+                findChildClass( $flank, "social", ( $social ) => {
+                    findChildClass( $social, "item", ( $item, indx ) => {
+                        delay( addFade.bind( null, $item ), 150 * indx );
+                    } );
+                } );
+            }
+        }
+    } );
+};
+
+/*
 * Document Ready
 */
 document.onreadystatechange = () => {
     if ( document.readyState === "complete" ) {
+        // Fades
+        documentFade();
+        headerFade();
+        // Gallery & Images
         Gallery.build();
+        initLightbox();
+        // Nav Logic
         navEvent();
         toggleTabs();
-        initLightbox();
     }
 };

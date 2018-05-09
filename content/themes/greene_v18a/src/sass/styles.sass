@@ -30,8 +30,13 @@ html
     box-sizing: inherit
 
 body
+    opacity: 0
+    transition: 0.5s opacity cubic-bezier(0.39, 0.575, 0.565, 1)
     background-color: $white
     position: relative
+
+body.fade
+    opacity: 1
 
 body.lock
     overflow: hidden
