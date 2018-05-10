@@ -208,13 +208,36 @@ section#menu
         path.wheelchair-cls-1
             fill: $cream
 
+    div.link-wrapper
+        opacity: 0
+        transform: translate( 0, -10px )
+        transition: 1s opacity cubic-bezier(0.39, 0.575, 0.565, 1), 0.7s transform cubic-bezier(0.39, 0.575, 0.565, 1)
+
+    div.link-wrapper.fade
+        opacity: 1
+        transform: translate( 0, 0 )
+
+
+
 header#head.toggle
     line.hamburger-st0
         stroke: $white
 
+@keyframes rotate
+    from 
+        opacity: 0.4
+        transform: rotate( 0deg )
 
+    to
+        opacity: 0.8
+        transform: rotate( 360deg )
 
-
+section#menu
+    div.menu.logo
+        animation-duration: 210s
+        animation-name: rotate
+        animation-iteration-count: infinite
+        animation-direction: normal
 
 
 

@@ -103,29 +103,6 @@ const hamburger = {
         ] );
     },
 };
-/**
-* Nav Event
-*/
-const navEvent = () => {
-    const $body = document.getElementsByTagName( "BODY" )[ 0 ];
-    addEvents.toID( {
-        trigger: "ham",
-        target: "head",
-        callback: ( $trigger, $target ) => {
-            if ( !$target.classList.contains( "toggle" ) ) {
-                $target.classList.add( "pre" );
-                $body.classList.add( "lock" );
-                $target.classList.add( "toggle" );
-                hamburger.open();
-            } else {
-                hamburger.close();
-                $target.classList.remove( "toggle" );
-                $body.classList.remove( "lock" );
-                delay( () => $target.classList.remove( "pre" ) );
-            }
-        },
-    } );
-};
 
 /*
 * slideShow
@@ -492,6 +469,13 @@ const addFade = ( $el ) => {
 };
 
 /*
+* Remove Fade
+*/
+const removeFade = ( $el ) => {
+    $el.classList.remove( "fade" );
+};
+
+/*
 * findChildClass
 */
 const findChildClass = ( $el, className, callback ) => {
@@ -514,7 +498,7 @@ const documentFade = () => {
 };
 
 /*
-* Document Fade
+* Header Fade
 */
 const headerFade = () => {
     const $head = document.getElementById( "head" );
@@ -582,6 +566,51 @@ const footerFade = ( dist = 1 ) => {
                 }
             } );
         } );
+    } );
+};
+
+/*
+* Menu Fade
+*/
+const menuFade = ( callback ) => {
+    const $menu = document.getElementById( "menu" );
+    findChildClass( $menu, "menu-wrapper", ( $wrapper ) => {
+        findChildClass( $wrapper, "items", ( $items ) => {
+            findChildClass( $items, "link-wrapper", ( $link, indx ) => {
+                callback( $link, indx );
+            } );
+        } );
+    } );
+};
+
+/**
+* Nav Event
+*/
+const navEvent = () => {
+    const $body = document.getElementsByTagName( "BODY" )[ 0 ];
+    addEvents.toID( {
+        trigger: "ham",
+        target: "head",
+        callback: ( $trigger, $target ) => {
+            if ( !$target.classList.contains( "toggle" ) ) {
+                $target.classList.add( "pre" );
+                $body.classList.add( "lock" );
+                $target.classList.add( "toggle" );
+                hamburger.open();
+                menuFade( ( $link, indx ) => {
+                    const time = 100 * ( 1 + indx );
+                    delay( addFade.bind( null, $link ), time );
+                } );
+            } else {
+                hamburger.close();
+                $target.classList.remove( "toggle" );
+                $body.classList.remove( "lock" );
+                delay( () => $target.classList.remove( "pre" ) );
+                menuFade( ( $link ) => {
+                    removeFade( $link );
+                } );
+            }
+        },
     } );
 };
 
