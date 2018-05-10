@@ -5,6 +5,17 @@
 */
 
 /*
+* TriggerScrollOnLoad
+*/
+const triggerScrollOnLoad = () => {
+    const scrollTo = window.scrollY + 2;
+    window.scroll( {
+        top: scrollTo,
+        behavior: "smooth",
+    } );
+};
+
+/*
 * AddEvents Constructor
 */
 const addEvents = {
@@ -579,11 +590,12 @@ const footerFade = ( dist = 1 ) => {
 */
 document.onreadystatechange = () => {
     if ( document.readyState === "complete" ) {
+        // Trigger Scroll
+        triggerScrollOnLoad();
+
         // Fades
         documentFade();
         headerFade();
-        blockFade();
-        signupFade();
 
         // Gallery & Images
         Gallery.build();
