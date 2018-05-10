@@ -6,204 +6,209 @@
 
 div.signup,
 div.schedule
-	width: 100%
-	padding-top: 50px
-	+small
-		padding-top: 25px
+    width: 100%
+    padding-top: 50px
+    +small
+        padding-top: 25px
 
-	div.signup.wrapper,
-	div.column.wrapper
-		width: 100%
-		max-width: 1130px
-		margin: 0 auto
-		padding-top: 25px
-		+medium
-			max-width: 900px
-		+small
-			max-width: 500px
-		+tiny
-			max-width: 300px
+    div.signup.wrapper,
+    div.column.wrapper
+        width: 100%
+        max-width: 1130px
+        margin: 0 auto
+        padding-top: 25px
+        +medium
+            max-width: 900px
+        +small
+            max-width: 500px
+        +tiny
+            max-width: 300px
 
-	div.signup.wrapper
-		+flex( $c: center )
+    div.signup.wrapper
+        +flex( $c: center )
 
-	div.column.wrapper
-		+flex
-		
-		div.col
-			+flex
+    div.column.wrapper
+        +flex
+        
+        div.col
+            +flex
 
-		div.col.one
-			flex: 0 0 600px
+        div.col.one
+            flex: 0 0 600px
 
-		div.col.two
-			flex: 0 0 490px
+        div.col.two
+            flex: 0 0 490px
 
-	div.text.wrapper
-		flex: 0 0 340px
-		padding-bottom: 75px
-		+medium
-			flex: 0 0 350px
-		+small
-			flex: 0 0 100%
-			padding-bottom: 25px
+    div.text.wrapper
+        flex: 0 0 340px
+        padding-bottom: 75px
+        +medium
+            flex: 0 0 350px
+        +small
+            flex: 0 0 100%
+            padding-bottom: 25px
 
-	div.form.wrapper
-		flex: 0 0 650px
-		+medium
-			flex: 0 0 500px
-		+small
-			flex: 0 0 100%
+    div.form.wrapper
+        flex: 0 0 650px
+        +medium
+            flex: 0 0 500px
+        +small
+            flex: 0 0 100%
 
-	form
-		+flex
+    form
+        +flex
 
-	div.full,
-	div.submit
-		flex: 0 0 100%
-		margin-bottom: 25px
+    div.full,
+    div.submit
+        flex: 0 0 100%
+        margin-bottom: 25px
 
-	div.half
-		flex: 0 0 45%
-		margin-bottom: 25px
-		+tiny
-			flex: 0 0 100%
+    div.half
+        flex: 0 0 45%
+        margin-bottom: 25px
+        +tiny
+            flex: 0 0 100%
 
-	input,
-	textarea,
-	select
-		width: 100%
-		border: none
-		
-	input,
-	select,
-	textarea
-		padding-left: 15px
+    input,
+    textarea,
+    select
+        width: 100%
+        border: none
+        
+    input,
+    select,
+    textarea
+        padding-left: 15px
 
-	input,
-	select
-		height: 35px
+    input,
+    select
+        height: 35px
 
-	textarea
-		height: 90px
+    textarea
+        height: 90px
 
-	label
-		display: block
-		height: 20px
+    label
+        display: block
+        height: 20px
 
-	div.submit
-		+flex( $b: flex-end, $c: center)
-		+tiny
-			justify-content: center
+    div.submit
+        +flex( $b: flex-end, $c: center)
+        +tiny
+            justify-content: center
 
-		input[type=submit]
-			flex: 0 0 117px
-			padding: 0
+        input[type=submit]
+            flex: 0 0 117px
+            padding: 0
 
-		span.checkbox-1
-			flex: 0 0 340px
-			margin-right: 40px
-			+tiny
-				flex: 0 0 100%
-				margin: 0
+        span.checkbox-1
+            flex: 0 0 340px
+            margin-right: 40px
+            +tiny
+                flex: 0 0 100%
+                margin: 0
 
-		span.ajax-loader
-			flex: 0 0 100% 
+        span.ajax-loader
+            flex: 0 0 100% 
 
-	span.first.last
-		+flex( $c: center )
-		+tiny
-			justify-content: flex-start
-			margin-bottom: 40px
+    span.first.last
+        +flex( $c: center )
+        +tiny
+            justify-content: flex-start
+            margin-bottom: 40px
 
-		input
-			flex 0 0 14px
-			height: 14px
-			width: 14px
-			padding-left: 0
-			+tiny
-				margin-right: 10px
+        input
+            flex 0 0 14px
+            height: 14px
+            width: 14px
+            padding-left: 0
+            +tiny
+                margin-right: 10px
 
-		span
-			+tiny
-				flex: 1 0 50%
+        span
+            +tiny
+                flex: 1 0 50%
 
 
 div.schedule
-	div.submit
-		margin-top: 140px
-		margin-bottom: 0
+    div.submit
+        margin-top: 140px
+        margin-bottom: 0
 
 body.page-template-tmpl_contact
-	div.signup
-		min-height: 600px
+    div.signup
+        min-height: 600px
 
 
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */
 /* INCEPTION RULE: DO NOT nest more than 4  */
 
-div.signup
-	background-color: $cream
+div.signup.comp
+    opacity: 0
+    transform: translate( 0, 20px )
+    transition: 0.6s opacity cubic-bezier(0.39, 0.575, 0.565, 1), 1s transform cubic-bezier(0.39, 0.575, 0.565, 1)
+    background-color: $cream
 
-
+div.signup.fade
+    opacity: 1
+    transform: translate( 0, 0 )
 
 div.signup,
 div.schedule
 
-	input,
-	textarea,
-	select
-		border: none
-		@extend %FormFillText
+    input,
+    textarea,
+    select
+        border: none
+        @extend %FormFillText
 
-	input:focus,
-	textarea:focus
-		border-left: 5px solid $lime
+    input:focus,
+    textarea:focus
+        border-left: 5px solid $lime
 
-	label
-		@extend %FormText
-		color: $grey
+    label
+        @extend %FormText
+        color: $grey
 
-	div.submit
+    div.submit
 
-		input[type=submit]
-			@extend %FormText
-			color: $white
-			background-color: $navy
-			&:hover
-				background-color: $lime
+        input[type=submit]
+            @extend %FormText
+            color: $white
+            background-color: $navy
+            &:hover
+                background-color: $lime
 
 
-	span.first.last
+    span.first.last
 
-		input
-			-moz-appearance: none
-			-webkit-appearance: none
-			-o-appearance: none
-			border: 2px solid $black
+        input
+            -moz-appearance: none
+            -webkit-appearance: none
+            -o-appearance: none
+            border: 2px solid $black
 
-		span
-			@extend %FormText
+        span
+            @extend %FormText
 
-	input[ type="checkbox" ]
-		transition: 0.2s background-color ease
-	
-	input[ type="checkbox" ]:checked
-		background-color: $lime
+    input[ type="checkbox" ]
+        transition: 0.2s background-color ease
+    
+    input[ type="checkbox" ]:checked
+        background-color: $lime
 
 div.schedule
-	input,
-	textarea
-		border: 1px solid $grey
+    input,
+    textarea
+        border: 1px solid $grey
 
-	select
-		background-color: $white;
-		outline: 1px solid $grey
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
+    select
+        background-color: $white;
+        outline: 1px solid $grey
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
 
-	div.column.wrapper
-		border-bottom: 1px solid $grey
+    div.column.wrapper
+        border-bottom: 1px solid $grey
 

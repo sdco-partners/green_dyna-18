@@ -29,7 +29,7 @@ div.block.bahira
         div.single.image
             position: absolute
             transform: translate( 0, 0 )
-            transition: 1s transform ease-in, 0.4s opacity ease-in
+            transition: 1.3s transform cubic-bezier(0.19, 1, 0.22, 1), 0.4s opacity ease-in
             top: 0
             left: 0
             opacity: 1
@@ -72,7 +72,7 @@ div.block.dagmar
             left: 80px
 
         > div.close
-            top: 80px
+            top: 0px
             left: calc( 50% - 12px )
             &:before
                 content: ""
@@ -118,12 +118,7 @@ div.block.dagmar
 
 div.block.dagmar
     div.gallery-wrapper.lightbox.on
-        position: fixed
-        top: 0
-        left: 0
-        height: 100vh
-        width: 100vw
-        z-index: 400
+        position: relative
 
         > div.prev,
         > div.next,
@@ -131,14 +126,10 @@ div.block.dagmar
             z-index: 500
 
         div.gallery
-            position: absolute
+            position: relative
             justify-content: center
             flex-wrap: nowrap
-            top: 0
-            left: 0
-            max-width: 100vw
-            height: 100vh
-            z-index: 400
+            height: 680px
 
             div.single.image
                 display: block
@@ -146,7 +137,6 @@ div.block.dagmar
                 margin: 0
                 max-width: 80vw
                 max-height: 80vh
-                margin-bottom: 0
                 transition: 1.5s transform cubic-bezier(0.19, 1, 0.22, 1), 0.3s opacity ease
 
             div.single.image.next

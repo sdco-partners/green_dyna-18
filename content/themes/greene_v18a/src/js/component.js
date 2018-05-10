@@ -526,6 +526,55 @@ const headerFade = () => {
 };
 
 /*
+* Block Fade
+*/
+const blockFade = ( dist = 1 ) => {
+    const $blocks = document.getElementsByClassName( "blocks" )[ 0 ];
+    let blockCount = 0;
+    findChildClass( $blocks, "block", ( $block ) => {
+        const blockTop = $block.getBoundingClientRect().top;
+        if ( blockCount === 0 ) {
+            addFade( $block );
+        } else if ( blockTop - dist < 0 ) {
+            addFade( $block );
+        }
+        blockCount += 1;
+    } );
+};
+
+/*
+* Signup Fade
+*/
+const signupFade = ( dist = 1 ) => {
+    const $signup = document.getElementsByClassName( "signup" )[ 0 ];
+    const blockTop = $signup.getBoundingClientRect().top;
+    if ( blockTop - dist < 0 ) {
+        addFade( $signup );
+    }
+};
+
+/*
+* Footer Fade
+*/
+const footerFade = ( dist = 1 ) => {
+    const $foot = document.getElementById( "foot" );
+    findChildClass( $foot, "main", ( $main ) => {
+        const $divs = Array.prototype.filter.call( $main.childNodes, $flank =>
+            $flank.tagName === "DIV" );
+        $divs.forEach( ( $div ) => {
+            Array.prototype.forEach.call( $div.childNodes, ( $el, indx ) => {
+                if ( $el.tagName === "DIV" ) {
+                    const blockTop = $el.getBoundingClientRect().top;
+                    if ( blockTop - dist < 0 ) {
+                        delay( addFade.bind( null, $el ), 250 * ( 1 + indx ) );
+                    }
+                }
+            } );
+        } );
+    } );
+};
+
+/*
 * Document Ready
 */
 document.onreadystatechange = () => {
@@ -533,11 +582,31 @@ document.onreadystatechange = () => {
         // Fades
         documentFade();
         headerFade();
+        blockFade();
+        signupFade();
+
         // Gallery & Images
         Gallery.build();
         initLightbox();
+
         // Nav Logic
         navEvent();
         toggleTabs();
+
+        /*
+        * Window OnScroll
+        */
+        window.onscroll = () => {
+            // Trigger Vars
+            const height = ( window.innerHeight ) ?
+                window.innerHeight :
+                document.documentElement.clientHeight;
+            const trigger = height / 2;
+
+            // Fades Triggered On Scroll
+            blockFade( trigger );
+            signupFade( trigger );
+            footerFade( height );
+        };
     }
 };

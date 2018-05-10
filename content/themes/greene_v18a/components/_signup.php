@@ -4,7 +4,7 @@
   */
 ?>
 
-<div class="signup">
+<div class="signup comp">
 	<div class="signup wrapper">
 		<div class="text wrapper">
 			<?php include( locate_template("components/_text.php") ); ?>
