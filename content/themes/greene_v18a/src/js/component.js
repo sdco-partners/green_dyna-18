@@ -53,7 +53,7 @@ const addEvents = {
     },
 };
 
-/**
+/*
 * delay
 */
 const delay = ( callback, time = 250 ) => {
@@ -62,7 +62,7 @@ const delay = ( callback, time = 250 ) => {
     }, time );
 };
 
-/**
+/*
 * Begin SVG Animate
 */
 const SVGAnimate = ( svgIds ) => {
@@ -74,7 +74,7 @@ const SVGAnimate = ( svgIds ) => {
     }
 };
 
-/**
+/*
 * Toggle Hamburger
 */
 const hamburger = {
@@ -105,7 +105,7 @@ const hamburger = {
 };
 
 /*
-* slideShow
+* SlideShow Class
 */
 class SlideShow {
     constructor( {
@@ -479,13 +479,15 @@ const removeFade = ( $el ) => {
 * findChildClass
 */
 const findChildClass = ( $el, className, callback ) => {
-    Array.prototype.forEach.call( $el.childNodes, ( $item, indx ) => {
-        if ( $item.tagName === "DIV" ) {
-            if ( $item.classList.contains( className ) ) {
-                callback( $item, indx );
+    if ( $el && $el.childNodes ) {
+        Array.prototype.forEach.call( $el.childNodes, ( $item, indx ) => {
+            if ( $item.tagName === "DIV" ) {
+                if ( $item.classList.contains( className ) ) {
+                    callback( $item, indx );
+                }
             }
-        }
-    } );
+        } );
+    }
     return null;
 };
 
@@ -583,7 +585,7 @@ const menuFade = ( callback ) => {
     } );
 };
 
-/**
+/*
 * Nav Event
 */
 const navEvent = () => {
@@ -613,7 +615,93 @@ const navEvent = () => {
         },
     } );
 };
+/*
+* String Replace
+*/
+const stringReplace = ( string, target, replace ) => {
+    let newString = string;
+    if ( string.indexOf( target ) >= 0 ) {
+        newString = newString.substring( 0, string.indexOf( target ) );
+        newString += `${ target }${ replace }`;
+    }
+    return newString;
+};
 
+/*
+* Parallax
+*/
+const parallax = ( {
+    plane,
+    speed,
+} = {} ) => {
+    const $plane = document.getElementsByClassName( plane );
+    Array.prototype.forEach.call( $plane, ( $el ) => {
+        const elBox = $el.getBoundingClientRect();
+        const mutate = Math.floor( ( elBox.top - 300 ) / speed );
+        const currentStyle = ( $el.getAttribute( "style" ) !== null ) ?
+            `${ $el.getAttribute( "style" ) } ` :
+            "";
+        const newStyle = ( currentStyle && currentStyle.indexOf( "transform" ) >= 0 ) ?
+            stringReplace( currentStyle, "translateY", `(${ mutate }px)` ) :
+            `${ currentStyle }transform: translateX(0) translateY(${ mutate }px)`;
+        $el.setAttribute( "style", newStyle );
+    } );
+};
+
+/*
+* Init Parallax
+*/
+function initParallax( ...args ) {
+    args.forEach( ( arg ) => {
+        parallax( {
+            plane: arg.plane,
+            speed: arg.speed,
+        } );
+    } );
+}
+/*
+* Pin Option
+*/
+const pinOption = ( $el, $siblings ) => {
+    findChildClass( $siblings, "option", ( $sib ) => {
+        if ( $sib.tagName === "DIV" ) {
+            $sib.classList.remove( "pin" );
+        }
+    } );
+    if ( $el.tagName === "DIV" ) {
+        $el.classList.add( "pin" );
+    }
+};
+
+/*
+* Process Search
+*/
+const processSearch = ( input ) => {
+    console.log( "processSearch", input );
+};
+
+/*
+* Select Bed Options
+*/
+const selectBedOptions = ( $search ) => {
+    findChildClass( $search, "bedrooms", ( $bedrooms ) => {
+        findChildClass( $bedrooms, "option", ( $option ) => {
+            $option.addEventListener( "click", ( e ) => {
+                e.preventDefault();
+                processSearch( "click" );
+                pinOption( $option, $bedrooms );
+            } );
+        } );
+    } );
+};
+
+/*
+* Search Listeners
+*/
+const initSearchComp = () => {
+    const $search = document.getElementById( "search" );
+    selectBedOptions( $search );
+};
 /*
 * Document Ready
 */
@@ -634,6 +722,9 @@ document.onreadystatechange = () => {
         navEvent();
         toggleTabs();
 
+        // Search Logic
+        initSearchComp();
+
         /*
         * Window OnScroll
         */
@@ -648,6 +739,12 @@ document.onreadystatechange = () => {
             blockFade( trigger );
             signupFade( trigger );
             footerFade( height );
+
+            // Parallax
+            initParallax( {
+                plane: "overlay",
+                speed: 50,
+            } );
         };
     }
 };

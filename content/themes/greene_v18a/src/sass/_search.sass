@@ -52,7 +52,8 @@ div.expandable.wrapper
         select
             border: none
             width: 100%
-            padding: 10px
+            height: 32px
+            padding-left: 10px
 
         span
             position: relative
@@ -92,9 +93,6 @@ div.submit.options
             width: 117px
             margin-left: 40px
 
-
-
-
 div.option.rent-range,
 div.option.square-footage-range
     +flex( $c: center )
@@ -114,14 +112,19 @@ div.search.filter
     @extend %FilterText
     border: 1px solid $black
 
-    div.choose.bedrooms.wrapperv
+    div.choose.bedrooms.wrapper
         border-bottom: 1px solid $black
 
         div.option.bed
             border-left: 1px solid $black
+            cursor: pointer
             &:hover
                 color: $white
                 background-color: $lime
+
+        div.option.bed.pin
+            background-color: $navy
+            color: $white
 
         div.option.bed:nth-of-type( 1 )
             border: none
@@ -140,17 +143,23 @@ div.expandable.wrapper
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        cursor: pointer
 
     span
+        transition: 0.2s border ease
+        cursor: pointer
         &:before
             border-left: 1px solid $grey
             border-bottom: 1px solid $grey
         &:after
             border-left: 1px solid $grey
 
+    span:hover::before
+        border-left: 1px solid $lime
+        border-bottom: 1px solid $lime
+
 div.option#toggle-full
     text-align: center
-
 
 div.submit#search,
 div.reset#default,
@@ -162,7 +171,15 @@ div.submit#search
     span
         color: $white
         background-color: $navy
+        transition: 0.2s background-color ease
+        &:hover
+            background-color: $lime
 
-div.reset#default
+div.reset#default,
+div.option#toggle-full
+    cursor: pointer
     span
         border: none
+        transition: 0.2s color ease
+        &:hover
+            color: $lime

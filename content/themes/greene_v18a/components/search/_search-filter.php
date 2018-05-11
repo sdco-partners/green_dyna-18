@@ -39,7 +39,7 @@ $footage = dropdown_builder(
 
 ?>
 
-<div class="search filter wrapper">
+<div class="search filter wrapper" id="search">
 	<div class="choose bedrooms wrapper">
 		<?php foreach( $bedrooms as $param ) {
 			include( locate_template( "components/search/_single-option.php") );	
