@@ -24,7 +24,7 @@ div.search.filter
         flex: 2 0 auto
         padding-left: 30px
 
-div.option#toggle-full
+div.option#advancedoptions
     width: 100%
     padding-top: 20px
     padding-bottom: 20px
@@ -34,6 +34,9 @@ div.expandable.wrapper
     width: 100%
     max-width: 655px
     margin: 0 auto
+    max-height: 1px
+    overflow: hidden
+    transition: 0.15s max-height ease
 
     div.col
         flex: 0 0 45%
@@ -78,12 +81,16 @@ div.expandable.wrapper
         span#opt-availability
             padding: 10px
 
+
+div.expandable.wrapper.expand
+    max-height: 216px
+
 div.submit.options
     flex: 0 0 100%
     +flex( $b: flex-end, $c: center )
     margin-bottom: 30px
 
-    div.submit#search
+    div.submit#submit
         flex: 1 0 auto
         +flex( $b: center, $c: center)
 
@@ -123,7 +130,7 @@ div.search.filter
                 background-color: $lime
 
         div.option.bed.pin
-            background-color: $navy
+            background-color: $lime
             color: $white
 
         div.option.bed:nth-of-type( 1 )
@@ -158,16 +165,16 @@ div.expandable.wrapper
         border-left: 1px solid $lime
         border-bottom: 1px solid $lime
 
-div.option#toggle-full
+div.option#advancedoptions
     text-align: center
 
-div.submit#search,
+div.submit#submit,
 div.reset#default,
-div.option#toggle-full
+div.option#advancedoptions
     @extend %FilterSubmit
     border: none
 
-div.submit#search
+div.submit#submit
     span
         color: $white
         background-color: $navy
@@ -176,7 +183,7 @@ div.submit#search
             background-color: $lime
 
 div.reset#default,
-div.option#toggle-full
+div.option#advancedoptions
     cursor: pointer
     span
         border: none

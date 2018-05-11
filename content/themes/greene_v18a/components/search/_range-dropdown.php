@@ -20,7 +20,7 @@
 		</select>
 	</span>
 	<span class="max-range">
-		<select name="max-range">
+		<select name name="max-range">
 			<option disabled selected hidden>
 				<?php echo $dropdown->min_label; ?>
 			</option>

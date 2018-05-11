@@ -47,7 +47,7 @@ $footage = dropdown_builder(
 	</div>
 	<div class="advanced options wrapper">
 		<?php include( locate_template( "components/search/_advanced-filter-bttn.php") ); ?> 
-		<div class="expandable wrapper">
+		<div class="expandable wrapper" id="expandable">
 			<?php include( locate_template( "components/search/_left-col.php") );
 			include( locate_template( "components/search/_right-col.php") );
 			include( locate_template( "components/search/_submit.php") ); ?>

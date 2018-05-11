@@ -4,7 +4,7 @@
   */
 ?>
 <div class="submit options">
-	<div class="submit" id="search">
+	<div class="submit" id="submit">
 		<span>Submit</span>
 	</div>
 	<div class="reset" id="default">
