@@ -4,159 +4,202 @@ namespace FloorPlans;
 class Listing {
 	public function create () {
 		
-		/* 1. the kiawah */
-		$plan_kiawah = new \StdClass();
-		$plan_kiawah->Name = "kiawah";
+		/* 1. the bowen */
+		$plan_bowen = new \StdClass();
+		$plan_bowen->Name = "bowen";
 		// ids
-		$id_kiawah_1 = "A1-1";
+		$id_bowen_1 = "A1-1";
 		// set to plan
-		$plan_kiawah->ID[] = $id_kiawah_1;
+		$plan_bowen->ID[] = $id_bowen_1;
 
-		/* 2. the folly */
-		$plan_folly = new \StdClass();
-		$plan_folly->Name = "folly";
+		/* 2. the summit */
+		$plan_summit = new \StdClass();
+		$plan_summit->Name = "summit";
 		// ids
-		$id_folly_1 = "A2-1";
-		$id_folly_2 = "A2-2";
-		$id_folly_3 = "A2-3";
-		$id_folly_4 = "A2-3A";
-		$id_folly_5 = "A2-4";
-		$id_folly_6 = "A2-5";
-		$id_folly_7 = "A2-5A";
-		$id_folly_8 = "A2-6";
-		$id_folly_9 = "A2-7";
-		$id_folly_10 = "A2-8";
-		$id_folly_11 = "A2-9";
-		$id_folly_12 = "A2-10";
+		$id_summit_1 = "A2-1";
+		$id_summit_2 = "A2-2";
+		$id_summit_3 = "A2-3";
+		$id_summit_4 = "A2-3A";
+		$id_summit_5 = "A2-4";
+		$id_summit_6 = "A2-5";
+		$id_summit_7 = "A2-5A";
+		$id_summit_8 = "A2-6";
+		$id_summit_9 = "A2-7";
+		$id_summit_10 = "A2-8";
+		$id_summit_11 = "A2-9";
+		$id_summit_12 = "A2-10";
 		// set to plan
-		$plan_folly->ID[] = $id_folly_1;
-		$plan_folly->ID[] = $id_folly_2;
-		$plan_folly->ID[] = $id_folly_3;
-		$plan_folly->ID[] = $id_folly_4;
-		$plan_folly->ID[] = $id_folly_5;
-		$plan_folly->ID[] = $id_folly_6;
-		$plan_folly->ID[] = $id_folly_7;
-		$plan_folly->ID[] = $id_folly_8;
-		$plan_folly->ID[] = $id_folly_9;
-		$plan_folly->ID[] = $id_folly_10;
-		$plan_folly->ID[] = $id_folly_11;
-		$plan_folly->ID[] = $id_folly_12;
+		$plan_summit->ID[] = $id_summit_1;
+		$plan_summit->ID[] = $id_summit_2;
+		$plan_summit->ID[] = $id_summit_3;
+		$plan_summit->ID[] = $id_summit_4;
+		$plan_summit->ID[] = $id_summit_5;
+		$plan_summit->ID[] = $id_summit_6;
+		$plan_summit->ID[] = $id_summit_7;
+		$plan_summit->ID[] = $id_summit_8;
+		$plan_summit->ID[] = $id_summit_9;
+		$plan_summit->ID[] = $id_summit_10;
+		$plan_summit->ID[] = $id_summit_11;
+		$plan_summit->ID[] = $id_summit_12;
 
-		/* 3. the may */
-		$plan_may = new \StdClass();
-		$plan_may->Name = "may";
+		/* 3. the whitewater */
+		$plan_whitewater = new \StdClass();
+		$plan_whitewater->Name = "whitewater";
 		// ids
-		$id_may_1 = "A3";
+		$id_whitewater_1 = "A3";
 		// set to plan
-		$plan_may->ID[] = $id_may_1;
+		$plan_whitewater->ID[] = $id_whitewater_1;
 
-		/* 4. the asehepoo */
-		$plan_ashepoo = new \StdClass();
-		$plan_ashepoo->Name = "Ashepoo";
+		/* 4. the brasstown */
+		$plan_brasstown = new \StdClass();
+		$plan_brasstown->Name = "brasstown";
 		// ids
-		$id_ashepoo_1 = "A4";
+		$id_brasstown_1 = "A4";
 		// set to plan
-		$plan_ashepoo->ID[] = $id_ashepoo_1;
+		$plan_brasstown->ID[] = $id_brasstown_1;
 
-		/* 5. the wando */
-		$plan_wando = new \StdClass();
-		$plan_wando->Name = "wando";
+		/* 5. the wildcat */
+		$plan_wildcat = new \StdClass();
+		$plan_wildcat->Name = "wildcat";
 		// ids
-		$id_wando_1 = "B1-1";
-		$id_wando_2 = "B1-2";
-		$id_wando_3 = "B1-2A";
-		$id_wando_4 = "B1-3";
-		$id_wando_5 = "B1-4";
+		$id_wildcat_1 = "B1-1";
+		$id_wildcat_2 = "B1-2";
+		$id_wildcat_3 = "B1-2A";
+		$id_wildcat_4 = "B1-3";
+		$id_wildcat_5 = "B1-4";
 		// set to plan
-		$plan_wando->ID[] = $id_wando_1;
-		$plan_wando->ID[] = $id_wando_2;
-		$plan_wando->ID[] = $id_wando_3;
-		$plan_wando->ID[] = $id_wando_4;
-		$plan_wando->ID[] = $id_wando_5;
+		$plan_wildcat->ID[] = $id_wildcat_1;
+		$plan_wildcat->ID[] = $id_wildcat_2;
+		$plan_wildcat->ID[] = $id_wildcat_3;
+		$plan_wildcat->ID[] = $id_wildcat_4;
+		$plan_wildcat->ID[] = $id_wildcat_5;
 
-		/* 6. the edisto */
-		$plan_edisto = new \StdClass();
-		$plan_edisto->Name = "edisto";
+		/* 6. the chattooga */
+		$plan_chattooga = new \StdClass();
+		$plan_chattooga->Name = "chattooga";
 		// ids
-		$id_edisto_1 = "B2-1";
+		$id_chattooga_1 = "B2-1";
 		// set to plan
-		$plan_edisto->ID[] = $id_edisto_1;
+		$plan_chattooga->ID[] = $id_chattooga_1;
 
-		/* 7. the ashley */
-		$plan_ashley = new \StdClass();
-		$plan_ashley->Name = "ashley";
+		/* 7. the broad */
+		$plan_broad = new \StdClass();
+		$plan_broad->Name = "broad";
 		// ids
-		$id_ashley_1 = "B3";
+		$id_broad_1 = "B3";
 		// set to plan
-		$plan_ashley->ID[] = $id_ashley_1;
+		$plan_broad->ID[] = $id_broad_1;
 
-		/* 8. the cooper */
-		$plan_cooper = new \StdClass();
-		$plan_cooper->Name = "cooper";
+		/* 8. the brushy */
+		$plan_brushy = new \StdClass();
+		$plan_brushy->Name = "brushy";
 		// ids
-		$id_cooper_1 = "B4";
+		$id_brushy_1 = "B4";
 		// set to plan
-		$plan_cooper->ID[] = $id_cooper_1;
+		$plan_brushy->ID[] = $id_brushy_1;
 
-		/* 9. the beaufort */
-		$plan_beaufort = new \StdClass();
-		$plan_beaufort->Name = "beaufort";
+		/* 9. the tyger */
+		$plan_tyger = new \StdClass();
+		$plan_tyger->Name = "tyger";
 		// ids
-		$id_beaufort_1 = "C1";
-		$id_beaufort_2 = "C1-2";
-		$id_beaufort_3 = "C1-3";
-		$id_beaufort_4 = "C1-3A";
+		$id_tyger_1 = "C1";
+		$id_tyger_2 = "C1-2";
+		$id_tyger_3 = "C1-3";
+		$id_tyger_4 = "C1-3A";
 		// set to plan
-		$plan_beaufort->ID[] = $id_beaufort_1;
-		$plan_beaufort->ID[] = $id_beaufort_2;
-		$plan_beaufort->ID[] = $id_beaufort_3;
-		$plan_beaufort->ID[] = $id_beaufort_4;
+		$plan_tyger->ID[] = $id_tyger_1;
+		$plan_tyger->ID[] = $id_tyger_2;
+		$plan_tyger->ID[] = $id_tyger_3;
+		$plan_tyger->ID[] = $id_tyger_4;
 
-		/* 10. the combahee */
-		$plan_combahee = new \StdClass();
-		$plan_combahee->Name = "combahee";
+		/* 10. the pacolet */
+		$plan_pacolet = new \StdClass();
+		$plan_pacolet->Name = "pacolet";
 		// ids
-		$id_combahee_1 = "C2";
+		$id_pacolet_1 = "C2";
 		// set to plan
-		$plan_combahee->ID[] = $id_combahee_1;
+		$plan_pacolet->ID[] = $id_pacolet_1;
 
-		/* 11. the lighthouse */
-		$plan_lighthouse = new \StdClass();
-		$plan_lighthouse->Name = "lighthouse";
+		/* 11. the saluda */
+		$plan_saluda = new \StdClass();
+		$plan_saluda->Name = "saluda";
 		// ids
-		$id_lighthouse_1 = "D1-1";
-		$id_lighthouse_2 = "D1-2";
-		$id_lighthouse_3 = "D1-3";
+		$id_saluda_1 = "D1-1";
+		$id_saluda_2 = "D1-2";
+		$id_saluda_3 = "D1-3";
 		// set to plan
-		$plan_lighthouse->ID[] = $id_lighthouse_1;
-		$plan_lighthouse->ID[] = $id_lighthouse_2;
-		$plan_lighthouse->ID[] = $id_lighthouse_3;
+		$plan_saluda->ID[] = $id_saluda_1;
+		$plan_saluda->ID[] = $id_saluda_2;
+		$plan_saluda->ID[] = $id_saluda_3;
 
-		/* 12.the Stono */
-		$plan_stono = new \StdClass();
-		$plan_stono->Name = "stono";
+		/* 12.the toxaway */
+		$plan_toxaway = new \StdClass();
+		$plan_toxaway->Name = "toxaway";
 		// ids
-		$id_stono_1 = "S1";
-		$id_stono_2 = "S1-A";
+		$id_toxaway_1 = "S1";
+		$id_toxaway_2 = "S1-A";
 		// set to plan
-		$plan_stono->ID[] = $id_stono_1;
-		$plan_stono->ID[] = $id_stono_2;
+		$plan_toxaway->ID[] = $id_toxaway_1;
+		$plan_toxaway->ID[] = $id_toxaway_2;
 
+		/* 13.the jocassee */
+		$plan_jocassee = new \StdClass();
+		$plan_jocassee->Name = "jocassee";
+		// ids
+		$id_jocassee_1 = "S1";
+		$id_jocassee_2 = "S1-A";
+		// set to plan
+		$plan_jocassee->ID[] = $id_jocassee_1;
+		$plan_jocassee->ID[] = $id_jocassee_2;
+
+		/* 14.the eastatoe */
+		$plan_eastatoe = new \StdClass();
+		$plan_eastatoe->Name = "eastatoe";
+		// ids
+		$id_eastatoe_1 = "S1";
+		$id_eastatoe_2 = "S1-A";
+		// set to plan
+		$plan_eastatoe->ID[] = $id_eastatoe_1;
+		$plan_eastatoe->ID[] = $id_eastatoe_2;
+
+		/* 15.the keowee */
+		$plan_keowee = new \StdClass();
+		$plan_keowee->Name = "keowee";
+		// ids
+		$id_keowee_1 = "S1";
+		$id_keowee_2 = "S1-A";
+		// set to plan
+		$plan_keowee->ID[] = $id_keowee_1;
+		$plan_keowee->ID[] = $id_keowee_2;
+
+		/* 16.the reedy */
+		$plan_reedy = new \StdClass();
+		$plan_reedy->Name = "reedy";
+		// ids
+		$id_reedy_1 = "S1";
+		$id_reedy_2 = "S1-A";
+		// set to plan
+		$plan_reedy->ID[] = $id_reedy_1;
+		$plan_reedy->ID[] = $id_reedy_2;
 
 		/* Floor Plan Object */
 		$Floor_Plan_Obj = new \StdClass();
-		$Floor_Plan_Obj->Names[] = $plan_kiawah;
-		$Floor_Plan_Obj->Names[] = $plan_folly;
-		$Floor_Plan_Obj->Names[] = $plan_may;
-		$Floor_Plan_Obj->Names[] = $plan_ashepoo;
-		$Floor_Plan_Obj->Names[] = $plan_wando;
-		$Floor_Plan_Obj->Names[] = $plan_edisto;
-		$Floor_Plan_Obj->Names[] = $plan_ashley;
-		$Floor_Plan_Obj->Names[] = $plan_cooper;
-		$Floor_Plan_Obj->Names[] = $plan_beaufort;
-		$Floor_Plan_Obj->Names[] = $plan_combahee;
-		$Floor_Plan_Obj->Names[] = $plan_lighthouse;
-		$Floor_Plan_Obj->Names[] = $plan_stono;	
+		$Floor_Plan_Obj->Names[] = $plan_bowen;
+		$Floor_Plan_Obj->Names[] = $plan_summit;
+		$Floor_Plan_Obj->Names[] = $plan_whitewater;
+		$Floor_Plan_Obj->Names[] = $plan_brasstown;
+		$Floor_Plan_Obj->Names[] = $plan_wildcat;
+		$Floor_Plan_Obj->Names[] = $plan_chattooga;
+		$Floor_Plan_Obj->Names[] = $plan_broad;
+		$Floor_Plan_Obj->Names[] = $plan_brushy;
+		$Floor_Plan_Obj->Names[] = $plan_tyger;
+		$Floor_Plan_Obj->Names[] = $plan_pacolet;
+		$Floor_Plan_Obj->Names[] = $plan_saluda;
+		$Floor_Plan_Obj->Names[] = $plan_toxaway;
+		$Floor_Plan_Obj->Names[] = $plan_jocassee;
+		$Floor_Plan_Obj->Names[] = $plan_eastatoe;	
+		$Floor_Plan_Obj->Names[] = $plan_keowee;
+		$Floor_Plan_Obj->Names[] = $plan_reedy;
 
 		return $Floor_Plan_Obj;
 	}
