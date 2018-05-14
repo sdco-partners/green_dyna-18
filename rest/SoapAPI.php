@@ -73,6 +73,9 @@ abstract class SoapAPI
 		$sorted->FloorNumber = $data->Path->UnitDetails->FloorNumber;
 		$sorted->SquareFootage = $data->Path->UnitDetails->RentSqFtCount;
 		$sorted->AvailableDate = $data->Path->Availability->AvailableDate;
+		$sorted->UnitID = $data->Path->Address->UnitID;
+		$sorted->UnitNumber = $data->Path->Address->UnitNumber;
+		$sorted->DummyUnitNumber = 1;
 		return $sorted;
 	}
 
