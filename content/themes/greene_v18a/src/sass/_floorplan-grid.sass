@@ -41,7 +41,18 @@ div.floorplans.grid
                     bottom: -9px
                     left: 0
                     width: 100%
+                    overflow: hidden
                     height: 4px
+            > h3
+                margin-right: 7px
+
+            > h3:nth-child( 3 )
+                &:after
+                    content: "..."
+                    padding-left: 5px
+
+            > h3:nth-child( n + 4 )
+                display: none
 
         div.attributes
             flex: 0 0 50%
@@ -84,7 +95,6 @@ div.single.floorplan
             h2
                 color: $white
                 text-align: center
-                
                 line-height: 2.5rem
     
     h2

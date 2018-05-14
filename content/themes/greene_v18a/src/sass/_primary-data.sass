@@ -22,10 +22,22 @@ div.primary.data.component
 		margin-top: 45px
 		position: relative
 
+	div.codes
+		flex: 0 0 calc( 100% - 130px )
+		h2
+			width: 100%
+		h3
+			width: 75px
+
 div.codes
-	+flex( $c: flex-end )
+	+flex( $b: flex-start, $c: flex-end )
 	h2
 		margin-right: 10px
+
+div.files
+	+flex( $b: flex-end )
+	flex: 0 0 130px
+	height: 100%
 
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */

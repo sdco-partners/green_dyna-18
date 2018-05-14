@@ -10,6 +10,7 @@
 /* global footerFade */
 /* global initParallax */
 /* global initSearchComp */
+/* global fetchData */
 
 /**
 *
@@ -41,6 +42,8 @@ document.onreadystatechange = () => {
         // Search Logic
         initSearchComp();
 
+        // ReST API Logic
+        fetchData();
         /*
         * Window OnScroll
         */

@@ -6,15 +6,15 @@
 
 <div class="attributes">
 	<div class="rest">
-		<span class="bed">1 Bed</span>
+		<span class="bed"></span>
 	</div>
 	<div class="rest">
-		<span class="bath">1 Bath</span>
+		<span class="bath"></span>
 	</div>
 	<div class="rest">
-		<span class="sqft">728 Sq Ft</span>
+		<span class="sqft"></span>
 	</div>
 	<div class="rest">
-		<span class="price">$$$$ - $$$$</span>
+		<span class="price">No Available Units</span>
 	</div>
 </div>
