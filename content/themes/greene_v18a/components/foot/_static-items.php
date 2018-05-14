@@ -8,9 +8,9 @@
 		&copy;THE GREENE <?php echo date( "Y" ); ?>
 	</div>
 	<div class="item">
-		<a href="">Site Map</a>
+		<a href="<?php echo get_page_link( 137 ); ?>">Site Map</a>
 	</div>
 	<div class="item">
-		<a href="">Privacy Policy</a>
+		<a href="https://www.greystar.com/privacy/us-policy" target="_blank">Privacy Policy</a>
 	</div>
 </div>
