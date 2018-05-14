@@ -49,7 +49,7 @@ document.onreadystatechange = () => {
             const height = ( window.innerHeight ) ?
                 window.innerHeight :
                 document.documentElement.clientHeight;
-            const trigger = height / 2;
+            const trigger = height - ( height / 4 );
 
             // Fades Triggered On Scroll
             blockFade( trigger );

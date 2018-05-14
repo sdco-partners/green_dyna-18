@@ -135,7 +135,7 @@ const expandOptions = () => {
 };
 
 /*
-* Reset Options 
+* Reset Options
 */
 const resetOptions = ( $search ) => {
     addEvents.toClass( {
