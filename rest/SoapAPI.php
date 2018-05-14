@@ -67,14 +67,14 @@ abstract class SoapAPI
 		$sorted->ID = $this->count;
 		$sorted->Code = $data->Path->FloorPlan->FloorPlanCode;
 		$sorted->Name = $data->Name;
-		$sorted->BaseRentAmount = $data->Path->BaseRentAmount;
-		$sorted->Bathrooms = $data->Path->UnitDetails->Bathrooms;
-		$sorted->Bedrooms = $data->Path->UnitDetails->Bedrooms;
-		$sorted->FloorNumber = $data->Path->UnitDetails->FloorNumber;
-		$sorted->SquareFootage = $data->Path->UnitDetails->RentSqFtCount;
+		$sorted->BaseRentAmount = intval( $data->Path->BaseRentAmount );
+		$sorted->Bathrooms = intval( $data->Path->UnitDetails->Bathrooms );
+		$sorted->Bedrooms = intval( $data->Path->UnitDetails->Bedrooms );
+		$sorted->FloorNumber = intval( $data->Path->UnitDetails->FloorNumber );
+		$sorted->SquareFootage = intval( $data->Path->UnitDetails->RentSqFtCount );
 		$sorted->AvailableDate = $data->Path->Availability->AvailableDate;
-		$sorted->UnitID = $data->Path->Address->UnitID;
-		$sorted->UnitNumber = $data->Path->Address->UnitNumber;
+		$sorted->UnitID = intval( $data->Path->Address->UnitID );
+		$sorted->UnitNumber = intval( $data->Path->Address->UnitNumber );
 		$sorted->DummyUnitNumber = 1;
 		return $sorted;
 	}
