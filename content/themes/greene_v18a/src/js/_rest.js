@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* global delay */
 /* global findChildClass */
-/* eslint complexity: ["error", 7] */
 
 /**
 *
@@ -10,33 +9,83 @@
 */
 
 /*
-* Range Finder
+* Range
 */
-const rangeFinder = ( data ) => {
-    const ranges = {};
-    ranges.count = 0;
+class DataRanges {
+    constructor() {
+        this.count = 0;
+    }
+
+    add( key, value ) {
+        this.addNewKey( key, value );
+        this.checkMin( key, value );
+        this.checkMax( key, value );
+    }
+
+    addNewFloorName( value ) {
+        this.name = value;
+    }
+
+    addNewKey( key, value ) {
+        if ( !this[ key ] ) {
+            this[ key ] = {};
+            this[ key ].min = value;
+            this[ key ].max = value;
+        }
+    }
+
+    checkMin( key, value ) {
+        if ( this[ key ].min > value ) {
+            this[ key ].min = value;
+        }
+    }
+
+    checkMax( key, value ) {
+        if ( this[ key ].max < value ) {
+            this[ key ].max = value;
+        }
+    }
+
+    increment() {
+        this.count += 1;
+    }
+
+    reset() {
+        Object.keys( this ).forEach( ( key ) => {
+            if ( this[ key ].min ) {
+                delete this[ key ];
+            }
+        } );
+    }
+}
+
+/*
+* Filter Data
+*/
+const filterData = ( filter, data ) => {
+    if ( filter === false ) {
+        return true;
+    }
+    return false;
+};
+
+/*
+* Build Data Ranges
+*/
+const buildDataRanges = ( data, filter = false ) => {
     const units = data.AvailableUnits;
+    const thisRange = new DataRanges();
     Object.keys( units ).forEach( ( row ) => {
         Object.keys( units[ row ] ).forEach( ( key ) => {
-            ranges.count += 1;
-            if ( key === "Name" && !ranges.name ) {
-                ranges.name = units[ row ][ key ];
+            thisRange.increment();
+            if ( key === "Name" && !thisRange.name ) {
+                thisRange.addNewFloorName( units[ row ][ key ] );
             } else if ( typeof ( units[ row ][ key ] ) === "number" ) {
-                if ( !ranges[ key ] ) {
-                    ranges[ key ] = {};
-                    ranges[ key ].min = units[ row ][ key ];
-                    ranges[ key ].max = units[ row ][ key ];
-                }
-                if ( ranges[ key ].min > units[ row ][ key ] ) {
-                    ranges[ key ].min = units[ row ][ key ];
-                }
-                if ( ranges[ key ].max < units[ row ][ key ] ) {
-                    ranges[ key ].max = units[ row ][ key ];
-                }
+                thisRange.add( key, units[ row ][ key ] );
             }
         } );
     } );
-    return ranges;
+    return thisRange;
 };
 
 /*
@@ -96,43 +145,49 @@ const createNewItem = ( {
 * Build Grid Table
 */
 const buildGridTable = ( data, $grid ) => {
-    if ( data.UnitNumber ) {
-        createNewItem( {
-            data: data.UnitNumber,
-            $grid,
-            classes: "first",
-        } );
-    }
-    if ( data.FloorNumber ) {
-        createNewItem( {
-            data: data.FloorNumber,
-            $grid,
-        } );
-    }
-    if ( data.BaseRentAmount ) {
-        createNewItem( {
-            data: `$${ data.BaseRentAmount }`,
-            $grid,
-        } );
-    }
-    if ( data.DepositAmount ) {
-        createNewItem( {
-            data: `$${ data.DepositAmount }`,
-            $grid,
-        } );
-    }
-    if ( data.AvailableDate ) {
-        createNewItem( {
-            data: data.AvailableDate,
-            $grid,
-        } );
-    }
+    createNewItem( {
+        data: data.UnitNumber,
+        $grid,
+        classes: "first",
+    } );
+    createNewItem( {
+        data: data.FloorNumber,
+        $grid,
+    } );
+    createNewItem( {
+        data: `$${ data.BaseRentAmount }`,
+        $grid,
+    } );
+    createNewItem( {
+        data: `$${ data.DepositAmount }`,
+        $grid,
+    } );
+    createNewItem( {
+        data: data.AvailableDate,
+        $grid,
+    } );
     createNewItem( {
         data: "Lease Now",
         $grid,
         classes: "last",
         link: "https://1849373v2.onlineleasing.realpage.com/",
     } );
+};
+
+/*
+* Assemble Grid Data
+*/
+const assembleFields = ( $child, ranges ) => {
+    const child = $child;
+    if ( $child.classList.contains( "bed" ) ) {
+        child.textContent = dataAssembly.bed( ranges );
+    } else if ( $child.classList.contains( "bath" ) ) {
+        child.textContent = dataAssembly.bath( ranges );
+    } else if ( $child.classList.contains( "sqft" ) ) {
+        child.textContent = dataAssembly.sqft( ranges );
+    } else if ( $child.classList.contains( "price" ) ) {
+        child.textContent = dataAssembly.price( ranges );
+    }
 };
 
 /*
@@ -144,16 +199,7 @@ const populateFloorPlanGrid = ( ranges, $id ) => {
             findChildClass( $attrs, "rest", ( $rest ) => {
                 Array.prototype.forEach.call( $rest.childNodes, ( $child ) => {
                     if ( $child.tagName === "SPAN" ) {
-                        const child = $child;
-                        if ( $child.classList.contains( "bed" ) ) {
-                            child.textContent = dataAssembly.bed( ranges );
-                        } else if ( $child.classList.contains( "bath" ) ) {
-                            child.textContent = dataAssembly.bath( ranges );
-                        } else if ( $child.classList.contains( "sqft" ) ) {
-                            child.textContent = dataAssembly.sqft( ranges );
-                        } else if ( $child.classList.contains( "price" ) ) {
-                            child.textContent = dataAssembly.price( ranges );
-                        }
+                        assembleFields( $child, ranges );
                         $id.classList.add( "available" );
                     }
                 } );
@@ -170,16 +216,7 @@ const populatePrimaryComp = ( ranges ) => {
     findChildClass( $attrs, "rest", ( $rest ) => {
         Array.prototype.forEach.call( $rest.childNodes, ( $child ) => {
             if ( $child.tagName === "SPAN" ) {
-                const child = $child;
-                if ( $child.classList.contains( "bed" ) ) {
-                    child.textContent = dataAssembly.bed( ranges );
-                } else if ( $child.classList.contains( "bath" ) ) {
-                    child.textContent = dataAssembly.bath( ranges );
-                } else if ( $child.classList.contains( "sqft" ) ) {
-                    child.textContent = dataAssembly.sqft( ranges );
-                } else if ( $child.classList.contains( "price" ) ) {
-                    child.textContent = dataAssembly.price( ranges );
-                }
+                assembleFields( $child, ranges );
             }
         } );
     } );
@@ -206,10 +243,10 @@ const populateUnitsComp = ( data ) => {
 };
 
 /*
-* Single Data Populator
+* Single Floorplan Populator
 */
-const singleDataPopulator = ( data ) => {
-    const ranges = rangeFinder( data );
+const singleFloorplanPopulator = ( data, filter = false ) => {
+    const ranges = buildDataRanges( data );
     if ( ranges.name ) {
         const $floorplan = document.getElementById( ranges.name );
         const $primary = document.getElementsByClassName( "primary" );
@@ -238,6 +275,19 @@ const assembleRESTPath = ( params ) => {
 };
 
 /*
+* Response Handling
+*/
+const responseHandling = ( xmlHTTP, callback ) => {
+    if ( xmlHTTP.status >= 200 && xmlHTTP.status < 300 ) {
+        callback();
+    } else if ( xmlHTTP.status >= 400 && xmlHTTP.status < 500 ) {
+        // console.warn( "error! request status", xmlHTTP.status );
+    } else {
+        // console.warn( "warning! evacuate: ", xmlHTTP.status );
+    }
+};
+
+/*
 * AJAX Requester
 */
 const ajaxRequester = ( params, callback ) => {
@@ -245,13 +295,9 @@ const ajaxRequester = ( params, callback ) => {
     const xmlHTTP = new XMLHttpRequest();
     xmlHTTP.onreadystatechange = () => {
         if ( xmlHTTP.readyState === XMLHttpRequest.DONE ) {
-            if ( xmlHTTP.status >= 200 && xmlHTTP.status < 300 ) {
+            responseHandling( xmlHTTP, () => {
                 callback( xmlHTTP.response );
-            } else if ( xmlHTTP.status >= 400 && xmlHTTP.status < 500 ) {
-                // console.warn( "error! request status", xmlHTTP.status );
-            } else {
-                // console.warn( "warning! evacuate: ", xmlHTTP.status );
-            }
+            } );
         }
     };
     xmlHTTP.open( "GET", RESTPath, true );
@@ -261,16 +307,17 @@ const ajaxRequester = ( params, callback ) => {
 };
 
 /*
-* Get FP Name
+* Get Primary ID
 */
-const getSingleName = () => {
+const getPrimaryID = () => {
     const $primary = document.getElementsByClassName( "primary" )[ 0 ];
     return $primary.getAttribute( "id" );
 };
+
 /*
-* Get FP Name
+* Get Floor Plan IDs
 */
-const getAllNames = ( callback ) => {
+const getFloorPlanIDs = ( callback ) => {
     const $floorplans = document.getElementsByClassName( "floorplan" );
     Array.prototype.forEach.call( $floorplans, ( $single ) => {
         callback( $single.getAttribute( "id" ) );
@@ -283,13 +330,13 @@ const getAllNames = ( callback ) => {
 const fetchData = () => {
     const $body = document.getElementsByTagName( "BODY" )[ 0 ];
     if ( $body.classList.contains( "single-floorplan" ) ) {
-        ajaxRequester( getSingleName(), data =>
-            singleDataPopulator( JSON.parse( data ) ) );
+        ajaxRequester( getPrimaryID(), data =>
+            singleFloorplanPopulator( JSON.parse( data ) ) );
     } else if ( $body.classList.contains( "post-type-archive-floorplan" ) ) {
-        getAllNames( ( $id ) => {
+        getFloorPlanIDs( ( $id ) => {
             ajaxRequester( $id, ( data ) => {
                 const thisData = JSON.parse( data );
-                singleDataPopulator( thisData );
+                singleFloorplanPopulator( thisData );
             } );
         } );
     }

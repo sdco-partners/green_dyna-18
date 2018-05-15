@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* global findChildClass */
 /* global addEvents */
+/* global fetchData */
+/* global getFloorPlanIDs */
+/* global singleDataPopulator */
 
 /*
 * Unpin All Option
@@ -47,6 +50,22 @@ const selectBedOptions = ( $search, callback ) => {
     findChildClass( $search, "bedrooms", ( $bedrooms ) => {
         findChildClass( $bedrooms, "option", ( $option ) => {
             callback( $option, $bedrooms );
+        } );
+    } );
+};
+
+/*
+* Trigger Bedroom Events
+*/
+const triggerBedroomEvents = ( $search ) => {
+    selectBedOptions( $search, ( $option, $bedrooms ) => {
+        $option.addEventListener( "click", ( e ) => {
+            e.preventDefault();
+            const $expandable = document.getElementById( "expandable" );
+            pinOption( $option, $bedrooms );
+            if ( !$expandable.classList.contains( "expand" ) ) {
+                console.log( "trigger ajax" );
+            }
         } );
     } );
 };
@@ -163,12 +182,7 @@ const initSearchComp = () => {
         $viewAll.classList.add( "pin" );
 
         // Bed listeners
-        selectBedOptions( $search, ( $option, $bedrooms ) => {
-            $option.addEventListener( "click", ( e ) => {
-                e.preventDefault();
-                pinOption( $option, $bedrooms );
-            } );
-        } );
+        triggerBedroomEvents( $search );
 
         // Reset
         resetOptions( $search );
