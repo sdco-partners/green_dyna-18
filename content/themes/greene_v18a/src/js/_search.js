@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* global findChildClass */
 /* global addEvents */
-/* global fetchData */
+/* global ajaxRequester */
 /* global getFloorPlanIDs */
-/* global singleDataPopulator */
+/* global singleFloorplanPopulator */
 
 /*
 * Unpin All Option
@@ -55,6 +55,37 @@ const selectBedOptions = ( $search, callback ) => {
 };
 
 /*
+* Process Bedroom Filter
+*/
+const processBedroomFilter = ( $option ) => {
+    const params = [];
+    const filterOptions = {};
+    switch ( $option.getAttribute( "id" ) ) {
+    case "opt-studio":
+        filterOptions.Bedrooms = 0;
+        break;
+    case "opt-one-bedroom":
+        filterOptions.Bedrooms = 1;
+        break;
+    case "opt-two-bedroom":
+        filterOptions.Bedrooms = 2;
+        break;
+    case "opt-three-bedroom":
+        filterOptions.Bedrooms = 3;
+        break;
+    default:
+        filterOptions.Bedrooms = "VIEW ALL";
+    }
+    params.push( filterOptions );
+    getFloorPlanIDs( ( $id ) => {
+        ajaxRequester( $id, ( data ) => {
+            const thisData = JSON.parse( data );
+            singleFloorplanPopulator( thisData, params );
+        } );
+    } );
+};
+
+/*
 * Trigger Bedroom Events
 */
 const triggerBedroomEvents = ( $search ) => {
@@ -64,7 +95,7 @@ const triggerBedroomEvents = ( $search ) => {
             const $expandable = document.getElementById( "expandable" );
             pinOption( $option, $bedrooms );
             if ( !$expandable.classList.contains( "expand" ) ) {
-                console.log( "trigger ajax" );
+                processBedroomFilter( $option );
             }
         } );
     } );

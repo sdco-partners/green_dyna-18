@@ -16,10 +16,23 @@ class DataRanges {
         this.count = 0;
     }
 
-    add( key, value ) {
-        this.addNewKey( key, value );
-        this.checkMin( key, value );
-        this.checkMax( key, value );
+    add( key, value, params = false ) {
+        const checkKeys = () => {
+            let pass = false;
+            if ( key !== "ID" &&
+                key !== "UnitID" &&
+                key !== "UnitNumber" &&
+                key !== "DummyUnitNumber" ) {
+                pass = true;
+            }
+            return pass;
+        };
+
+        if ( checkKeys() ) {
+            this.addNewKey( key, value );
+            this.checkMin( key, value );
+            this.checkMax( key, value );
+        }
     }
 
     addNewFloorName( value ) {
@@ -35,13 +48,13 @@ class DataRanges {
     }
 
     checkMin( key, value ) {
-        if ( this[ key ].min > value ) {
+        if ( this[ key ] && this[ key ].min > value ) {
             this[ key ].min = value;
         }
     }
 
     checkMax( key, value ) {
-        if ( this[ key ].max < value ) {
+        if ( this[ key ] && this[ key ].max < value ) {
             this[ key ].max = value;
         }
     }
@@ -58,15 +71,43 @@ class DataRanges {
         } );
     }
 }
+/*
+* Process Filters
+*/
+const processFilters = ( filter, item ) => {
+    let pass = true;
+    filter.forEach( ( object ) => {
+        Object.keys( object ).forEach( ( filterKey ) => {
+            if ( Object.prototype.hasOwnProperty.call( item, filterKey ) ) {
+                if ( item[ filterKey ] !== object[ filterKey ] ) {
+                    pass = false;
+                }
+            }
+        } );
+    } );
+    return pass;
+};
 
 /*
 * Filter Data
 */
 const filterData = ( filter, data ) => {
-    if ( filter === false ) {
-        return true;
+    let pass = true;
+    if ( !filter ) {
+        return pass;
     }
-    return false;
+    if ( Array.isArray( data ) ) {
+        data.forEach( ( item ) => {
+            pass = processFilters( filter, item );
+        } );
+    } else {
+        Object.keys( data ).forEach( ( row ) => {
+            Object.keys( data[ row ] ).forEach( ( key ) => {
+                pass = processFilters( filter, data[ row ] );
+            } );
+        } );
+    }
+    return pass;
 };
 
 /*
@@ -76,15 +117,19 @@ const buildDataRanges = ( data, filter = false ) => {
     const units = data.AvailableUnits;
     const thisRange = new DataRanges();
     Object.keys( units ).forEach( ( row ) => {
-        Object.keys( units[ row ] ).forEach( ( key ) => {
-            thisRange.increment();
-            if ( key === "Name" && !thisRange.name ) {
-                thisRange.addNewFloorName( units[ row ][ key ] );
-            } else if ( typeof ( units[ row ][ key ] ) === "number" ) {
-                thisRange.add( key, units[ row ][ key ] );
-            }
-        } );
+        if ( !thisRange.name ) {
+            thisRange.addNewFloorName( units[ row ].Name );
+        }
+        if ( filterData( filter, data.AvailableUnits ) ) {
+            Object.keys( units[ row ] ).forEach( ( key ) => {
+                thisRange.increment();
+                if ( typeof ( units[ row ][ key ] ) === "number" ) {
+                    thisRange.add( key, units[ row ][ key ] );
+                }
+            } );
+        }
     } );
+    // console.log( thisRange.name, thisRange );
     return thisRange;
 };
 
@@ -93,27 +138,39 @@ const buildDataRanges = ( data, filter = false ) => {
 */
 const dataAssembly = {
     bed( range ) {
-        const bedroomType = ( range.Bedrooms.min > 0 ) ?
-            `${ range.Bedrooms.min } bed` :
-            "Studio";
-        return ( range.Bedrooms.min === range.Bedrooms.max ) ?
-            bedroomType :
-            `${ range.Bedrooms.min } - ${ range.Bedrooms.max } bed`;
+        if ( range.Bedrooms ) {
+            const bedroomType = ( range.Bedrooms.min > 0 ) ?
+                `${ range.Bedrooms.min } bed` :
+                "Studio";
+            return ( range.Bedrooms.min === range.Bedrooms.max ) ?
+                bedroomType :
+                `${ range.Bedrooms.min } - ${ range.Bedrooms.max } bed`;
+        }
+        return "";
     },
     bath( range ) {
-        return ( range.Bathrooms.min === range.Bathrooms.max ) ?
-            `${ range.Bathrooms.min } bath` :
-            `${ range.Bathrooms.min } - ${ range.Bathrooms.max } bath`;
+        if ( range.Bathrooms ) {
+            return ( range.Bathrooms.min === range.Bathrooms.max ) ?
+                `${ range.Bathrooms.min } bath` :
+                `${ range.Bathrooms.min } - ${ range.Bathrooms.max } bath`;
+        }
+        return "";
     },
     sqft( range ) {
-        return ( range.SquareFootage.min === range.SquareFootage.max ) ?
-            `${ range.SquareFootage.min } sqft` :
-            `${ range.SquareFootage.min } - ${ range.SquareFootage.max } sqft`;
+        if ( range.SquareFootage ) {
+            return ( range.SquareFootage.min === range.SquareFootage.max ) ?
+                `${ range.SquareFootage.min } sqft` :
+                `${ range.SquareFootage.min } - ${ range.SquareFootage.max } sqft`;
+        }
+        return "";
     },
     price( range ) {
-        return ( range.BaseRentAmount.min === range.BaseRentAmount.max ) ?
-            `$ ${ range.BaseRentAmount.min }` :
-            `From $ ${ range.BaseRentAmount.min } - $ ${ range.BaseRentAmount.max }`;
+        if ( range.BaseRentAmount ) {
+            return ( range.BaseRentAmount.min === range.BaseRentAmount.max ) ?
+                `$ ${ range.BaseRentAmount.min }` :
+                `From $ ${ range.BaseRentAmount.min } - $ ${ range.BaseRentAmount.max }`;
+        }
+        return "Currently Not Available";
     },
 };
 
@@ -173,6 +230,16 @@ const buildGridTable = ( data, $grid ) => {
         link: "https://1849373v2.onlineleasing.realpage.com/",
     } );
 };
+/*
+* Toggle Availability
+*/
+const toggleAvailability = ( $id, ranges ) => {
+    if ( ranges.BaseRentAmount ) {
+        $id.classList.add( "available" );
+    } else {
+        $id.classList.remove( "available" );
+    }
+};
 
 /*
 * Assemble Grid Data
@@ -200,7 +267,7 @@ const populateFloorPlanGrid = ( ranges, $id ) => {
                 Array.prototype.forEach.call( $rest.childNodes, ( $child ) => {
                     if ( $child.tagName === "SPAN" ) {
                         assembleFields( $child, ranges );
-                        $id.classList.add( "available" );
+                        toggleAvailability( $id, ranges );
                     }
                 } );
             } );
@@ -246,12 +313,12 @@ const populateUnitsComp = ( data ) => {
 * Single Floorplan Populator
 */
 const singleFloorplanPopulator = ( data, filter = false ) => {
-    const ranges = buildDataRanges( data );
+    const ranges = buildDataRanges( data, filter );
     if ( ranges.name ) {
         const $floorplan = document.getElementById( ranges.name );
         const $primary = document.getElementsByClassName( "primary" );
         const $units = document.getElementById( "comp-available" );
-        if ( $primary ) populatePrimaryComp( ranges );
+        if ( $primary.length ) populatePrimaryComp( ranges );
         if ( $floorplan ) populateFloorPlanGrid( ranges, $floorplan );
         if ( $units ) populateUnitsComp( data.AvailableUnits );
     }
