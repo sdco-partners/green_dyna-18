@@ -62,7 +62,7 @@ abstract class SoapAPI
     * unnecessary fields 
     *
     */
-    protected function _sortData( $data, $isArray ) {
+    protected function _sortData( $data ) {
 		$sorted = new StdClass();
 		$sorted->ID = $this->count;
 		$sorted->Code = $data->Path->FloorPlan->FloorPlanCode;
@@ -75,8 +75,9 @@ abstract class SoapAPI
 		$sorted->AvailableDate = $data->Path->Availability->AvailableDate;
 		$sorted->UnitID = intval( $data->Path->Address->UnitID );
 		$sorted->UnitNumber = intval( $data->Path->Address->UnitNumber );
+		$sorted->DepositAmount = $data->Path->DepositAmount;
 		$sorted->DummyUnitNumber = 1;
-		$sorted->isArray = $isArray;
+		// $sorted->raw = $data->Path;
 		return $sorted;
 	}
 

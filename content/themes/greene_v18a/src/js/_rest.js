@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* global delay */
 /* global findChildClass */
+/* eslint complexity: ["error", 7] */
 
 /**
 *
@@ -11,7 +12,6 @@
 /*
 * Range Finder
 */
-
 const rangeFinder = ( data ) => {
     const ranges = {};
     ranges.count = 0;
@@ -42,20 +42,19 @@ const rangeFinder = ( data ) => {
 /*
 * Data Assembly
 */
-
 const dataAssembly = {
     bed( range ) {
         const bedroomType = ( range.Bedrooms.min > 0 ) ?
-            `${ range.Bedrooms.min } bedroom` :
+            `${ range.Bedrooms.min } bed` :
             "Studio";
         return ( range.Bedrooms.min === range.Bedrooms.max ) ?
             bedroomType :
-            `${ range.Bedrooms.min } - ${ range.Bedrooms.max } bedroom`;
+            `${ range.Bedrooms.min } - ${ range.Bedrooms.max } bed`;
     },
     bath( range ) {
         return ( range.Bathrooms.min === range.Bathrooms.max ) ?
-            `${ range.Bathrooms.min } bathroom` :
-            `${ range.Bathrooms.min } - ${ range.Bathrooms.max } bathroom`;
+            `${ range.Bathrooms.min } bath` :
+            `${ range.Bathrooms.min } - ${ range.Bathrooms.max } bath`;
     },
     sqft( range ) {
         return ( range.SquareFootage.min === range.SquareFootage.max ) ?
@@ -67,29 +66,6 @@ const dataAssembly = {
             `$ ${ range.BaseRentAmount.min }` :
             `From $ ${ range.BaseRentAmount.min } - $ ${ range.BaseRentAmount.max }`;
     },
-};
-
-/*
-* Populate Primary Comp
-*/
-const populatePrimaryComp = ( ranges ) => {
-    const $attrs = document.getElementsByClassName( "attributes" )[ 0 ];
-    findChildClass( $attrs, "rest", ( $rest ) => {
-        Array.prototype.forEach.call( $rest.childNodes, ( $child ) => {
-            if ( $child.tagName === "SPAN" ) {
-                const child = $child;
-                if ( $child.classList.contains( "bed" ) ) {
-                    child.textContent = dataAssembly.bed( ranges );
-                } else if ( $child.classList.contains( "bath" ) ) {
-                    child.textContent = dataAssembly.bath( ranges );
-                } else if ( $child.classList.contains( "sqft" ) ) {
-                    child.textContent = dataAssembly.sqft( ranges );
-                } else if ( $child.classList.contains( "price" ) ) {
-                    child.textContent = dataAssembly.price( ranges );
-                }
-            }
-        } );
-    } );
 };
 
 /*
@@ -135,14 +111,16 @@ const buildGridTable = ( data, $grid ) => {
     }
     if ( data.BaseRentAmount ) {
         createNewItem( {
-            data: data.BaseRentAmount,
+            data: `$${ data.BaseRentAmount }`,
             $grid,
         } );
     }
-    createNewItem( {
-        data: "See Agent",
-        $grid,
-    } );
+    if ( data.DepositAmount ) {
+        createNewItem( {
+            data: `$${ data.DepositAmount }`,
+            $grid,
+        } );
+    }
     if ( data.AvailableDate ) {
         createNewItem( {
             data: data.AvailableDate,
@@ -158,21 +136,68 @@ const buildGridTable = ( data, $grid ) => {
 };
 
 /*
+* Populate Floor Plan Grid
+*/
+const populateFloorPlanGrid = ( ranges, $id ) => {
+    findChildClass( $id, "data", ( $data ) => {
+        findChildClass( $data, "attributes", ( $attrs ) => {
+            findChildClass( $attrs, "rest", ( $rest ) => {
+                Array.prototype.forEach.call( $rest.childNodes, ( $child ) => {
+                    if ( $child.tagName === "SPAN" ) {
+                        const child = $child;
+                        if ( $child.classList.contains( "bed" ) ) {
+                            child.textContent = dataAssembly.bed( ranges );
+                        } else if ( $child.classList.contains( "bath" ) ) {
+                            child.textContent = dataAssembly.bath( ranges );
+                        } else if ( $child.classList.contains( "sqft" ) ) {
+                            child.textContent = dataAssembly.sqft( ranges );
+                        } else if ( $child.classList.contains( "price" ) ) {
+                            child.textContent = dataAssembly.price( ranges );
+                        }
+                        $id.classList.add( "available" );
+                    }
+                } );
+            } );
+        } );
+    } );
+};
+
+/*
+* Populate Primary Comp
+*/
+const populatePrimaryComp = ( ranges ) => {
+    const $attrs = document.getElementsByClassName( "attributes" )[ 0 ];
+    findChildClass( $attrs, "rest", ( $rest ) => {
+        Array.prototype.forEach.call( $rest.childNodes, ( $child ) => {
+            if ( $child.tagName === "SPAN" ) {
+                const child = $child;
+                if ( $child.classList.contains( "bed" ) ) {
+                    child.textContent = dataAssembly.bed( ranges );
+                } else if ( $child.classList.contains( "bath" ) ) {
+                    child.textContent = dataAssembly.bath( ranges );
+                } else if ( $child.classList.contains( "sqft" ) ) {
+                    child.textContent = dataAssembly.sqft( ranges );
+                } else if ( $child.classList.contains( "price" ) ) {
+                    child.textContent = dataAssembly.price( ranges );
+                }
+            }
+        } );
+    } );
+};
+
+/*
 * Populate Units Comp
 */
-
 const populateUnitsComp = ( data ) => {
     const $units = document.getElementById( "comp-available" );
     findChildClass( $units, "wrapper", ( $wrapper ) => {
         findChildClass( $wrapper, "grid", ( $grid ) => {
-            console.log( "grid", $grid );
             if ( Array.isArray( data ) ) {
                 data.forEach( ( row ) => {
                     buildGridTable( row, $grid );
                 } );
             } else {
                 Object.keys( data ).forEach( ( row ) => {
-                    console.log( "obj row", data[ row ] );
                     buildGridTable( data[ row ], $grid );
                 } );
             }
@@ -181,13 +206,17 @@ const populateUnitsComp = ( data ) => {
 };
 
 /*
-* Data Populator
+* Single Data Populator
 */
-const dataPopulator = ( data ) => {
+const singleDataPopulator = ( data ) => {
     const ranges = rangeFinder( data );
     if ( ranges.name ) {
-        populatePrimaryComp( ranges );
-        populateUnitsComp( data.AvailableUnits );
+        const $floorplan = document.getElementById( ranges.name );
+        const $primary = document.getElementsByClassName( "primary" );
+        const $units = document.getElementById( "comp-available" );
+        if ( $primary ) populatePrimaryComp( ranges );
+        if ( $floorplan ) populateFloorPlanGrid( ranges, $floorplan );
+        if ( $units ) populateUnitsComp( data.AvailableUnits );
     }
 };
 
@@ -196,7 +225,9 @@ const dataPopulator = ( data ) => {
 */
 const assembleRESTPath = ( params ) => {
     let RESTPath = `${ window.location.host }`;
-    RESTPath += "/green_dyna-18"; // dev path
+    if ( window.location.host.indexOf( "localhost" ) >= 0 ) {
+        RESTPath += "/green_dyna-18"; // dev path
+    }
     const requestAll = "&request=units";
     const requestByName = "&request=unitsby&type=name&filter=";
     RESTPath += "/rest/?";
@@ -217,9 +248,9 @@ const ajaxRequester = ( params, callback ) => {
             if ( xmlHTTP.status >= 200 && xmlHTTP.status < 300 ) {
                 callback( xmlHTTP.response );
             } else if ( xmlHTTP.status >= 400 && xmlHTTP.status < 500 ) {
-                console.warn( "error! request status", xmlHTTP.status );
+                // console.warn( "error! request status", xmlHTTP.status );
             } else {
-                console.warn( "something went wrong with your request: ", xmlHTTP.status, xmlHTTP );
+                // console.warn( "warning! evacuate: ", xmlHTTP.status );
             }
         }
     };
@@ -232,9 +263,18 @@ const ajaxRequester = ( params, callback ) => {
 /*
 * Get FP Name
 */
-const getFPName = () => {
+const getSingleName = () => {
     const $primary = document.getElementsByClassName( "primary" )[ 0 ];
     return $primary.getAttribute( "id" );
+};
+/*
+* Get FP Name
+*/
+const getAllNames = ( callback ) => {
+    const $floorplans = document.getElementsByClassName( "floorplan" );
+    Array.prototype.forEach.call( $floorplans, ( $single ) => {
+        callback( $single.getAttribute( "id" ) );
+    } );
 };
 
 /*
@@ -243,10 +283,14 @@ const getFPName = () => {
 const fetchData = () => {
     const $body = document.getElementsByTagName( "BODY" )[ 0 ];
     if ( $body.classList.contains( "single-floorplan" ) ) {
-        ajaxRequester( getFPName(), data =>
-            dataPopulator( JSON.parse( data ) ) );
+        ajaxRequester( getSingleName(), data =>
+            singleDataPopulator( JSON.parse( data ) ) );
     } else if ( $body.classList.contains( "post-type-archive-floorplan" ) ) {
-        ajaxRequester( null, data =>
-            dataPopulator( JSON.parse( data ) ) );
+        getAllNames( ( $id ) => {
+            ajaxRequester( $id, ( data ) => {
+                const thisData = JSON.parse( data );
+                singleDataPopulator( thisData );
+            } );
+        } );
     }
 };

@@ -15,6 +15,6 @@
 		<span class="sqft"></span>
 	</div>
 	<div class="rest">
-		<span class="price">No Available Units</span>
+		<span class="price">Currently Not Available</span>
 	</div>
 </div>
