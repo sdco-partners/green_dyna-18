@@ -72,11 +72,16 @@ $archive_id = 29; ?>
 			/* BLOCK: FLOORPLAN */
 			include( locate_template( "components/floorplan/_floorplan-grid.php" ) );
 
+
 		endwhile; ?>
 		</div>
 
-	<?php endif; ?>
+	<?php endif;
 
+	/* BLOCK: COMMUNITY MAP */
+	include( locate_template( "components/floorplan/_community-map.php" ) );
+
+	?>
 </div>
 
 <?php $text = get_field( "form_text", "option" );

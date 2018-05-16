@@ -142,7 +142,6 @@ const processSearch = ( $options, fullSearch = false ) => {
     } else {
         params.push( processBedFilters( $options ) );
     }
-    console.log( "params", params );
     getFloorPlanIDs( ( $id ) => {
         ajaxRequester( $id, ( data ) => {
             const thisData = JSON.parse( data );
