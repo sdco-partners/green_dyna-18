@@ -346,6 +346,73 @@ const searchOptions = {
 };
 
 /*
+* Set Range
+*/
+const setRange = ( $el, field ) => {
+    const options = [];
+    let num = Math.floor( ( searchOptions[ `min${ field }` ] ) / 100 ) * 100;
+    const max = Math.ceil( ( searchOptions[ `max${ field }` ] ) / 100 ) * 100;
+    while ( num <= max ) {
+        options.push( num );
+        num += 100;
+    }
+    options.forEach( ( option ) => {
+        const $newOption = document.createElement( "option" );
+        $newOption.textContent = option;
+        $el.append( $newOption );
+    } );
+};
+
+/*
+* Find Range
+*/
+const findRange = ( $col, className, type, callback ) => {
+    findChildClass( $col, className, ( $rent ) => {
+        Array.prototype.forEach.call( $rent.childNodes, ( $el ) => {
+            if ( $el.tagName === "SPAN" ) {
+                if ( $el.classList.contains( "min-range" ) ) {
+                    Array.prototype.forEach.call( $el.childNodes, ( $select ) => {
+                        if ( $select.tagName === "SELECT" ) {
+                            callback( $select, type );
+                        }
+                    } );
+                } else if ( $el.classList.contains( "max-range" ) ) {
+                    Array.prototype.forEach.call( $el.childNodes, ( $select ) => {
+                        if ( $select.tagName === "SELECT" ) {
+                            callback( $select, type );
+                        }
+                    } );
+                }
+            }
+        } );
+    } );
+};
+
+/*
+* Config Search Options
+*/
+const configSearchOptions = () => {
+    if ( searchOptions.maxPrice && searchOptions.minPrice ) {
+        const $expandable = document.getElementById( "expandable" );
+        Array.prototype.forEach.call( $expandable.childNodes, ( $col ) => {
+            if ( $col.tagName === "DIV" ) {
+                if ( $col.classList.contains( "left" ) ) {
+                    findRange( $col, "rent-range", "Price", ( $el, field ) => {
+                        setRange( $el, field );
+                    } );
+                } else if ( $col.classList.contains( "right" ) ) {
+                    findRange( $col, "square-footage-range", "SQFT", ( $el, field ) => {
+                        setRange( $el, field );
+                    } );
+                }
+            }
+        } );
+    } else {
+        delay( () => configSearchOptions(), 1000 );
+    }
+};
+
+/*
 * Single Floorplan Populator
 */
 const singleFloorplanPopulator = ( data, filter = false ) => {
@@ -437,6 +504,7 @@ const fetchData = () => {
         ajaxRequester( getPrimaryID(), data =>
             singleFloorplanPopulator( JSON.parse( data ) ) );
     } else if ( $body.classList.contains( "post-type-archive-floorplan" ) ) {
+        configSearchOptions();
         getFloorPlanIDs( ( $id ) => {
             ajaxRequester( $id, ( data ) => {
                 const thisData = JSON.parse( data );

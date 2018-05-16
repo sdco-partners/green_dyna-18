@@ -27,23 +27,6 @@ const pinOption = ( $el, $siblings ) => {
 };
 
 /*
-* Find Pins
-*/
-const findPins = ( $siblings ) => {
-    const data = {};
-    findChildClass( $siblings, "option", ( $sib ) => {
-        if ( $sib.tagName === "DIV" ) {
-            if ( $sib.classList.contains( "pin" ) ) {
-                const thisSpan = Array.prototype.filter.call( $sib.childNodes, $el =>
-                    $el.tagName === "SPAN" );
-                data.bedrooms = thisSpan[ 0 ].innerText;
-            }
-        }
-    } );
-    return data;
-};
-
-/*
 * Select Bed Options
 */
 const selectBedOptions = ( $search, callback ) => {
@@ -55,10 +38,46 @@ const selectBedOptions = ( $search, callback ) => {
 };
 
 /*
+* Scrub Bedroom Options
+*/
+const scrubBedOptions = ( $wrapper, callback ) => {
+    findChildClass( $wrapper, "pin", ( $pin ) => {
+        callback( $pin );
+    } );
+};
+
+/*
+* Scrub Col Options
+*/
+const scrubColOptions = ( $wrapper, callback ) => {
+    findChildClass( $wrapper, "expandable", ( $expandable ) => {
+        findChildClass( $expandable, "col", ( $col ) => {
+            findChildClass( $col, "option", ( $option ) => {
+                const field = $option.classList[ 1 ];
+                Array.prototype.forEach.call( $option.childNodes, ( $span ) => {
+                    if ( $span.tagName === "SPAN" ) {
+                        if ( $span.classList.contains( "min-range" ) ||
+                            $span.classList.contains( "max-range" ) ) {
+                            const type = ( $span.classList.contains( "min-range" ) ) ?
+                                `${ field }-min` :
+                                `${ field }-max`;
+                            Array.prototype.forEach.call( $span.childNodes, ( $select ) => {
+                                if ( $select.tagName === "SELECT" ) {
+                                    callback( $select.options[ $select.selectedIndex ], type );
+                                }
+                            } );
+                        }
+                    }
+                } );
+            } );
+        } );
+    } );
+};
+
+/*
 * Process Bedroom Filter
 */
 const processBedFilters = ( $option ) => {
-    const params = [];
     const filterOptions = {};
     switch ( $option.getAttribute( "id" ) ) {
     case "opt-studio":
@@ -76,17 +95,53 @@ const processBedFilters = ( $option ) => {
     default:
         filterOptions.Bedrooms = "VIEW ALL";
     }
-    params.push( filterOptions );
-    return params;
+    return filterOptions;
 };
 
+/*
+* Process Bedroom Filter
+*/
+const processRangeFilters = ( selected, type ) => {
+    const filterOptions = {};
+    switch ( type ) {
+    case "rent-range-max":
+        filterOptions.maxPrice = parseInt( selected, 10 );
+        break;
+    case "rent-range-min":
+        filterOptions.minPrice = parseInt( selected, 10 );
+        break;
+    case "square-footage-range-max":
+        filterOptions.minSQFT = parseInt( selected, 10 );
+        break;
+    case "square-footage-range-min":
+        filterOptions.minSQFT = parseInt( selected, 10 );
+        break;
+    default:
+        filterOptions.unknown = "Unknown Filter Type!";
+    }
+    return filterOptions;
+};
 /*
 * Process Search
 */
 const processSearch = ( $options, fullSearch = false ) => {
-    const params = ( !fullSearch ) ?
-        processBedFilters( $options ) :
-        null;
+    const params = [];
+    if ( fullSearch ) {
+        Array.prototype.forEach.call( $options.childNodes, ( $wrapper ) => {
+            if ( $wrapper.tagName === "DIV" ) {
+                if ( $wrapper.classList.contains( "bedrooms" ) ) {
+                    scrubBedOptions( $wrapper, option =>
+                        params.push( processBedFilters( option ) ) );
+                } else if ( $wrapper.classList.contains( "advanced" ) ) {
+                    scrubColOptions( $wrapper, ( option, type ) =>
+                        params.push( processRangeFilters( option.textContent, type ) ) );
+                }
+            }
+        } );
+    } else {
+        params.push( processBedFilters( $options ) );
+    }
+    console.log( "params", params );
     getFloorPlanIDs( ( $id ) => {
         ajaxRequester( $id, ( data ) => {
             const thisData = JSON.parse( data );
@@ -201,7 +256,6 @@ const resetOptions = ( $search ) => {
 * Init Search Comp
 */
 const initSearchComp = () => {
-    // Bedroom Listeners
     const $search = document.getElementById( "search" );
     if ( $search ) {
         // Pin default Option
@@ -221,7 +275,7 @@ const initSearchComp = () => {
         const $submit = document.getElementById( "submit" );
         $submit.addEventListener( "click", ( e ) => {
             e.preventDefault();
-            console.log( processSearch( $search ) );
+            processSearch( $search, true );
         } );
     }
 };

@@ -3,7 +3,6 @@
 * Section =>  _SEARCH-FILTER
 */
 
-
 $bedrooms = single_option_repeater(
 	[ "view all",
 	"studio",
@@ -17,24 +16,14 @@ $range = dropdown_builder(
 	"Rent Range",
 	"Rent Min",
 	"Rent Max",
-	[
-		"1100",
-		"1200",
-		"1300",
-		"1400"
-	]
+	[]
 );
 
 $footage = dropdown_builder(
 	"Square Footage Range",
 	"Min Sq Ft",
 	"Max Sq Ft",
-	[
-		"2100",
-		"3200",
-		"4300",
-		"5400"
-	]
+	[]
 );
 
 ?>
