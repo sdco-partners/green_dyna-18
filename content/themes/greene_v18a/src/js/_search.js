@@ -111,7 +111,7 @@ const processRangeFilters = ( selected, type ) => {
         filterOptions.minPrice = parseInt( selected, 10 );
         break;
     case "square-footage-range-max":
-        filterOptions.minSQFT = parseInt( selected, 10 );
+        filterOptions.maxSQFT = parseInt( selected, 10 );
         break;
     case "square-footage-range-min":
         filterOptions.minSQFT = parseInt( selected, 10 );

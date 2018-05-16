@@ -100,9 +100,9 @@ const processFilters = ( filter, item ) => {
             }
             if ( item.SquareFootage ) {
                 if ( filterKey === "maxSQFT" && object[ filterKey ] ) {
+                    console.log( "pass max" );
                     if ( item.SquareFootage > object[ filterKey ] ) {
                         pass = false;
-                        console.log( "maxprice", object[ filterKey ], item.SqureFootate, pass );
                     }
                 }
                 if ( filterKey === "minSQFT" && object[ filterKey ] ) {

@@ -11,12 +11,11 @@
 	<span class="min-range">
 		<select name="min-range">
 			<option disabled selected hidden>
-				
 				<?php echo $dropdown->min_label; ?>
 			</option>
-			<?php foreach( $dropdown->choices as $option ) {
+			<?php /* foreach( $dropdown->choices as $option ) {
 				include( locate_template( "components/search/_single-range.php") );
-			} ?>
+			} */ ?>
 		</select>
 	</span>
 	<span class="max-range">
@@ -24,9 +23,9 @@
 			<option disabled selected hidden>
 				<?php echo $dropdown->max_label; ?>
 			</option>
-			<?php foreach( $dropdown->choices as $option ) {
+			<?php /* foreach( $dropdown->choices as $option ) {
 				include( locate_template( "components/search/_single-range.php") );
-			} ?>
+			} */ ?>
 		</select>
 	</span>
 </div>
