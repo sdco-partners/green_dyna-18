@@ -89,16 +89,16 @@ div.single.floorplan
 
     div.rendering
         background-color: $palegreen
-        border: 5px solid $lime
+        border: 5px solid $grey
         transition: 0.2s all ease-in
         &:hover
             border: 1px solid $palegreen
 
         div.not.available
-            background-color: rgba( 245, 247, 245, 0.85 )
+            background-color: rgba( 245, 241, 239, 0.85 )
 
             h2
-                color: $lime
+                color: $grey
                 text-align: center
                 line-height: 2.5rem
     
@@ -127,3 +127,7 @@ div.single.floorplan
 
     div.attributes
         text-align: right
+
+div.single.floorplan.available
+    div.rendering
+        border: 5px solid $lime

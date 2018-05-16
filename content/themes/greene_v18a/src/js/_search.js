@@ -57,7 +57,7 @@ const selectBedOptions = ( $search, callback ) => {
 /*
 * Process Bedroom Filter
 */
-const processBedroomFilter = ( $option ) => {
+const processBedFilters = ( $option ) => {
     const params = [];
     const filterOptions = {};
     switch ( $option.getAttribute( "id" ) ) {
@@ -77,6 +77,16 @@ const processBedroomFilter = ( $option ) => {
         filterOptions.Bedrooms = "VIEW ALL";
     }
     params.push( filterOptions );
+    return params;
+};
+
+/*
+* Process Search
+*/
+const processSearch = ( $options, fullSearch = false ) => {
+    const params = ( !fullSearch ) ?
+        processBedFilters( $options ) :
+        null;
     getFloorPlanIDs( ( $id ) => {
         ajaxRequester( $id, ( data ) => {
             const thisData = JSON.parse( data );
@@ -95,7 +105,7 @@ const triggerBedroomEvents = ( $search ) => {
             const $expandable = document.getElementById( "expandable" );
             pinOption( $option, $bedrooms );
             if ( !$expandable.classList.contains( "expand" ) ) {
-                processBedroomFilter( $option );
+                processSearch( $option );
             }
         } );
     } );
@@ -155,20 +165,6 @@ const resetSelectData = ( $field ) => {
             $resetSelect.selectedIndex = 0;
         }
     } );
-};
-
-/*
-* Process Search
-*/
-const processSearch = ( $search ) => {
-    const data = [];
-    selectDropdownOptions( $search, ( $field ) => {
-        data.push( fetchSelectData( $field ) );
-    } );
-    findChildClass( $search, "bedrooms", ( $bedrooms ) => {
-        data.push( findPins( $bedrooms ) );
-    } );
-    return data;
 };
 
 /*

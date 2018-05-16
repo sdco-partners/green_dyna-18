@@ -79,7 +79,9 @@ const processFilters = ( filter, item ) => {
     filter.forEach( ( object ) => {
         Object.keys( object ).forEach( ( filterKey ) => {
             if ( Object.prototype.hasOwnProperty.call( item, filterKey ) ) {
-                if ( item[ filterKey ] !== object[ filterKey ] ) {
+                if ( object[ filterKey ] === "VIEW ALL" ) {
+                    pass = true;
+                } else if ( item[ filterKey ] !== object[ filterKey ] ) {
                     pass = false;
                 }
             }
@@ -310,6 +312,40 @@ const populateUnitsComp = ( data ) => {
 };
 
 /*
+* Search Options
+*/
+const searchOptions = {
+    create( ranges ) {
+        if ( ranges.BaseRentAmount ) {
+            this.checkMax( ranges.BaseRentAmount, "maxPrice" );
+            this.checkMin( ranges.BaseRentAmount, "minPrice" );
+        }
+        if ( ranges.SquareFootage ) {
+            this.checkMax( ranges.SquareFootage, "maxSQFT" );
+            this.checkMin( ranges.SquareFootage, "minSQFT" );
+        }
+    },
+    checkMax( obj, target ) {
+        if ( this[ target ] ) {
+            if ( this[ target ] < obj.max ) {
+                this[ target ] = obj.max;
+            }
+        } else {
+            this[ target ] = obj.max;
+        }
+    },
+    checkMin( obj, target ) {
+        if ( this[ target ] ) {
+            if ( this[ target ] > obj.min ) {
+                this[ target ] = obj.min;
+            }
+        } else {
+            this[ target ] = obj.min;
+        }
+    },
+};
+
+/*
 * Single Floorplan Populator
 */
 const singleFloorplanPopulator = ( data, filter = false ) => {
@@ -321,6 +357,7 @@ const singleFloorplanPopulator = ( data, filter = false ) => {
         if ( $primary.length ) populatePrimaryComp( ranges );
         if ( $floorplan ) populateFloorPlanGrid( ranges, $floorplan );
         if ( $units ) populateUnitsComp( data.AvailableUnits );
+        searchOptions.create( ranges );
     }
 };
 

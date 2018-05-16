@@ -4,5 +4,5 @@
 */ 
 ?>
 <div class="not available">
-	<h2>Currently Not Available</h2>
+	<h2>No Units Found</h2>
 </div>
