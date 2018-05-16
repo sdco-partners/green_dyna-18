@@ -71,6 +71,7 @@ class DataRanges {
         } );
     }
 }
+
 /*
 * Process Filters
 */
@@ -78,11 +79,36 @@ const processFilters = ( filter, item ) => {
     let pass = true;
     filter.forEach( ( object ) => {
         Object.keys( object ).forEach( ( filterKey ) => {
-            if ( Object.prototype.hasOwnProperty.call( item, filterKey ) ) {
+            if ( filterKey === "Bedrooms" ) {
                 if ( object[ filterKey ] === "VIEW ALL" ) {
-                    pass = true;
+                    // view all
                 } else if ( item[ filterKey ] !== object[ filterKey ] ) {
                     pass = false;
+                }
+            }
+            if ( item.BaseRentAmount ) {
+                if ( filterKey === "maxPrice" && object[ filterKey ] ) {
+                    if ( item.BaseRentAmount > object[ filterKey ] ) {
+                        pass = false;
+                    }
+                }
+                if ( filterKey === "minPrice" && object[ filterKey ] ) {
+                    if ( item.BaseRentAmount < object[ filterKey ] ) {
+                        pass = false;
+                    }
+                }
+            }
+            if ( item.SquareFootage ) {
+                if ( filterKey === "maxSQFT" && object[ filterKey ] ) {
+                    if ( item.SquareFootage > object[ filterKey ] ) {
+                        pass = false;
+                        console.log( "maxprice", object[ filterKey ], item.SqureFootate, pass );
+                    }
+                }
+                if ( filterKey === "minSQFT" && object[ filterKey ] ) {
+                    if ( item.SquareFootage < object[ filterKey ] ) {
+                        pass = false;
+                    }
                 }
             }
         } );

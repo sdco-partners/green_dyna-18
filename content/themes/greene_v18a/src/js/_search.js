@@ -121,6 +121,7 @@ const processRangeFilters = ( selected, type ) => {
     }
     return filterOptions;
 };
+
 /*
 * Process Search
 */

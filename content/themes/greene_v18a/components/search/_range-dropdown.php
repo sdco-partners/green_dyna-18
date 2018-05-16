@@ -22,7 +22,7 @@
 	<span class="max-range">
 		<select name name="max-range">
 			<option disabled selected hidden>
-				<?php echo $dropdown->min_label; ?>
+				<?php echo $dropdown->max_label; ?>
 			</option>
 			<?php foreach( $dropdown->choices as $option ) {
 				include( locate_template( "components/search/_single-range.php") );
