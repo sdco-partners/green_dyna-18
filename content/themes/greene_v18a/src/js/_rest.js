@@ -79,36 +79,33 @@ const processFilters = ( filter, item ) => {
     let pass = true;
     filter.forEach( ( object ) => {
         Object.keys( object ).forEach( ( filterKey ) => {
-            if ( filterKey === "Bedrooms" ) {
-                if ( object[ filterKey ] === "VIEW ALL" ) {
-                    // view all
-                } else if ( item[ filterKey ] !== object[ filterKey ] ) {
-                    pass = false;
-                }
+            if ( filterKey === "Bedrooms" &&
+                item[ filterKey ] !== object[ filterKey ] &&
+                object[ filterKey ] !== "VIEW ALL" ) {
+                pass = false;
             }
-            if ( item.BaseRentAmount ) {
-                if ( filterKey === "maxPrice" && object[ filterKey ] ) {
-                    if ( item.BaseRentAmount > object[ filterKey ] ) {
-                        pass = false;
-                    }
-                }
-                if ( filterKey === "minPrice" && object[ filterKey ] ) {
-                    if ( item.BaseRentAmount < object[ filterKey ] ) {
-                        pass = false;
-                    }
-                }
+            if ( item.BaseRentAmount &&
+                filterKey === "maxPrice" &&
+                object[ filterKey ] &&
+                item.BaseRentAmount > object[ filterKey ] ) {
+                pass = false;
             }
-            if ( item.SquareFootage ) {
-                if ( filterKey === "maxSQFT" && object[ filterKey ] ) {
-                    if ( item.SquareFootage > object[ filterKey ] ) {
-                        pass = false;
-                    }
-                }
-                if ( filterKey === "minSQFT" && object[ filterKey ] ) {
-                    if ( item.SquareFootage < object[ filterKey ] ) {
-                        pass = false;
-                    }
-                }
+            if ( item.BaseRentAmount &&
+                filterKey === "minPrice" && object[ filterKey ] &&
+                item.BaseRentAmount < object[ filterKey ] ) {
+                pass = false;
+            }
+            if ( item.SquareFootage &&
+                filterKey === "maxSQFT" &&
+                object[ filterKey ] &&
+                item.SquareFootage > object[ filterKey ] ) {
+                pass = false;
+            }
+            if ( item.SquareFootage &&
+                filterKey === "minSQFT" &&
+                object[ filterKey ] &&
+                item.SquareFootage < object[ filterKey ] ) {
+                pass = false;
             }
         } );
     } );
