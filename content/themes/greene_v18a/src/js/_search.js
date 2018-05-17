@@ -6,6 +6,27 @@
 /* global singleFloorplanPopulator */
 
 /*
+* Unpin All Floor Option
+*/
+const unpinAllFloorOptions = ( $siblings ) => {
+    Array.prototype.forEach.call( $siblings, ( $sib ) => {
+        if ( $sib.tagName === "polygon" ) {
+            $sib.classList.remove( "pin" );
+        }
+    } );
+};
+
+/*
+* Pin Floor Option
+*/
+const pinFloorOption = ( $el, $siblings ) => {
+    unpinAllFloorOptions( $siblings );
+    if ( $el.tagName === "polygon" ) {
+        $el.classList.add( "pin" );
+    }
+};
+
+/*
 * Unpin All Option
 */
 const unpinAllOptions = ( $siblings ) => {
@@ -77,6 +98,33 @@ const scrubColOptions = ( $wrapper, callback ) => {
 /*
 * Process Bedroom Filter
 */
+const processFloorFilters = ( $option ) => {
+    const filterOptions = {};
+    switch ( $option.getAttribute( "id" ) ) {
+    case "fp-first":
+        filterOptions.Level = 1;
+        break;
+    case "fp-second":
+        filterOptions.Level = 2;
+        break;
+    case "fp-third":
+        filterOptions.Level = 3;
+        break;
+    case "fp-fourth":
+        filterOptions.Level = 4;
+        break;
+    case "fp-fifth":
+        filterOptions.Level = 5;
+        break;
+    default:
+        filterOptions.Level = "VIEW ALL";
+    }
+    return filterOptions;
+};
+
+/*
+* Process Bedroom Filter
+*/
 const processBedFilters = ( $option ) => {
     const filterOptions = {};
     switch ( $option.getAttribute( "id" ) ) {
@@ -99,7 +147,7 @@ const processBedFilters = ( $option ) => {
 };
 
 /*
-* Process Bedroom Filter
+* Process Range Filter
 */
 const processRangeFilters = ( selected, type ) => {
     const filterOptions = {};
@@ -167,6 +215,23 @@ const triggerBedroomEvents = ( $search ) => {
 };
 
 /*
+* Trigger Floor Events
+*/
+const triggerFloorEvents = () => {
+    const $floor = document.getElementsByClassName( "fplevel" );
+    Array.prototype.forEach.call( $floor, ( $level ) => {
+        $level.addEventListener( "click", ( e ) => {
+            e.preventDefault();
+            const $expandable = document.getElementById( "expandable" );
+            pinFloorOption( $level, $floor );
+            if ( !$expandable.classList.contains( "expand" ) ) {
+                // processSearch( $level );
+            }
+        } );
+    } );
+};
+
+/*
 * Select Col Options
 */
 const selectColOptions = ( $comp, col, range, callback ) => {
@@ -214,10 +279,12 @@ const fetchSelectData = ( $field ) => {
 * Reset Select Data
 */
 const resetSelectData = ( $field ) => {
+    const $viewAll = document.getElementById( "opt-view-all" );
     Array.prototype.forEach.call( $field.childNodes, ( $select ) => {
         if ( $select.tagName === "SELECT" ) {
             const $resetSelect = $select;
             $resetSelect.selectedIndex = 0;
+            $viewAll.classList.add( "pin" );
         }
     } );
 };
@@ -260,10 +327,13 @@ const initSearchComp = () => {
     if ( $search ) {
         // Pin default Option
         const $viewAll = document.getElementById( "opt-view-all" );
+        const $firstFloor = document.getElementById( "fp-first" );
         $viewAll.classList.add( "pin" );
+        $firstFloor.classList.add( "pin" );
 
-        // Bed listeners
+        // Search listeners
         triggerBedroomEvents( $search );
+        triggerFloorEvents();
 
         // Reset
         resetOptions( $search );

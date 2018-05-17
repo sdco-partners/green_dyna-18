@@ -24,14 +24,33 @@ div.community-map
             height: 463px
 
     
-    div.map.view
+    div.map.view 
         flex: 0 0 717px
         svg
             width: 717px
             height: 472px
 
 
-
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */
 /* INCEPTION RULE: DO NOT nest more than 4  */
+
+div.building.view
+    svg
+        cursor: pointer
+        polygon.floors-cls-2
+            opacity: 0
+            transition: 0.3s opacity ease-in
+            &:hover
+                opacity: 0.4
+
+        polygon.floors-cls-2.pin
+            opacity: 0.6
+
+polygon.g-unit,
+rect.g-unit,
+path.g-unit
+    cursor: pointer
+    transition: 0.3s fill ease-in 
+    &:hover
+        fill: $olive
