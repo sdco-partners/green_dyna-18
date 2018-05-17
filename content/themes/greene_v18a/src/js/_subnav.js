@@ -21,9 +21,23 @@ const toggleEl = {
         delay( () => $el.classList.remove( "pre" ) );
     },
 
+    removeAll( $els, className ) {
+        Array.prototype.forEach.call( $els, ( $el ) => {
+            $el.classList.remove( className );
+        } );
+    },
+
     status( $el ) {
         return ( $el.classList.contains( "pre" ) &&
             $el.classList.contains( "opacity" ) );
+    },
+
+    set( $trigger, $target, $tab, className ) {
+        if ( !this.status( $trigger ) ) {
+            this.remove( $target );
+            this.add( $trigger );
+        }
+        $tab.classList.add( className );
     },
 };
 
@@ -34,29 +48,21 @@ const toggleTabs = () => {
     const $tabs = document.getElementsByClassName( "tabs" );
     const $schedule = document.getElementById( "comp-schedule" );
     const $availability = document.getElementById( "comp-available" );
+    const $individual = document.getElementById( "comp-individual" );
+    const $community = document.getElementById( "comp-community" );
 
     Array.prototype.forEach.call( $tabs, ( $tab ) => {
         $tab.addEventListener( "click", ( e ) => {
             e.preventDefault();
-            Array.prototype.forEach.call( $tabs, ( $tab2 ) => {
-                $tab2.classList.remove( "tabbed" );
-            } );
+            toggleEl.removeAll( $tabs, "tabbed" );
             if ( $tab.classList.contains( "schedule-link" ) ) {
-                if ( toggleEl.status( $schedule ) ) {
-                    toggleEl.remove( $schedule );
-                } else {
-                    toggleEl.remove( $availability );
-                    toggleEl.add( $schedule );
-                    $tab.classList.add( "tabbed" );
-                }
+                toggleEl.set( $schedule, $availability, $tab, "tabbed" );
             } else if ( $tab.classList.contains( "available-link" ) ) {
-                if ( toggleEl.status( $availability ) ) {
-                    toggleEl.remove( $availability );
-                } else {
-                    toggleEl.remove( $schedule );
-                    toggleEl.add( $availability );
-                    $tab.classList.add( "tabbed" );
-                }
+                toggleEl.set( $availability, $schedule, $tab, "tabbed" );
+            } else if ( $tab.classList.contains( "individual-link" ) ) {
+                toggleEl.set( $individual, $community, $tab, "tabbed" );
+            } else if ( $tab.classList.contains( "community-link" ) ) {
+                toggleEl.set( $community, $individual, $tab, "tabbed" );
             }
         } );
     } );

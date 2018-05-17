@@ -171,31 +171,69 @@ const processRangeFilters = ( selected, type ) => {
 };
 
 /*
-* Process Search
+* Process Community Search
 */
-const processSearch = ( $options, fullSearch = false ) => {
-    const params = [];
-    if ( fullSearch ) {
-        Array.prototype.forEach.call( $options.childNodes, ( $wrapper ) => {
-            if ( $wrapper.tagName === "DIV" ) {
-                if ( $wrapper.classList.contains( "bedrooms" ) ) {
-                    scrubBedOptions( $wrapper, option =>
-                        params.push( processBedFilters( option ) ) );
-                } else if ( $wrapper.classList.contains( "advanced" ) ) {
-                    scrubColOptions( $wrapper, ( option, type ) =>
-                        params.push( processRangeFilters( option.textContent, type ) ) );
-                }
+const proccesCommunitySearch = ( $options, callback ) => {
+    callback( $options );
+};
+
+/*
+* Process Full List Search
+*/
+const processFullListSearch = ( $options, callback ) => {
+    Array.prototype.forEach.call( $options.childNodes, ( $wrapper ) => {
+        if ( $wrapper.tagName === "DIV" ) {
+            if ( $wrapper.classList.contains( "bedrooms" ) ) {
+                scrubBedOptions( $wrapper, ( option ) => {
+                    const processed = processBedFilters( option );
+                    callback( processed );
+                } );
+            } else if ( $wrapper.classList.contains( "advanced" ) ) {
+                scrubColOptions( $wrapper, ( option, type ) => {
+                    const processed = processRangeFilters( option.textContent, type );
+                    callback( processed );
+                } );
             }
-        } );
-    } else {
-        params.push( processBedFilters( $options ) );
-    }
+        }
+    } );
+};
+
+/*
+* Send Search Request
+*/
+const sendSearchRequest = ( params ) => {
     getFloorPlanIDs( ( $id ) => {
         ajaxRequester( $id, ( data ) => {
             const thisData = JSON.parse( data );
             singleFloorplanPopulator( thisData, params );
         } );
     } );
+};
+
+/*
+* Search Logic
+*/
+const searchLogic = ( $options, fullSearch = false ) => {
+    const params = [];
+    const $individual = document.getElementsByClassName( "individual-link" )[ 0 ];
+    const indvIsToggled = $individual.classList.contains( "tabbed" );
+    const $community = document.getElementsByClassName( "community-link" )[ 0 ];
+    const communityIsToggled = $community.classList.contains( "tabbed" );
+    if ( fullSearch ) {
+        if ( indvIsToggled ) {
+            processFullListSearch( $options, ( processed ) => {
+                params.push( processed );
+            } );
+        } else if ( communityIsToggled ) {
+            proccesCommunitySearch( $options, ( processed ) => {
+                console.log( $options );
+                params.push( processed );
+            } );
+        }
+    } else {
+        params.push( processBedFilters( $options ) );
+    }
+    sendSearchRequest( params );
 };
 
 /*
@@ -208,7 +246,7 @@ const triggerBedroomEvents = ( $search ) => {
             const $expandable = document.getElementById( "expandable" );
             pinOption( $option, $bedrooms );
             if ( !$expandable.classList.contains( "expand" ) ) {
-                processSearch( $option );
+                searchLogic( $option );
             }
         } );
     } );
@@ -225,7 +263,7 @@ const triggerFloorEvents = () => {
             const $expandable = document.getElementById( "expandable" );
             pinFloorOption( $level, $floor );
             if ( !$expandable.classList.contains( "expand" ) ) {
-                // processSearch( $level );
+                // searchLogic( $level );
             }
         } );
     } );
@@ -345,7 +383,7 @@ const initSearchComp = () => {
         const $submit = document.getElementById( "submit" );
         $submit.addEventListener( "click", ( e ) => {
             e.preventDefault();
-            processSearch( $search, true );
+            searchLogic( $search, true );
         } );
     }
 };

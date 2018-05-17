@@ -3,7 +3,7 @@
   * Section =>  _COMMUNITY-MAP
   */
   ?>
-<div class="comp-community community-map">
+<div id="comp-community" class="community-map">
   	<div class="map wrapper">
   		<div class="building view" 
 	  		style="background-image: url( 'http://localhost/green_dyna-18/content/themes/greene_v18a/assets/images/img_building-view.jpg' );">

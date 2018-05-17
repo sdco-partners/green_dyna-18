@@ -65,7 +65,7 @@ $archive_id = 29; ?>
 
 	if( have_posts() ) : ?>
 
-		<div class="comp-floorplans floorplans grid">
+		<div id="comp-individual" class="floorplans grid">
 		<?php while( have_posts() ) :
 			the_post();
 

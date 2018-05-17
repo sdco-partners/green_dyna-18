@@ -17,11 +17,7 @@ div.floorplan.layout
 
     div.schedule.component,
     div.available.units.component
-        opacity: 0
         display: none
-        transition: 0.4s all ease-in
-        transition-delay: 0.2s
-        transform: translate( 0, 20px ) 
         padding-top: 50px
 
         > div.wrapper
@@ -31,10 +27,6 @@ div.floorplan.layout
     div.available.units.component.pre
         display: flex
 
-    div.schedule.component.opacity,
-    div.available.units.component.opacity
-        opacity: 1
-        transform: translate( 0, 0 ) 
 
 div.heading
     width: 100%
@@ -54,6 +46,15 @@ div.heading
 
 @import "search" 
 
+div.content.blocks
+    div.floorplans.grid,
+    div.community-map
+        display: none
+        padding-top: 50px
+
+    div.floorplans.grid.pre,
+    div.community-map.pre
+        display: flex
 
 /* OBJECTS -> For styling objects */
 /* Includes cosmetic styles like color, typography, and borders */
@@ -66,3 +67,29 @@ div.heading
     h2
         @extend %IndvFPTitle
         color: $black
+
+div.floorplan.layout
+    div.schedule.component,
+    div.available.units.component,
+        opacity: 0
+        transition: 0.4s all ease-in
+        transition-delay: 0.2s
+        transform: translate( 0, 20px ) 
+
+    div.schedule.component.opacity,
+    div.available.units.component.opacity
+        opacity: 1
+        transform: translate( 0, 0 ) 
+
+div.content.blocks
+    div.floorplans.grid,
+    div.community-map
+        opacity: 0
+        transition: 0.4s all ease-in
+        transition-delay: 0.2s
+        transform: translate( 0, 20px ) 
+
+    div.floorplans.grid.opacity,
+    div.community-map.opacity
+        opacity: 1
+        transform: translate( 0, 0 ) 

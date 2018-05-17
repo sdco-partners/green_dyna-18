@@ -16,7 +16,7 @@
 			<span id="span"></span>
 		</div>
 		<div class="tabs community-link">
-			<span id="view-map" class="link individual">Community Map</span>
+			<span id="view-map" class="link community">Community Map</span>
 		</div>
 	</div>
 </div>

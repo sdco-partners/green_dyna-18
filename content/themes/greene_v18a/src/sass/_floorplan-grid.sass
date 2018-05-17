@@ -8,12 +8,13 @@ div.floorplans.grid
     +flex
     width: 100%
     max-width: 1130px
-    height: 100%
     margin: 100px auto
 
     div.single.floorplan
+        display: none
         flex: 0 0 557px
         margin-bottom: 35px
+        transition: 0.3s all ease-in
 
         div.rendering
             position: relative
@@ -75,6 +76,7 @@ div.floorplans.grid
                     height: 13px
 
     div.single.floorplan.available
+        display: block
         div.rendering
             div.not.available
                 display: none
