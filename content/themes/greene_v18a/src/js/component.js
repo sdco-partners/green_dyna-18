@@ -49,6 +49,16 @@ document.onreadystatechange = () => {
         // Module
         modulePosition();
 
+        // Page Load Triggers
+        const $body = document.getElementsByTagName( "BODY" )[ 0 ];
+        if ( $body.classList.contains( "single-floorplan" ) ) {
+            const $tab = document.getElementsByClassName( "schedule" )[ 0 ];
+            $tab.click();
+        } else if ( $body.classList.contains( "post-type-archive-floorplan" ) ) {
+            const $tab = document.getElementById( "view-map" );
+            $tab.click();
+        }
+
         /*
         * Window OnScroll
         */

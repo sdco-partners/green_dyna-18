@@ -5,6 +5,7 @@
 /* global getFloorPlanIDs */
 /* global dataPopulator */
 /* global mapData */
+/* global resetAvailability */
 
 /*
 * Unpin All Floor Option
@@ -255,6 +256,7 @@ const searchLogic = ( $options, fullSearch = false ) => {
         }
     }
     mapData.reset();
+    resetAvailability();
     sendSearchRequest( params, type );
 };
 
@@ -275,6 +277,37 @@ const triggerBedroomEvents = ( $search ) => {
 };
 
 /*
+* Set Floor Number
+*/
+const setFloorNumber = ( level ) => {
+    let floorNumber = "Floor ";
+    switch ( level ) {
+    case "fp-sixth":
+        floorNumber += "6";
+        break;
+    case "fp-fifth":
+        floorNumber += "5";
+        break;
+    case "fp-fourth":
+        floorNumber += "4";
+        break;
+    case "fp-third":
+        floorNumber += "3";
+        break;
+    case "fp-second":
+        floorNumber += "2";
+        break;
+    case "fp-first":
+        floorNumber += "1";
+        break;
+    default:
+        floorNumber = "Choose A Floor";
+    }
+    const $currentFloor = document.getElementById( "currentFloor" );
+    $currentFloor.textContent = floorNumber;
+};
+
+/*
 * Trigger Floor Events
 */
 const triggerFloorEvents = () => {
@@ -284,6 +317,7 @@ const triggerFloorEvents = () => {
             e.preventDefault();
             const $expandable = document.getElementById( "expandable" );
             pinFloorOption( $level, $floor );
+            setFloorNumber( $level.getAttribute( "id" ) );
             if ( !$expandable.classList.contains( "expand" ) ) {
                 searchLogic( $level );
             }

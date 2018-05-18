@@ -79,8 +79,7 @@ const processFilters = ( filter, item ) => {
     let pass = true;
     filter.forEach( ( object ) => {
         Object.keys( object ).forEach( ( filterKey ) => {
-            if ( item.Bedrooms &&
-                filterKey === "Bedrooms" &&
+            if ( filterKey === "Bedrooms" &&
                 item[ filterKey ] !== object[ filterKey ] &&
                 object[ filterKey ] !== "VIEW ALL" ) {
                 pass = false;
@@ -91,8 +90,7 @@ const processFilters = ( filter, item ) => {
                 object[ filterKey ] !== "VIEW ALL" ) {
                 pass = false;
             }
-            if ( item.BaseRentAmount &&
-                filterKey === "maxPrice" &&
+            if ( filterKey === "maxPrice" &&
                 object[ filterKey ] &&
                 item.BaseRentAmount > object[ filterKey ] ) {
                 pass = false;
@@ -116,6 +114,9 @@ const processFilters = ( filter, item ) => {
             }
         } );
     } );
+    // if ( item.BaseRentAmount && pass ) {
+    //     console.log( "item", item.BaseRentAmount );
+    // }
     return pass;
 };
 
@@ -151,7 +152,7 @@ const buildDataRanges = ( data, filter = false ) => {
         if ( !thisRange.name ) {
             thisRange.addNewFloorName( units[ row ].Name );
         }
-        if ( filterData( filter, data.AvailableUnits ) ) {
+        if ( filterData( filter, units ) ) {
             Object.keys( units[ row ] ).forEach( ( key ) => {
                 thisRange.increment();
                 if ( typeof ( units[ row ][ key ] ) === "number" ) {
@@ -257,7 +258,17 @@ const buildGridTable = ( data, $grid ) => {
         data: "Lease Now",
         $grid,
         classes: "last",
-        link: "https://1849373v2.onlineleasing.realpage.com/",
+        link: `https://5055119.onlineleasing.realpage.com/?UnitId=${ data.UnitNumber }&SearchUrl=&MoveInDate=${ data.AvailableDate }`,
+    } );
+};
+
+/*
+* Reset Availability
+*/
+const resetAvailability = () => {
+    const $available = document.getElementsByClassName( "single floorplan" );
+    Array.prototype.forEach.call( $available, ( $id ) => {
+        $id.classList.remove( "available" );
     } );
 };
 
@@ -398,8 +409,47 @@ const mapData = {
         }
     },
 
+    setDummyNum( item ) {
+        let dummyNum = item.UnitNumber.toString().slice( 2 );
+        if ( dummyNum > 55 ) {
+            dummyNum -= 55;
+        }
+        const modifyItem = item;
+        const dummyUnitNum = `${ item.FloorNumber }${ dummyNum }`;
+        modifyItem.DummyUnitNumber = parseInt( dummyUnitNum, 10 );
+        return `g${ dummyUnitNum }`;
+    },
+
+    find( item ) {
+        const unitNumber = parseInt( item.slice( 1 ), 10 );
+        if ( Number( unitNumber ) ) {
+            this.data.forEach( ( row ) => {
+                if ( unitNumber === row.DummyUnitNumber ) {
+                    this.populateModule( row );
+                }
+            } );
+        }
+    },
+
+    populateModule( item ) {
+        const $modName = document.getElementById( "mod-name" );
+        const $modCode = document.getElementById( "mod-code" );
+        const $modUnit = document.getElementById( "mod-unitnumber" );
+        const $modBed = document.getElementById( "mod-bed" );
+        const $modBath = document.getElementById( "mod-bath" );
+        const $modSQFT = document.getElementById( "mod-sqft" );
+        const $modPrice = document.getElementById( "mod-price" );
+        $modName.textContent = item.Name;
+        $modCode.textContent = `( ${ item.Code } )`;
+        $modUnit.textContent = item.DummyUnitNumber;
+        $modBed.textContent = `${ item.Bedrooms } Bed`;
+        $modBath.textContent = `${ item.Bathrooms } Bath`;
+        $modSQFT.textContent = `${ item.SquareFootage } SQ FT`;
+        $modPrice.textContent = `$${ item.BaseRentAmount }`;
+    },
+
     pin( item ) {
-        const unitNum = `g${ Math.floor( item.UnitNumber / 10 ) }`;
+        const unitNum = this.setDummyNum( item );
         const $unit = document.getElementsByClassName( unitNum );
         if ( $unit[ 0 ] ) {
             $unit[ 0 ].classList.add( "gpin" );
@@ -495,9 +545,15 @@ const singleFloorplan = ( data, filter = false ) => {
         const $floorplan = document.getElementById( ranges.name );
         const $primary = document.getElementsByClassName( "primary" );
         const $units = document.getElementById( "comp-available" );
-        if ( $primary.length ) populatePrimaryComp( ranges );
-        if ( $floorplan ) populateFloorPlanGrid( ranges, $floorplan );
-        if ( $units ) populateUnitsComp( data.AvailableUnits );
+        if ( $primary.length ) {
+            populatePrimaryComp( ranges );
+        }
+        if ( $floorplan ) {
+            populateFloorPlanGrid( ranges, $floorplan );
+        }
+        if ( $units ) {
+            populateUnitsComp( data.AvailableUnits );
+        }
         searchOptions.create( ranges );
     }
 };
@@ -593,13 +649,12 @@ const fetchData = () => {
     const $body = document.getElementsByTagName( "BODY" )[ 0 ];
     if ( $body.classList.contains( "single-floorplan" ) ) {
         ajaxRequester( getPrimaryID(), data =>
-            dataPopulator( JSON.parse( data, "single" ) ) );
+            dataPopulator( JSON.parse( data ), "single" ) );
     } else if ( $body.classList.contains( "post-type-archive-floorplan" ) ) {
         configSearchOptions();
         getFloorPlanIDs( ( $id ) => {
             ajaxRequester( $id, ( data ) => {
-                const thisData = JSON.parse( data );
-                dataPopulator( thisData, "single" );
+                dataPopulator( JSON.parse( data ), "single" );
             } );
         } );
     }
