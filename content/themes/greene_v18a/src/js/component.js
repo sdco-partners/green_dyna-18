@@ -11,6 +11,7 @@
 /* global initParallax */
 /* global initSearchComp */
 /* global fetchData */
+/* global modulePosition */
 
 /**
 *
@@ -44,6 +45,10 @@ document.onreadystatechange = () => {
 
         // ReST API Logic
         fetchData();
+
+        // Module
+        modulePosition();
+
         /*
         * Window OnScroll
         */

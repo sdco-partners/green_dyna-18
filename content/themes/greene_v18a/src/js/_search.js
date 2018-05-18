@@ -3,7 +3,8 @@
 /* global addEvents */
 /* global ajaxRequester */
 /* global getFloorPlanIDs */
-/* global singleFloorplanPopulator */
+/* global dataPopulator */
+/* global mapData */
 
 /*
 * Unpin All Floor Option
@@ -68,6 +69,18 @@ const scrubBedOptions = ( $wrapper, callback ) => {
 };
 
 /*
+* Scrub Floor Options
+*/
+const scrubFloorOptions = ( callback ) => {
+    const $floor = document.getElementsByClassName( "fplevel" );
+    Array.prototype.forEach.call( $floor, ( $poly ) => {
+        if ( $poly.classList.contains( "pin" ) ) {
+            callback( $poly );
+        }
+    } );
+};
+
+/*
 * Scrub Col Options
 */
 const scrubColOptions = ( $wrapper, callback ) => {
@@ -102,22 +115,25 @@ const processFloorFilters = ( $option ) => {
     const filterOptions = {};
     switch ( $option.getAttribute( "id" ) ) {
     case "fp-first":
-        filterOptions.Level = 1;
+        filterOptions.FloorNumber = 1;
         break;
     case "fp-second":
-        filterOptions.Level = 2;
+        filterOptions.FloorNumber = 2;
         break;
     case "fp-third":
-        filterOptions.Level = 3;
+        filterOptions.FloorNumber = 3;
         break;
     case "fp-fourth":
-        filterOptions.Level = 4;
+        filterOptions.FloorNumber = 4;
         break;
     case "fp-fifth":
-        filterOptions.Level = 5;
+        filterOptions.FloorNumber = 5;
+        break;
+    case "fp-sixth":
+        filterOptions.FloorNumber = 6;
         break;
     default:
-        filterOptions.Level = "VIEW ALL";
+        filterOptions.FloorNumber = "VIEW ALL";
     }
     return filterOptions;
 };
@@ -171,13 +187,6 @@ const processRangeFilters = ( selected, type ) => {
 };
 
 /*
-* Process Community Search
-*/
-const proccesCommunitySearch = ( $options, callback ) => {
-    callback( $options );
-};
-
-/*
 * Process Full List Search
 */
 const processFullListSearch = ( $options, callback ) => {
@@ -199,13 +208,23 @@ const processFullListSearch = ( $options, callback ) => {
 };
 
 /*
+* Process Community Search
+*/
+const proccesCommunitySearch = ( callback ) => {
+    scrubFloorOptions( ( $option ) => {
+        const processed = processFloorFilters( $option );
+        callback( processed );
+    } );
+};
+
+/*
 * Send Search Request
 */
-const sendSearchRequest = ( params ) => {
+const sendSearchRequest = ( params, type ) => {
     getFloorPlanIDs( ( $id ) => {
         ajaxRequester( $id, ( data ) => {
             const thisData = JSON.parse( data );
-            singleFloorplanPopulator( thisData, params );
+            dataPopulator( thisData, type, params );
         } );
     } );
 };
@@ -215,25 +234,28 @@ const sendSearchRequest = ( params ) => {
 */
 const searchLogic = ( $options, fullSearch = false ) => {
     const params = [];
-    const $individual = document.getElementsByClassName( "individual-link" )[ 0 ];
-    const indvIsToggled = $individual.classList.contains( "tabbed" );
     const $community = document.getElementsByClassName( "community-link" )[ 0 ];
     const communityIsToggled = $community.classList.contains( "tabbed" );
+    const type = ( communityIsToggled ) ? "community" : "single";
     if ( fullSearch ) {
-        if ( indvIsToggled ) {
-            processFullListSearch( $options, ( processed ) => {
-                params.push( processed );
-            } );
-        } else if ( communityIsToggled ) {
-            proccesCommunitySearch( $options, ( processed ) => {
-                console.log( $options );
+        processFullListSearch( $options, ( processed ) => {
+            params.push( processed );
+        } );
+        if ( communityIsToggled ) {
+            proccesCommunitySearch( ( processed ) => {
                 params.push( processed );
             } );
         }
     } else {
         params.push( processBedFilters( $options ) );
+        if ( communityIsToggled ) {
+            proccesCommunitySearch( ( processed ) => {
+                params.push( processed );
+            } );
+        }
     }
-    sendSearchRequest( params );
+    mapData.reset();
+    sendSearchRequest( params, type );
 };
 
 /*
@@ -263,7 +285,7 @@ const triggerFloorEvents = () => {
             const $expandable = document.getElementById( "expandable" );
             pinFloorOption( $level, $floor );
             if ( !$expandable.classList.contains( "expand" ) ) {
-                // searchLogic( $level );
+                searchLogic( $level );
             }
         } );
     } );

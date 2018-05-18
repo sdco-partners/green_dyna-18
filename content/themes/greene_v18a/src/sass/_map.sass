@@ -26,9 +26,19 @@ div.community-map
     
     div.map.view 
         flex: 0 0 717px
+        position: realtive
+        padding-bottom: 50px
+
         svg
             width: 717px
             height: 472px
+
+        div.module
+            position: absolute
+            top: 0
+            left: 0
+            width: 200px
+            height: 86px
 
 
 /* OBJECTS -> For styling objects */
@@ -47,10 +57,28 @@ div.building.view
         polygon.floors-cls-2.pin
             opacity: 0.6
 
+div.map.view
+    div.module
+        opacity: 0
+        transition: 0.3s opacity ease-in
+        background-color: $olive
+        color: $white
+        border-radius: 5px
+
+    div.module.opacity
+        opacity: 1
+
 polygon.g-unit,
 rect.g-unit,
 path.g-unit
-    cursor: pointer
     transition: 0.3s fill ease-in 
+    &:hover
+        fill: $grey
+
+polygon.g-unit.gpin,
+rect.g-unit.gpin,
+path.g-unit.pin
+    cursor: pointer
+    fill: $lime
     &:hover
         fill: $olive

@@ -79,7 +79,14 @@ const processFilters = ( filter, item ) => {
     let pass = true;
     filter.forEach( ( object ) => {
         Object.keys( object ).forEach( ( filterKey ) => {
-            if ( filterKey === "Bedrooms" &&
+            if ( item.Bedrooms &&
+                filterKey === "Bedrooms" &&
+                item[ filterKey ] !== object[ filterKey ] &&
+                object[ filterKey ] !== "VIEW ALL" ) {
+                pass = false;
+            }
+            if ( item.FloorNumber &&
+                filterKey === "FloorNumber" &&
                 item[ filterKey ] !== object[ filterKey ] &&
                 object[ filterKey ] !== "VIEW ALL" ) {
                 pass = false;
@@ -153,7 +160,6 @@ const buildDataRanges = ( data, filter = false ) => {
             } );
         }
     } );
-    // console.log( thisRange.name, thisRange );
     return thisRange;
 };
 
@@ -254,6 +260,7 @@ const buildGridTable = ( data, $grid ) => {
         link: "https://1849373v2.onlineleasing.realpage.com/",
     } );
 };
+
 /*
 * Toggle Availability
 */
@@ -368,6 +375,51 @@ const searchOptions = {
 };
 
 /*
+* Search Options
+*/
+const mapData = {
+    data: [],
+
+    create( data, filter ) {
+        if ( Array.isArray( data ) ) {
+            data.forEach( ( item ) => {
+                if ( processFilters( filter, item ) ) {
+                    this.data.push( item );
+                    this.pin( item );
+                }
+            } );
+        } else {
+            Object.keys( data ).forEach( ( key ) => {
+                if ( processFilters( filter, data[ key ] ) ) {
+                    this.data.push( data[ key ] );
+                    this.pin( data[ key ] );
+                }
+            } );
+        }
+    },
+
+    pin( item ) {
+        const unitNum = `g${ Math.floor( item.UnitNumber / 10 ) }`;
+        const $unit = document.getElementsByClassName( unitNum );
+        if ( $unit[ 0 ] ) {
+            $unit[ 0 ].classList.add( "gpin" );
+        }
+    },
+
+    unpin() {
+        const $units = document.getElementsByClassName( "g-unit" );
+        Array.prototype.forEach.call( $units, ( $unit ) => {
+            $unit.classList.remove( "gpin" );
+        } );
+    },
+
+    reset() {
+        this.data = [];
+        this.unpin();
+    },
+};
+
+/*
 * Set Range
 */
 const setRange = ( $el, field ) => {
@@ -435,9 +487,9 @@ const configSearchOptions = () => {
 };
 
 /*
-* Single Floorplan Populator
+* Single Floorplan
 */
-const singleFloorplanPopulator = ( data, filter = false ) => {
+const singleFloorplan = ( data, filter = false ) => {
     const ranges = buildDataRanges( data, filter );
     if ( ranges.name ) {
         const $floorplan = document.getElementById( ranges.name );
@@ -447,6 +499,23 @@ const singleFloorplanPopulator = ( data, filter = false ) => {
         if ( $floorplan ) populateFloorPlanGrid( ranges, $floorplan );
         if ( $units ) populateUnitsComp( data.AvailableUnits );
         searchOptions.create( ranges );
+    }
+};
+
+/*
+* Community Map
+*/
+const communityMap = ( data, filter ) => {
+    mapData.create( data.AvailableUnits, filter );
+};
+/*
+* Data Populator
+*/
+const dataPopulator = ( data, type, filter = false ) => {
+    if ( type === "single" ) {
+        singleFloorplan( data, filter );
+    } else if ( type === "community" ) {
+        communityMap( data, filter );
     }
 };
 
@@ -524,13 +593,13 @@ const fetchData = () => {
     const $body = document.getElementsByTagName( "BODY" )[ 0 ];
     if ( $body.classList.contains( "single-floorplan" ) ) {
         ajaxRequester( getPrimaryID(), data =>
-            singleFloorplanPopulator( JSON.parse( data ) ) );
+            dataPopulator( JSON.parse( data, "single" ) ) );
     } else if ( $body.classList.contains( "post-type-archive-floorplan" ) ) {
         configSearchOptions();
         getFloorPlanIDs( ( $id ) => {
             ajaxRequester( $id, ( data ) => {
                 const thisData = JSON.parse( data );
-                singleFloorplanPopulator( thisData );
+                dataPopulator( thisData, "single" );
             } );
         } );
     }
